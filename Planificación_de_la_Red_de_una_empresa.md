@@ -1,6 +1,6 @@
 # La planificación se realizara en diferentes fases
 ## La primera fase sera montar una topografia de red como en la siguiente imagen
-![Fase1 de Red](C:/Users/Fran/Pictures/ImagenesPI/FASE1.PNG)
+![Fase1 de Red](/ImagenesPI/FASE1.PNG)
 
 __En la cual se configurara los siguientes aspectos__
 - DHCP tanto cliente como servidor
