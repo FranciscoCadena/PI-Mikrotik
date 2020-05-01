@@ -1,8 +1,10 @@
 ## Licencias Mikrotik, RouterOS y Winbox
 
+<div class = "align-justify">
 Nuestro primer paso será ir a la página oficial de [Mikrotik](https://mikrotik.com/download), una vez dentro vamos a la pestaña de Software y luego a Download, aquí hay que tener algo en cuenta, el sistema operativo RouterOS va por licencias, aquí podemos ver los distintos tipos de licencia y lo que nos ofrece cada una sacada directamente de la página oficial de mikrotik.
+</div>
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+![Licencias Mikrotik](/ImagenesPI/License.PNG)
 
 Como vemos hay una licencia gratuita en plan de demostración, pero como es de prueba no trae todas las características, hay que tener en cuenta que estas licencias solo es necesario comprarlas si queremos su software para tener un PC como enrutador, ya que los diferentes productos de Hardware de mikrotik al comprarlos ya te vienen con un nivel de licencia el cual te lo especifican en sus características. Esto es algo importante porque en varios videotutoriales no te lo especifican, usando licencias de prueba o algunos que ya tienen comprado sin especificarlo.
 
@@ -16,7 +18,9 @@ En cuanto lo tengamos listo la encendemos. Y lo primero que nos pedirá será el
 
 ![Texto alternativo](/ruta/a/la/imagen.jpg)
 
+<p align="justify">
 En cuanto entremos podemos observar que es una terminal que trabaja por línea de comando, debido a que su infraestructura deriva de Linux, en la siguiente imagen con el comando ip address print podemos ver que la interfaz que se definió como puente en virtualbox ya tiene una ip asignada.
+</p>
 
 ![Texto alternativo](/ruta/a/la/imagen.jpg)
 
