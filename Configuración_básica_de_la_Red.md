@@ -387,6 +387,61 @@ El resto de las configuraciones son procesos parecidos, por lo que para no repet
 
 ![Todas las relgas de firewall configuradas](/ImagenesPI/dmzfireconfigurada.PNG "Todas las relgas de firewall configuradas")
 
+## Configurar VPN por IPsec
+
+Es muy normal que una empresa que tenga varias sedes quiera tener conexión entre ellas, por ello suele ser usado crear vpn para que se comuniquen entre ellas, por eso vamos a hacer un ejemplo de como crear una vpn por ipsec según el siguiente diagrama, en el que habrá dos sedes con diferentes redes evidentemente y el vpn ira de un router al otro.
+
+![Topografia de red con vpn](/ImagenesPI/ipsec.PNG "Topografia de red con vpn")
+
+Para ver mejor la realización del vpn, vamos a usar dos nuevas imágenes del RouterOS. Con un adaptador puente y otro en red interna. 
+Como primer paso vamos a darle nombre e ip a las interfaces. y un servidor de dhcp para la red interna, esto no será necesario enseñarlo en imágenes porque ya se vio anteriormente.
+El siguiente paso será darle ip estáticas a la wan de los router, para ello vamos a mostrar un método rápido y sencillo que es con un ayudante de mikrotik, para ello vamos al menú izquierdo y seleccionamos __Quick Set__.
+
+![Fase1](/ImagenesPI/quickset.PNG "")
+
+Esta ventana que vemos es como una configuración inicial rápida, aquí podemos configurar lo siguiente.
+- Dentro del apartado de Internet está la configuración de la WAN donde configuraremos lo siguiente:
+  - En Address Acquisition definimos que queremos que sea Static
+  - IP Address, definimos la ip del interfaz del router con salida a internet
+  - En el gateway esta la ip del router de casa, pues todo esto es de manera virtual, en un entorno real será el gateway de nuestro ISP
+  - Y de DNS podemos usar los de google
+- En la parte de Local Network hace referencia a la interfaz que da a nuestra red LAN, en ella podemos configurar:
+  - La ip de la interfaz que va a la red LAN, y su máscara
+  - Activamos el servicio de DHCP para esta interfaz, definiendo el rango de las ip que va a proporcionar
+  - Y activamos el NAT, para el enmascaramiento.
+
+También podemos definir de paso la contraseña a la hora de acceder a nuestro router.
+Tener en cuenta que se debe configurar ambos router, cada uno con sus ip.
+
+ El siguiente paso será ir al menú izquierdo y darle a __IP → IPsec__, una vez abierta la ventana vamos a la pestaña de _Peer_, y le damos al símbolo del más.
+ 
+![Configurar el vecino](/ImagenesPI/ipsecpeer.PNG "Configurar el vecino")
+
+En esta nueva ventana debemos darle un nombre para identificar a nuestro vecino (Peer), en _Address_ escribimos la ip publica del router a donde queremos dirigirnos,  en _Local Address_ escribimos la ip publica del router que estamos configurando ahora mismo.
+
+Pasamos a la pestaña _Identities_, le damos al símbolo más, y en la nueva ventana lo dejamos todo por defecto menos el apartado Secret que hará referencia a la clave compartida, esta deberá ser la misma en ambos router, hay que fijarse en el apartado _Peer_ que corresponda con el que creamos anteriormente.
+
+![Configurar la clave en Identities](/ImagenesPI/ipsecidentity.PNG "Configurar la clave en Identities")
+
+Terminado este paso vamos a la pestaña de Policies, le damos al símbolo del mas y en la nueva ventana en la pestaña _General_ nos aseguramos primero que en el apartado _Peer_ corresponda con el que deseamos configurar, seguidamente activamos la opción de __Tunnel__, en el apartado de _Src. Address_ escribimos el __CIDR__ de la red local que pertenece al router que estamos configurando, y en _Dst. Address_ escribimos el __CIDR__ de la red local de destino.
+
+![Configurando las politicas de IPsec](/ImagenesPI/ipsecpolitica.PNG "Configurando las politicas de IPsec")
+
+Toda esta configuración deberá ser realizada en el otro router donde queremos realizar el túnel, modificando solamente las ip para que correspondan con la configuración del mismo.
+
+Cuando ambos estén configurados, debemos revisar dentro de __IPsec → Policies__ la pestaña _Status_
+Y dentro de esta ventana, nos fijamos en donde dice _PH2 State_ que si está en __established__, en ambos router, eso confirma que el túnel a sido creado. 
+
+![Estado del túnel](/ImagenesPI/ipsecpolicistatus.PNG "Estado del túnel")
+
+También podemos corroborarlo yendo a la pestaña de  _Active Peers_ dentro de __IPsec__.
+
+![Comprobación de Vecinos Activos](/ImagenesPI/ipsecactivepeer.PNG "Comprobación de Vecinos Activos")
+
+O en la pestaña de Installed SAs
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
 ![Fase1](/ImagenesPI/FASE1.PNG "")
 
 ![Fase1](/ImagenesPI/FASE1.PNG "")
