@@ -438,17 +438,28 @@ También podemos corroborarlo yendo a la pestaña de  _Active Peers_ dentro de _
 
 ![Comprobación de Vecinos Activos](/ImagenesPI/ipsecactivepeer.PNG "Comprobación de Vecinos Activos")
 
-O en la pestaña de Installed SAs
+O en la pestaña de Installed SAs.
+Donde saldrá reflejado los vecinos con los que se ha establecido una conexión, la encriptación, la autentificación y las ip públicas de ambos router
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Pestaña de Installed SAs](/ImagenesPI/ipsecsas.PNG "Pestaña de Installed SAs")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Si todo esto está correcto nuestro siguiente paso es añadir una regla NAT en el Firewall para que ambas redes locales puedan comunicarse y no se vean afectadas por el enmascaramiento.
+Por lo tanto vamos a __IP → Firewall__ pestaña _NAT_ y añadimos una nueva regla, donde dice _Chain_ lo dejamos como __srcnat__, y definimos la red local y la red de destino con su máscara.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Configurar regla nat para ipsec](/ImagenesPI/ipsecnat1.PNG "Configurar regla nat para ipsec")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Una vez agregada la regla debemos hacer que esta sea la primera, con lo que la subiremos poniéndola por delante de regla NAT del enmascaramiento como se muestra a continuación.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Reglas Nat en ipsec](/ImagenesPI/ipsecnatconf.PNG "Reglas Nat en ipsec")
+
+__NOTA:__ Debido a las diferentes versiones de RouterOS puede variar la configuración con lo mostrado. Por ello hay que tener en cuenta lo siguiente:
+- Para la configuración del vpn por ipsec se ha usado la versión de CHR __6.45.8__ debido a que realizando los mismos pasos en la version __6.46__ siempre ocurría algún problema.
+- Las interfaces de los Router que daban acceso a internet se dejaron en modo cliente por dhcp, debido a que como es una virtualización era mejor que el router de casa les diera la ip y los dns.
+- En la regla NAT para evitar el enmascaramiento en el apartado de Protocol hubo que definirlo, (aunque no siempre es necesario), lo que hay que hacer es comprobar si hay conexion entre ambas redes haciendo ping y según si hay conexion o no habra que modificar el protocolo de la regla nat, en este caso fue _50(ipsec-esp)_, para poder saber o modificar el tipo de protocolo que usa IPsec, vamos a __IP → IPsec__ pestaña _Policies_ y luego a la pestaña _Action_, como se muestra en la siguiente imagen.
+
+![Comprobar el protocolo de IPsec](/ImagenesPI/ipsecpoliciaction.PNG "Comprobar el protocolo de IPsec")
+
+
 
 
 
