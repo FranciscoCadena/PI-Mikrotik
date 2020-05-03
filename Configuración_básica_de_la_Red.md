@@ -198,28 +198,177 @@ Por último nos preguntará el tiempo de arrendamiento de la ip de nuestro clien
 
 Con el último paso ya habremos terminado de montar nuestro servicio de dhcp ahora solo queda montar un equipo de la LAN1 y ver si recibe una ip del rango definido y que tenga salida a internet.
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+## Vlan
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+Nuestro siguiente paso será crear redes virtuales para una LAN, por ejemplo supongamos que en una empresa en una misma LAN hay varios sectores por ejemplo: un grupo de Recursos Humanos, otro grupo de Administrativos, otro de Secretarios. Y para cada uno de estos grupos nombrados queremos que aunque estén en la misma red tengan sus propias redes diferenciadas una de las otras, pues para ello crearemos las Vlan, RouterOS admite __hasta 4095 interfaces vlan__, cada una con una ID de vlan única, por interfaz.
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+Para guiarnos nos fijamos en el siguiente diagrama en donde habrá 3 equipos en una misma LAN, pero cada uno tendrá su propia vlan diferenciada, por lo tanto configuraremos el Router con las 3 vlan en la interfaz de la LAN1, y luego para simular el switch lo haremos otro RouterOS donde designaremos cada vlan a un interfaz en modo bridge.
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+![Diagrama de red simple con 3 Vlan](/ImagenesPI/redvlanes.PNG "Diagrama de red simple con 3 Vlan")
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+Primero vamos al Router que terminamos de configurar al principio, nos vamos a interfaces desde el menu izquierdo, vamos a la _pestaña de Vlan_ y  le damos al símbolo más.
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+![Crear Vlan](/ImagenesPI/vlna1.PNG "Crear Vlan")
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+En esta nueva ventana definimos el nombre de la vlan, el tipo que será una vlan, su identificador, y a que interfaz irá vinculada. Terminado le damos a Apply y luego a OK.
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+![Crear Vlan30](/ImagenesPI/vlan30.PNG "Crear Vlan30")
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+Una vez configurada las 3 vlan, debemos darle sus ip, para ello desde el menu izquierdo vamos a __IP → Addresses__. le damos al símbolo del mas, y seleccionamos cada una de las vlan creadas y le damos una ip por ejemplo: 
+- Vlan10 → 10.10.10.1
+- Vlan20 → 20.20.20.1
+- Vlan30 → 30.30.30.1
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+![Direccionamiento de las Vlan](/ImagenesPI/ipvlan.PNG "Direccionamiento de las Vlan")
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+Terminada la configuración  del router, lo que faltaria hacer seria conectar la interfaz del Router que corresponde a la LAN1 al interfaz principal del Switch. Hecho esto entramos en el Switch por el RouterOS para configurarlo.
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+El primer paso será parecido al realizado en el Router, vamos a seleccionar la interface ether1 que será la conectada al router y crearemos las 3 vlan que creamos en el Router. Como en el paso anterior le damos al símbolo del más estando en la ventana de las interfaces, y después a Vlan, y rellenamos los campos como hicimos en el Router, hasta tener las 3 vlan creadas.
 
-![Texto alternativo](/ruta/a/la/imagen.jpg)
+![Crear vlan 10](/ImagenesPI/crearvlan10.PNG "Crear vlan 10")
+
+![Creadas las 3 vlanes](/ImagenesPI/vlans.PNG "Creadas las 3 vlanes")
+
+Una vez creada las vlan vamos a vincularla cada una con un interfaz del switch para eso haremos un bridge, con lo que nuestro siguiente paso será ir al menú izquierdo y luego a Bridge, y seguidamente al símbolo más para crearlo.
+
+![Crear bridge](/ImagenesPI/bridge.PNG "Crear bridge")
+
+Creamos 3 Bridge una para cada vlan anteriormente creada, tan solo definimos el nombre y le damos a OK.
+
+Ahora estando en la misma ventana del __bridge__ cambiamos de pestaña yendo a _Ports_, y seguidamente le damos al símbolo más.
+En la ventana que nos aparecerá, será donde definamos cada vlan con su correspondiente bridge y seguidamente ese mismo bridge con su interfaz, veamos el ejemplo con la vlan 10.
+
+Primero en interfaz seleccionamos la vlan10_RH y en bridge seleccionamos bridge10_RRHH, aplicamos y luego ok.
+
+![Bridge con vlan](/ImagenesPI/vlanbridge.PNG "Bridge con vlan")
+
+Volvemos a darle al símbolo de más y ahora en interfaz seleccionamos ether2, y en bridge volvemos a elegir bridge10_RH.
+
+![Bridge con interfaz](/ImagenesPI/etherbridge.PNG "Bridge con interfaz")
+
+Ahora realizaremos los mismos pasos para unir el _ether3 con la vlan20_Secre y el Bridge20_Secretariado_, y después unimos el _eher4 con la vlan30_Admin y el bridge30_Administrativo_. Quedando al final todo como se muestra en la siguiente imagen.
+
+![Todos los bridges creados](/ImagenesPI/bridgecreada.PNG "Todos los bridges creados")
+
+Ahora con esta configuración cuando conectemos un PC al ether2 del switch corresponderá al vlan 10, si lo conectamos al ether3 corresponderá a la van 20, etc.
+
+### Crear vlan solo en un Router
+
+Si por el contrario en vez de tener un router y un switch solo tenemos un Router, el procedimiento sería muy parecido cambiando un par de cosas. Partiremos con la configuración que hicimos en la OVA de CHR que configuramos como Switch, con la diferencia de que ahora ether 1 no estará conectado a un Router sino a un ISP o en este caso al Router de casa, por lo tanto lo configuraremos como dhcp cliente.
+Eso quiere decir que iremos al menú izquierdo y luego a __IP → Dhcp cliente__, le damos al símbolo más, seleccionamos el interface ether1 y le damos a ok, tal y como se ve en la siguiente imagen.
+
+![Dhcp cliente de ether1](/ImagenesPI/dhcpcliente2.PNG "Dhcp cliente de ether1")
+
+Como hemo dicho las vlan y los bridge ya están creadas porque partimos de la ova que antes configuramos, solo hemos cambiado de momento que el ether 1 reciba la ip por dhcp.
+
+![Brige y vlan creadas](/ImagenesPI/bridgeyvlan.PNG "Brige y vlan creadas")
+
+Ahora lo que debemos hacer es darle un direccionamiento a los bridge, para ello vamos al menú izquierdo, __IP → Addresses__ e iremos seleccionando cada uno de los Bridge y le daremos una IP, __OJO__ al asignarle la ip al bridge, hará que tanto la interfaz como la vlan puedan ver esa ip incluso si luego le configuramos dhcp.
+
+![Dando ip al bridge](/ImagenesPI/ipbridge.PNG "Dando ip al bridge")
+
+![Configuradas las ips para los 3 bridge](/ImagenesPI/ipsbridges.PNG "Configuradas las ips para los 3 bridge")
+
+Ahora podemos dejar la configuración como está asignando una ip fija a cada equipo que se conecte a cada vlan, o podemos establecer un servicio dhcp a cada bridge, así que vamos a hacerlo.
+Como siempre vamos al menú izquierdo, luego a __IP → Dhcp server__, y luego al símbolo más o al dhcp setup para que nos guíe el asistente, los pasos serán los mismos que los vistos anteriormente cuando configuramos el dhcp server con lo cual pasaremos a mostrar las capturas de imagenes de como seria la configuración.
+
+![Interfaz del server](/ImagenesPI/dhcpbridge1.PNG "Interfaz del server")
+
+![Red del dhcp](/ImagenesPI/dhcpbridge2.PNG "Red del dhcp")
+
+![Puerta de enlace de la red](/ImagenesPI/dhcpbridge3.PNG "Puerta de enlace de la red")
+
+![Rango de las ip asignadas por dhcp](/ImagenesPI/dhcpbridge4.PNG "Rango de las ip asignadas por dhcp")
+
+![Servidores de DNS](/ImagenesPI/dhcpbridge5.PNG "Servidores de DNS")
+
+![Tiempo de arrendamiento de la ip](/ImagenesPI/dhcpbridge6.PNG "Tiempo de arrendamiento de la ip")
+
+Estos mismos pasos lo haremos para las otras 2 bridges. Quedando como resultado final tal y como se muestra en la siguiente imagen.
+
+![Configurado el dhcp para las tres bridges](/ImagenesPI/dhcpbridgeconfig.PNG "Configurado el dhcp para las tres bridges")
+
+Otro paso que debemos realizar es crear la regla de enmascaramiento en la NAT para el ether 1, de la misma forma que ya se realizó anteriormente, para no repetir solo pondremos las imágenes.
+
+![Configurar enmascaramiento](/ImagenesPI/bridgenat.PNG "Configurar enmascaramiento")
+
+![Configurar enmascaramiento](/ImagenesPI/bridgenat2.PNG "Configurar enmascaramiento")
+
+Pero aún falta un detalle y es que si hacemos ping a la red de otra vlan por ejemplo a la vlan 20, nos responderá, y nosotros queremos que no se comuniquen entre ellas.
+
+![Ping a otra Vlan](/ImagenesPI/ipvlanes.PNG "Ping a otra Vlan")
+
+Tambien se puede ver la lista de rutas, en la cual vemos las rutas establecidas en el router.
+
+![Lista de rutas del router](/ImagenesPI/listarutasvlan.PNG "Lista de rutas del router")
+
+Por lo tanto debemos añadir un par de reglas en el Firewall, para que las vlans no se vean pero si salgan por internet.
+Para ello en el menu izquierdo vamos a __IP → Firewall__, pestaña de _File Rules_ y le damos al símbolo de más. En donde definimos que todo lo que vaya desde la red 10.10.10.0 que pertenece a la vlan 10 con destino a la red 20.20.20.0 que pertenece a la vlan 20, le hacemos un drop
+
+![Regla de firewall para vlan](/ImagenesPI/firewallvlan.PNG "Regla de firewall para vlan")
+
+![Regla de firewall para vlan](/ImagenesPI/firewallvlan2.PNG "Regla de firewall para vlan")
+
+Luego repetimos lo mismo pero a la inversa, todo lo que vaya de la vlan 20 a la vlan 10 le hacemos un drop.
+
+![Regla de firewall inversa para vlan](/ImagenesPI/firewallvlan3.PNG "Regla de firewall inversa para vlan")
+
+Entonces ya con esto podemos definir si queremos que alguna vlan si se vean entre ellas o que ninguna se vea entre ellas, en este caso haremos que sean completamente independientes y que no se vean entre ellas quedando todas las reglas como se muestra en la imagen.
+
+![Reglas de firewall para vlanes creadas](/ImagenesPI/firewallvlanes.PNG "Reglas de firewall para vlanes creadas")
+
+## Configurar DMZ y reglas de Firewall
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+
+
+
+
+
+
+
+
+
+
+
