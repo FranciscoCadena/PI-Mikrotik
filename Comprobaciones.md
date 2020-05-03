@@ -136,8 +136,27 @@ Prueba con traceroute desde el servidor de la dmz estando por ssh desde el anfit
 
 ![Traceroute](/ImagenesPI/dmztraceroute.PNG "Traceroute")
 
+## Comprobaciones de vpn por ipsec
 
+Una de las comprobaciones que podemos hacer para ver si el túnel funciona es desde Winbox vamos al menú izquierdo, hacemos clic donde dice __Tools__ y luego a __Ping__.
+En esta ventana debemos definir en la pestaña _General_  en el apartado de _Ping To_, la dirección a la cual queremos hacer ping, que en este caso será la interfaz del gateway de la red local del router con el que hemos establecido el túnel, luego vamos a la pestaña de _Advanced_ y en el apartado de _Src. Address_ escribimos la ip de la interfaz del router donde nos encontramos ahora mismo que da a la red lan de este.
+Una vez configurada ambas ip, le daremos al botón de Start y en la pantalla de abajo deberá verse si hay respuesta.
 
+![Pestaña General, ip de la lan del router destino, conexión establecida](/ImagenesPI/ipsecping.PNG "Pestaña General, ip de la lan del router destino, conexión establecida")
+
+![Pestaña Advanced, ip de la lan del router origen, conexión establecida](/ImagenesPI/IPsecping1.PNG "Pestaña Advanced, ip de la lan del router origen, conexión establecida")
+
+La siguiente conexión será desde un cliente de una red a otro cliente de otra red lan diferente, en este caso la ip del cliente será 192.168.20.254 como se muestra en la siguiente imagen.
+
+![IP de cliente](/ImagenesPI/ipsecipcliente.PNG "IP de cliente")
+
+Y primero probaremos a hacer ping a la dirección 192.168.10.1 que corresponde a la interfaz de la lan del router que está al otro lado del túnel.
+
+![Ping a la interfaz del ruter de la otra sede](/ImagenesPI/ipsecping3.PNG "Ping a la interfaz del ruter de la otra sede")
+
+Y seguidamente haremos lo mismo pero con la ip de un cliente que pertenezca a la red lan que está al otro lado del túnel.
+
+![Ping a un equipo de la otra sede](/ImagenesPI/ipsecping4.PNG "Ping a un equipo de la otra sede")
 
 
 
