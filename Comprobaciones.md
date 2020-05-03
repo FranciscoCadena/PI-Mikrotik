@@ -144,7 +144,7 @@ Una vez configurada ambas ip, le daremos al botón de Start y en la pantalla de 
 
 ![Pestaña General, ip de la lan del router destino, conexión establecida](/ImagenesPI/ipsecping.PNG "Pestaña General, ip de la lan del router destino, conexión establecida")
 
-![Pestaña Advanced, ip de la lan del router origen, conexión establecida](/ImagenesPI/IPsecping1.PNG "Pestaña Advanced, ip de la lan del router origen, conexión establecida")
+![Pestaña Advanced, ip de la lan del router origen, conexión establecida](/ImagenesPI/IPsecping2.PNG "Pestaña Advanced, ip de la lan del router origen, conexión establecida")
 
 La siguiente conexión será desde un cliente de una red a otro cliente de otra red lan diferente, en este caso la ip del cliente será 192.168.20.254 como se muestra en la siguiente imagen.
 
