@@ -44,6 +44,86 @@ Y a navegar a internet.
 
 ![Navegar por internet](/ImagenesPI/internetvlan.PNG "Navegar por internet")
 
+## Comprobaciones de reglas de firewall configuradas para la DMZ
+
+#### Primero comenzaremos con el administrador de los servicios de la lan2 cuya ip es 192.168.20.2, el debe tener acceso a internet, poder hacer ping a la dmz, conectarse por ssh a la dmz, pero no debe tener acceso a la lan1.
+
+![Lan2 salida a internet](/ImagenesPI/dmzinternet.PNG "Lan2 salida a internet")
+
+Ping a uno de los servidores de la dmz
+
+![Ping de lan a dmz](/ImagenesPI/dmzping.PNG "Ping de lan a dmz")
+
+Conexión por ssh a uno de los servidores de la dmz
+
+![Conexion por ssh a la dmz](/ImagenesPI/dmzssh.PNG "Conexion por ssh a la dmz")
+
+No conexión con un trabajador de la lan1
+
+![No hay ping a la lan1](/ImagenesPI/dmznopinglan1.PNG "No hay ping a la lan1")
+
+#### En cambio el otro administrador de la lan2 cuya ip es 192.168.20.3 y que se encarga de la red lan1 si tendrá conexión a esta y a internet pero no a la dmz ni tampoco por ssh.
+
+IP del administrador de la lan2 que se encarga de mantener la lan1
+
+![IP del administrador de la lan2 que se encarga de mantener la lan1](/ImagenesPI/dmziplan2.PNG "IP del administrador de la lan2 que se encarga de mantener la lan1")
+
+Sin conexión a la dmz
+
+![Sin conexión a la dmz](/ImagenesPI/dmznopinglan2dmz.PNG "Sin conexión a la dmz")
+
+Conexión a un trabajador de la red lan1
+
+![Conexión a la red lan1](/ImagenesPI/dmzpinglan2lan1.PNG "Conexión a la red lan1")
+
+#### Pruebas con un servidor de la dmz cuya ip será 192.168.30.3, que deberá tener acceso a internet, conexión con el administrador de servidor de la lan2, y todo lo demás denegado.
+
+![IP de servidor de dmz](/ImagenesPI/dmzipserver.PNG "IP de servidor de dmz")
+
+Ping con el Administrador de la red lan2
+
+![Ping con el Administrador de la red lan2](/ImagenesPI/dmzpingdmzlan2.PNG "Ping con el Administrador de la red lan2")
+
+No conexión con la red lan1
+
+![No conexión con la red lan1](/ImagenesPI/dmznopingdmzlan1.PNG "No conexión con la red lan1")
+
+#### Por último la red lan1 no tendrá conexión con nadie excepto con el administrador de la lan2, la ip de uno de los trabajadores de la lan1 será 192.168.10.254.
+
+![IP de un equipo de la lan1](/ImagenesPI/dmziplan1.PNG "IP de un equipo de la lan1")
+
+Sin conexión a la dmz
+
+![Sin conexión a la dmz](/ImagenesPI/dmznopinglan1dmz.PNG "Sin conexión a la dmz")
+
+Sin conexión al administrador de servidores de la lan2
+
+![Sin conexión al administrador de servidores de la lan2](/ImagenesPI/dmznopinglan1lan2.PNG "Sin conexión al administrador de servidores de la lan2")
+
+Sin conexión a internet
+
+![Sin conexión a internet](/ImagenesPI/dmznopinglan1internet.PNG "Sin conexión a internet")
+
+Conexión con el administrador de la red lan2 que mantiene la lan1
+
+![Conexión con el administrador de la red lan2](/ImagenesPI/dmzpinglan1lan2admin.PNG "Conexión con el administrador de la red lan2")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+
+
 
 
 
