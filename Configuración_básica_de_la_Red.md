@@ -319,39 +319,73 @@ Entonces ya con esto podemos definir si queremos que alguna vlan si se vean entr
 
 ## Configurar DMZ y reglas de Firewall
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Partiremos como ejemplo de la siguiente topografía de una red empresarial con 2 redes lan y una dmz.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Topografia de red con dmz](/ImagenesPI/dmz.PNG "Topografia de red con dmz")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Vamos a pasar a configurar una dmz con las siguientes condiciones guiándonos de la imagen anterior. 
+- La red de la dmz será la 192.168.30.0, donde habrá uno o varios servidores, según lo que necesite la empresa, como ejemplo pondremos 2, un servidor de ftp y otro de http, al ser servidores la ip será fija, tendrán acceso a internet.
+- La red lan1 será la 192.168.10.0, será la que tenga a los trabajadores de la empresa, , y no tendrán acceso a internet.
+- La red lan2 será la 192.168.20.0, también serán ip fijas puesto que solo estarán los administradores, estos si tendrán salida a internet, uno se encargará de mantener la dmz conectado por ssh, sin tener acceso a la red lan1 y el otro administrador se encargará del mantenimiento de la red lan1 sin tener acceso a la dmz.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+La configuración que se verá será solamente reglas de firewall puesto que ya se a visto anteriormente como crear redes, nombrar ips, crear dhcp, etc.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Lo primero será redirigir lo que entre por la WAN a nuestros servidores dependiendo del protocolo y puerto que  usen, para ello vamos a __IP → Firewall__ y luego a la pestaña de NAT, una vez aquí añadiremos una nueva regla dándole al símbolo del mas, en donde pondremos las reglas que se muestran en las imágenes siguientes.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Regla nat dmz puerto 80](/ImagenesPI/dmznat1.PNG "Regla nat dmz puerto 80")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Redireccion de puerto para servidor de http](/ImagenesPI/dmznat2.PNG "Redireccion de puerto para servidor de http")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Como hemos visto en las 2 imágenes anteriores hemos definido que todo lo que venga por el protocolo tcp y puerto 80 lo redirija a una ip concreta la cual coincidirá con la ip de nuestro servidor web. Esta misma regla lo repetiremos con los puertos 8080 y 443.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Ahora haremos los mismo con el puerto 21, redirigiendo lo que venga por este puerto a la ip del servidor de ftp
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![egla nat dmz puerto 21](/ImagenesPI/dmznat3.PNG "Regla nat dmz puerto 21")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Redireccion de puerto para servidor ftp](/ImagenesPI/dmznat4.PNG "Redireccion de puerto para servidor ftp")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Una vez terminado todas nuestras reglas NAT deberían quedar como en la imagen siguiente.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Configuración de reglas nat de la dmz](/ImagenesPI/dmznatconfi.PNG "Configuración de reglas nat de la dmz")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Vamos a añadir una regla más de NAT para posteriormente hacer una breve comprobación de que funciona la redirección de puerto usando el pc anfitrión de casa e intentando conectarnos por ssh a uno de los servidores de la dmz, usando la ip de la wan del router. 
+Para ello simplemente añadiremos las siguientes reglas como se muestran a continuación.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Regla nat dmz puerto 22](/ImagenesPI/dmznat5.PNG "Regla nat dmz puerto 22")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Configuración de reglas para ssh](/ImagenesPI/dmznat6.PNG "Configuración de reglas para ssh")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Ahora pasaremos a la pestaña de _Files Rules_ dentro de la ventana de __Firewall__, lo primero que vamos a hacer es permitir que el Administrador de los servicios de la red lan2 pueda acceder a los servidores de http y ftp, como seran muchas imagenes para no repetir tanto solo veremos un ejemplo y luego se mostrará toda la configuración al final.
+
+![Reglas de firewall](/ImagenesPI/dmzfire1.PNG "Reglas de firewall")
+
+![Reglas de firewall aceptar](/ImagenesPI/dmzfire2.PNG "Reglas de firewall aceptar")
+
+Podemos especificar también las reglas,  definiendo que solo se permiten las conexiones por un protocolo y puerto en concreto, quedando todas las reglas de la siguiente manera.
+
+![Reglas de firewall aceptadas configuradas](/ImagenesPI/dmzfireconf.PNG "Reglas de firewall aceptadas configuradas")
+
+La siguiente regla permite el tráfico de conexiones establecidas y relacionadas.
+
+![Reglas de firewall](/ImagenesPI/dmzfire3.PNG "Reglas de firewall")
+
+![Reglas de firewall conexiones establecidas y relacionadas](/ImagenesPI/dmzfire4.PNG "Reglas de firewall conexiones establecidas y relacionadas")
+
+Paso seguido denegamos con la acción __reject__ cualquier otra conexión que vaya desde la lan2 a la dmz y viceversa.
+
+![Regla de firewall reject](/ImagenesPI/dmzfire5.PNG "Regla de firewall reject")
+
+Con lo cual ambas reglas nos quedarían de la siguiente manera.
+
+![Reglas de firewall reject](/ImagenesPI/dmzfire6.PNG "Reglas de firewall reject")
+
+Nuestro siguiente paso será que el Administrador de los servicios pueda conectarse por ssh a ambos servidores, para ello solo necesitamos crear una regla como se muestra a continuación.
+
+![Reglas de firewall aceptar puerto 22](/ImagenesPI/dmzfire7.PNG "Reglas de firewall aceptar puerto 22")
+
+El resto de las configuraciones son procesos parecidos, por lo que para no repetir veremos en la siguiente imagen como quedaria todas las reglas configuradas.
+
+![Todas las relgas de firewall configuradas](/ImagenesPI/dmzfireconfigurada.PNG "Todas las relgas de firewall configuradas")
 
 ![Fase1](/ImagenesPI/FASE1.PNG "")
 
