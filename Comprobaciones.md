@@ -88,7 +88,7 @@ No conexión con la red lan1
 
 ![No conexión con la red lan1](/ImagenesPI/dmznopingdmzlan1.PNG "No conexión con la red lan1")
 
-#### Por último la red lan1 no tendrá conexión con nadie excepto con el administrador de la lan2, la ip de uno de los trabajadores de la lan1 será 192.168.10.254.
+#### Ahora probaremos que la red lan1 no tendrá conexión con nadie excepto con el administrador de la lan2, la ip de uno de los trabajadores de la lan1 será 192.168.10.254.
 
 ![IP de un equipo de la lan1](/ImagenesPI/dmziplan1.PNG "IP de un equipo de la lan1")
 
@@ -108,19 +108,33 @@ Conexión con el administrador de la red lan2 que mantiene la lan1
 
 ![Conexión con el administrador de la red lan2](/ImagenesPI/dmzpinglan1lan2admin.PNG "Conexión con el administrador de la red lan2")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+#### Por último haremos la configuración de la última regla NAT que añadimos para hacer la comprobación de redirección de puertos, para ello podemos usar la máquina anfitriona en este caso una windows 10,  así que se realizará la prueba desde la powershell. 
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![IP del equipo anfitrión de Windows 10](/ImagenesPI/dmzipanfitrion.PNG "IP del equipo anfitrión de Windows 10")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+IP configuradas del router mikrotik donde podemos observar la ip de la wan y de las diferentes LANES
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![IP del router](/ImagenesPI/dmzipsrouter.PNG "IP del router")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Ip del equipo servidor de la dmz al cual vamos a entrar por ssh
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Ip del equipo servidor de la dmz al cual vamos a entrar por ssh](/ImagenesPI/dmzipserverdmz.PNG "Ip del equipo servidor de la dmz al cual vamos a entrar por ssh")
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+Entrando por ssh al servidor de la dmz, usando la ip de la wan del router mikrotik
+
+![SSH de anfitrión a dmz](/ImagenesPI/dmzsshanfitriondmz.PNG "SSh de anfitrión a dmz")
+
+Comprobación de que estamos en el servidor de la dmz viendo su ip
+
+![Comprobación de que estamos en el servidor de la dmz viendo su ip](/ImagenesPI/dmzipdmzanfitrion.PNG "Comprobación de que estamos en el servidor de la dmz viendo su ip")
+
+Prueba con tracepath desde el servidor de la dmz estando por ssh desde el anfitrión
+
+![Tracepath](/ImagenesPI/dmztracepath.PNG "Tracepath")
+
+Prueba con traceroute desde el servidor de la dmz estando por ssh desde el anfitrión
+
+![Traceroute](/ImagenesPI/dmztraceroute.PNG "Traceroute")
 
 
 
