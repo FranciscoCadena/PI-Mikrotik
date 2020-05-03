@@ -4,7 +4,7 @@
 
 Para ello tan solo montamos un equipo en virtualbox, en este caso una ubuntu desktop, y lo fundamental es que en la parte de Red, esté en red interna y el nombre corresponda con la LAN a la cual hemos montado el servicio de dhcp. 
 
-![Red inter cliente Virtualbox](/ImagenesPI/cliente.PNG "Red inter cliente Virtualbox")
+![Red interna cliente Virtualbox](/ImagenesPI/cliente.PNG "Red interna cliente Virtualbox")
 
 En la configuración de la red lo dejamos todo en automático, en la pestaña de _ipv4_
 
