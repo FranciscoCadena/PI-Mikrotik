@@ -1,3 +1,18 @@
+# Datos del documento
+
+En este documento veremos lo siguiente:
+- Tipos de licencia de Mikrotik 
+- Donde descargar el CHR de Mikrotik y la herramienta de Winbox
+- Conectarnos a mikrotik por Winbox
+- Cambiar nombre de usuario y pass al acceder a mikrotik
+- Resetear nuestro router
+- Configuración de Dhcp cliente y servidor
+- Donde se configura el Dns y el gateway
+- Nombrar y crear ips
+- Crear vlans y hacerlo con un solo router
+- Crear un Vpn con protocolo IPsec
+- Configurar reglas de Firewall para una DMZ
+
 ## Licencias Mikrotik, RouterOS y Winbox
 
 Nuestro primer paso será ir a la página oficial de [Mikrotik](https://mikrotik.com/download), una vez dentro vamos a la pestaña de Software y luego a Download, aquí hay que tener algo en cuenta, el sistema operativo __RouterOS__ va por licencias, aquí podemos ver los distintos tipos de licencia y lo que nos ofrece cada una sacada directamente de la página oficial de mikrotik.
