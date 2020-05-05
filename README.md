@@ -8,12 +8,12 @@ En el proyecto se dará a conocer el sistema operativo que usa Mikrotik para con
 Todo este proceso se realizará de manera práctica donde desarrollaremos una topografía de red que podría usar una pequeña empresa de manera virtual, en la cual enseñaremos a configurar métodos básicos para la creación de una red y profundizando más en temas de Seguridad y Alta disponibilidad.
 
 __La estructura del documento es la siguiente__
-- Recursos
-- Planificación de la Red de una empresa
-- Configuración básica de la Red
-- Configuración de Herramientas que aportan Alta Disponibilidad
+- Recursos (donde se comenta las herramientas usadas para poder desarrollar el proyecto)
+- Planificación de la Red de una empresa (donde se irá mostrando las diferentes fases de topografías de red, que se irán realizando posteriormente)
+- Configuración básica de la Red (donde se explicara los pasos de configuración básica para montar una red )
+- Configuración de Herramientas que aportan Alta Disponibilidad 
 - Configuración de Herramientas para dar Seguridad
 - Uso de Suricata como IDS junto a Mikrotik
-- Lista de pruebas
-- Comprobaciones
+- Lista de pruebas (listado de pruebas que se realizarán para comprobar que todo funciona correctamente)
+- Comprobaciones (comprobaciones, basándonos en la lista de pruebas para confirmar el funcionamiento de nuestra configuración)
 
