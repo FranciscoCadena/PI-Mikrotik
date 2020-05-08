@@ -15,7 +15,7 @@ __En la cual se configurara los siguientes aspectos__
 Todo este apartado estara en el documento de configuracion de una red empresarial.
 
 ## La segunda fase tendrá algunos cambios en la topografía de red respecto a la anterior como se ve en la siguiente imagen.
-![Fase1 de Red](/ImagenesPI/FASE1.PNG)
+![Fase2 de Red](/ImagenesPI/PIFase2/Fase2.PNG)
 
 __En esta parte implementaremos algunos tecnologias para que nuestra red tanga mayor disponibilidad__
 - Se implementará un Failover de líneas de respaldo para ambos router con los dos ISP, para cuando uno de ellos falle, automáticamente tire por el otro.
