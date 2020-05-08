@@ -12,5 +12,9 @@
 - Comprobar que los equipos de cada vlan reciba ip dinámica y que no tengan conexión entre ellas mismas.
 - Comprobar que se crea el túnel por IPsec, se establece la conexión entre los vecinos, y hay conectividad entre ellos y los equipos definidos de cada red.
 
+## Fase 2
+
+- Comprobar el funcionamiento de Failover, haciendo que uno de los ISP se apague y ver si salta la ruta de respaldo para que mantenga la conectividad, luego volver a encender el ISP que antes hemos apagado para comprobar que cambia de nuevo la ruta de respaldo a como estaba al principio.
+- Comprobar el funcionamiento del vrrp, para ello se desconectara el router maestro, y se comprobará que en el equipo cliente sigue teniendo conexión a internet y que salta el vrrp que da al router backup, luego volvemos a encender el router maestro, y comprobamos que vuelve a cambiar la vrrp del backup al maestro.
 
 
