@@ -47,12 +47,15 @@ Por ello solo dejaremos las imágenes de cómo quedaría la configuración de am
 ### Master
 
 Interfaces
+
 ![Interfaces configuradas](ImagenesPI/PIFase2/masterinterface.PNG "Interfaces configuradas")
 
 Ips
+
 ![IP configuradas](ImagenesPI/PIFase2/masterips.PNG "IP configuradas")
 
 DNS
+
 ![DNS configurado](ImagenesPI/PIFase2/masterdns.PNG "DNS configurado")
 
 NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
@@ -61,6 +64,7 @@ NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
 ### Backup
 
 Ips
+
 ![IP configuradas](ImagenesPI/PIFase2/slaveips.PNG "IP configuradas")
 
 
