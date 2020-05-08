@@ -2,7 +2,7 @@
 
 Para ello nos guiaremos de la siguiente topografia.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
 
 Los router __ISP__ no serían necesario tocarlos puesto que la ip nos la debería dar nuestro proveedor de internet, pero como esto es una virtualización explicaremos brevemente qué tipo de configuración básica le daremos.
  
