@@ -55,7 +55,7 @@ Ips
 DNS
 ![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
 
-NAT
+NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
 ![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
 
 ### ISP2
@@ -69,7 +69,7 @@ Ips
 DNS
 ![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
 
-NAT
+NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
 ![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
 
 ### Failover Rutas de Respaldo
@@ -88,18 +88,27 @@ El resto podemos dejarlo por defecto.
  
 Una vez creada esta regla, pasamos a crear la siguiente, con los siguientes parámetros:
 - __Dst Address__ 0.0.0.0/0 (Toda IP)
-- __Gateway__ 192.168.3.1
+- __Gateway__ 192.168.2.1
 - __Check Gateway__ ping (con esto validará haciendo ping al gateway de que este funciona y hay conexión a el)
 - __Distance__ 2 (con el 2 definimos que será la secundaria o backup)
 
  ![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
  
 Como vemos la única diferencia con respecto a la anterior ha sido que hemos definido el otro gateway que corresponderá al otro ISP, será el secundario o ruta de respaldo, definido en Distance como 2.
- 
+
+Se puede observar en ambas imágenes, que la primera ruta que definimos con _Distance 1_ tiene un color negro y a la izquierda de la ventana tiene las siglas __AS__ correspondiendo la _A → active y la S → static_.
+Mientas que la ruta que definimos con _Distance 2_ tiene un color azul y la sigla que aparece es solo __S → static__, eso nos indica que la ruta de color azul está a la espera y cuando se caiga la primera, se activará la segunda, eso se verá en el apartado de comprobaciones.  
+
+
 Con esto conseguimos que cuando haya cualquier problema con el ISP1, nuestro router al hacer ping y comprobar que no hay respuesta pasará a hacer ping a la ruta de respaldo y si le responderá pasará a tirar el tráfico por este, con ello logramos no perder conexión a internet, solo una breve caída.
 
 Este mismo proceso habrá que hacerlo en el otro router de la empresa, en donde solo habrá que cambiar las ip de los gateways en la creación de ambas rutas.
 
+### VRRP
+
+Este protocolo lo usaremos en aquellas LAN que no sean demasiado grandes y cuyas ip sean estáticas, esto es debido porque cuando una ip es dinámica y tiene 2 router dándole servicio de dhcp, en cuanto uno se caiga con volver a pedir ip por dhcp el mismo equipo cambiara la ip y el gateway, pero con  una ip estática no ocurre esto.
+
+Por ello el protocolo vrrp lo que hace es crear un router virtual, y la ip que definimos en ese router virtual debe ser el mismo en ambos router, y será el gateway que usaremos en nuestros equipos que usen ip estática, de esta manera cuando haya cualquier problema con uno de los router el protocolo vrrp lo detectara y saltara al router de respaldo, consiguiendo así que el equipo cliente no se quede sin internet.
 
 
 
