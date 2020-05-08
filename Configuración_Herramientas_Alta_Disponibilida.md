@@ -2,7 +2,7 @@
 
 Para ello nos guiaremos de la siguiente topografia.
 
-![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+![Topografia sencilla para HA](ImagenesPI/PIFase2/Fase2-2.PNG "Topografia sencilla para HA")
 
 Los router __ISP__ no serían necesario tocarlos puesto que la ip nos la debería dar nuestro proveedor de internet, pero como esto es una virtualización explicaremos brevemente qué tipo de configuración básica le daremos.
  
@@ -10,19 +10,19 @@ Solo definiremos que tendrá tres interfaces uno que dé a internet, la cual ten
 
 Comencemos definiendo las interfaces del ISP, y a donde irá cada una.
  
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Interfaces del ISP](ImagenesPI/PIFase2/isp2interface.PNG "Interfaces del ISP")
  
 Seguiremos dándole ip dinámica a la interfaz WAN, para ello como siempre iremos a __ip →  dhcp__ cliente y definimos la regla para la WAN.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Dhcp cliente de ISP](ImagenesPI/PIFase2/isp2dhcpcliente.PNG "Dhcp cliente de ISP")
 
 Ahora daremos direccionamiento a las otras dos interfaces que irán a los dos router que se encuentran en la empresa, estas ip serán estáticas con lo que no crearemos un servicio de dhcp, y seran /30.
  
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![IP configuradas de ISP](ImagenesPI/PIFase2/isp2ips.PNG "IP configuradas de ISP")
 
 Definimos los servidores DNS y marcamos la casilla de __Allow Remote Request__.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![DNS del ISP](ImagenesPI/PIFase2/isp2dns.PNG "DNS del ISP")
 
 Por último creamos el enmascaramiento en NAT.
 
@@ -38,30 +38,30 @@ Todos estos pasos los realizaremos en ambos router ISP, teniendo precaución de 
  
 Una buena práctica a la hora de trabajar con varios router y poder diferenciarlos es darles un nombre o identificador, para ello vamos al menú izquierdo donde dice __System → Identity__, en esta ventana podemos darle un nombre al router para poder definirlo.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Nombrar al Router](ImagenesPI/PIFase2/identity.PNG "Nombrar al Router")
 
 Como siempre lo primero que haremos sera la configuracion basica del router, definiendo las interfaces, el direccionamiento de cada interfaz, el dns, y el servicio dhcp, pero en este caso no será necesario.
 
 Por ello solo dejaremos las imágenes de cómo quedaría la configuración de ambos router, haciendo el mismo procedimiento en el otro router, donde solo habrá que cambiar las ips de las interfaces. 
 
-### ISP1
+### Master
 
 Interfaces
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Interfaces configuradas](ImagenesPI/PIFase2/masterinterface.PNG "Interfaces configuradas")
 
 Ips
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![IP configuradas](ImagenesPI/PIFase2/masterips.PNG "IP configuradas")
 
 DNS
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![DNS configurado](ImagenesPI/PIFase2/masterdns.PNG "DNS configurado")
 
 NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Nat de ambas Wan configurada](ImagenesPI/PIFase2/masternat.PNG "Nat de ambas Wan configurada")
 
-### ISP2
+### Backup
 
 Ips
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![IP configuradas](ImagenesPI/PIFase2/slaveips.PNG "IP configuradas")
 
 
 ### Failover Rutas de Respaldo
@@ -74,7 +74,7 @@ En esta ventana definimos:
 - __Check Gateway__ ping (con esto validará haciendo ping al gateway de que este funciona y hay conexión a el)
 - __Distance__ 1 (con el 1 definimos que será la principal)
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Configurar ruta principal](ImagenesPI/PIFase2/master-route1.PNG "Configurar ruta principal")
 
 El resto podemos dejarlo por defecto.
  
@@ -84,13 +84,12 @@ Una vez creada esta regla, pasamos a crear la siguiente, con los siguientes par�
 - __Check Gateway__ ping (con esto validará haciendo ping al gateway de que este funciona y hay conexión a el)
 - __Distance__ 2 (con el 2 definimos que será la secundaria o backup)
 
- ![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Configurar ruta de respaldo](ImagenesPI/PIFase2/master-route2.PNG "Configurar ruta de respaldo")
  
 Como vemos la única diferencia con respecto a la anterior ha sido que hemos definido el otro gateway que corresponderá al otro ISP, será el secundario o ruta de respaldo, definido en Distance como 2.
 
 Se puede observar en ambas imágenes, que la primera ruta que definimos con _Distance 1_ tiene un color negro y a la izquierda de la ventana tiene las siglas __AS__ correspondiendo la _A → active y la S → static_.
 Mientas que la ruta que definimos con _Distance 2_ tiene un color azul y la sigla que aparece es solo __S → static__, eso nos indica que la ruta de color azul está a la espera y cuando se caiga la primera, se activará la segunda, eso se verá en el apartado de comprobaciones.  
-
 
 Con esto conseguimos que cuando haya cualquier problema con el ISP1, nuestro router al hacer ping y comprobar que no hay respuesta pasará a hacer ping a la ruta de respaldo y si le responderá pasará a tirar el tráfico por este, con ello logramos no perder conexión a internet, solo una breve caída.
 
@@ -110,17 +109,19 @@ En la ventana que nos aparece en la pestaña de _General_ tan solo definimos el 
 
 El resto de parámetros lo podemos dejar por defecto.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Vrrp1 pestaña Vrrp del router maestro](ImagenesPI/PIFase2/mastervrrp1.PNG "Vrrp1 pestaña Vrrp del router maestro")
+
+![Vrrp1 pestaña General del router maestro](ImagenesPI/PIFase2/mastervrrp1_1.PNG "Vrrp1 pestaña General del router maestro")
 
 Como en este ejemplo de Red tenemos 2 redes estáticas, creamos otro vrrp, donde solo deberemos modificar el nombre, la interfaz que ahora será LAN2 y el VRID  a 20 por ejemplo, quedando como en la siguiente imagen.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Vrrp2 pestaña Vrrp del router maestro](ImagenesPI/PIFase2/mastervrrp2.PNG "Vrrp2 pestaña Vrrp del router maestro")
+
+![Vrrp2 pestaña General del router maestro](ImagenesPI/PIFase2/mastervrrp2_1.PNG "Vrrp2 pestaña General del router maestro")
 
 Una vez creadas ambas vrrp podemos ver como quedan en el apartado de interfaces.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Interfaces con los vrrp configurados](ImagenesPI/PIFase2/mastervrrpinterfaces.PNG "Interfaces con los vrrp configurados")
 
 Las siglas de la izquierda de __RM__ hacen referencia a _R → running y M → master_.
 Esto aparecerá una vez que esté ambos router configurados.
@@ -128,20 +129,29 @@ Esto aparecerá una vez que esté ambos router configurados.
 El siguiente paso será darle ip a ambos vrrp, como siempre para ello vamos al menú izquierdo IP → Address, símbolo del (+).
 En la ventana seleccionamos uno de los vrrp creados y le damos una ip dentro del rango de la red, con la precaución de que debe terminar en /32.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![IP configuradas en los dos vrrp](ImagenesPI/PIFase2/mastervrrpips.PNG "IP configuradas en los dos vrrp")
 
 Hacemos el mismo procedimiento para el otro vrrp, definiendo una ip que corresponda a su red ya que cada vrrp que hemos creado es para una LAN diferente.
 
 #### Ahora pasaremos a configurar los VRRP en el router que hara de Backup
 
-Como hicimos con el router master, lo primero será los vrrp para cada LAN, donde lo único que cambiaremos será la interfaz y la prioridad, dejando el mismo VRID, quedando ambos router como se muestra en las siguientes imágenes.
+Como hicimos con el router master, lo primero será crear los vrrp para cada LAN, donde lo único que cambiaremos será la interfaz y la prioridad, dejando el mismo VRID, quedando ambos router como se muestra en las siguientes imágenes.
+
+![Vrrp1 pestaña Vrrp del router backup](ImagenesPI/PIFase2/slavevrrp1.PNG "Vrrp1 pestaña Vrrp del router backup")
+
+![Vrrp1 pestaña General del router backup](ImagenesPI/PIFase2/slavevrrp1_1.PNG "Vrrp1 pestaña General del router backup")
+
+![Vrrp2 pestaña Vrrp del router backup](ImagenesPI/PIFase2/slavevrrp2.PNG "Vrrp2 pestaña Vrrp del router backup")
+
+![Vrrp2 pestaña General del router backup](ImagenesPI/PIFase2/slavevrrp2_2.PNG "Vrrp2 pestaña General del router backup")
+
 Una vez creado ambos vrrp, en la parte de interfaces podemos observar como ya están creadas y que aparece a la izquierda la sigla __B__ haciendo referencia  _B → backup_.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Interfaces con los vrrp configurados](ImagenesPI/PIFase2/slavevrrpinterface.PNG "Interfaces con los vrrp configurados")
 
 El siguiente paso será darle las ip a ambos vrrp. donde deberán coincidir las ip de esos con las que usamos en el router master, quedando de la siguiente manera.
 
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![IP configuradas en los dos vrrp](ImagenesPI/PIFase2/slavevrrpips.PNG "IP configuradas en los dos vrrp")
 
 Una vez creada, aparecerán de color rojo eso es debido a que están en modo de espera, y cuando falle el maestro este saltara cambiando el color a negro debido a que se habrá activado.
 
