@@ -11,8 +11,9 @@ __La estructura del documento es la siguiente__
 - Recursos (donde se comenta las herramientas usadas para poder desarrollar el proyecto)
 - Planificación de la Red de una empresa (donde se irá mostrando las diferentes fases de topografías de red, que se irán realizando posteriormente)
 - Fase1:Configuración básica de la Red (donde se explicara los pasos de configuración básica para montar una red )
-- Fase1 con gns3(donde se verá la configuración realizada con gns3 de la fase 1 )
-- Configuración de Herramientas que aportan Alta Disponibilidad 
+- Fase1 con gns3(donde se verá la configuración realizada con gns3 de la fase 1)
+- Fase2:Configuración de Herramientas que aportan Alta Disponibilidad (donde se explicaran la configuracion de algunas herramientsa paa darle una mejor disponibilidad a nuestra red)
+- Fase2 congns3 (donde se verá la configuración realizada con gns3 de la fase 2)
 - Configuración de Herramientas para dar Seguridad
 - Uso de Suricata como IDS junto a Mikrotik
 - Lista de pruebas (listado de pruebas que se realizarán para comprobar que todo funciona correctamente)
