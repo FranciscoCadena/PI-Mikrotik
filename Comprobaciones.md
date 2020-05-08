@@ -162,44 +162,47 @@ Y seguidamente haremos lo mismo pero con la ip de un cliente que pertenezca a la
 
 Para realizar esta prueba entraremos por Winbox a uno de los router de la empresa, tendremos en pantalla, la terminal haciendo ping al 8.8.8.8 constantemente, la herramienta traceroute haciendo ping al 8.8.8.8 y la ventana de la lista de rutas.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Conexión con el isp principal](ImagenesPI/PIFase2/failoverprueba1.PNG "Conexión con el isp principal")
 
 A continuación desconectamos el ISP1 que es el que definimos como principal, y observaremos como se pierde la conexión, hasta que pasado un tiempo se conectará automáticamente al ISP2 volviendo a tener conexión, no solo será visible porque vuelva a hacer ping al 8.8.8.8 desde la terminal, sino porque se verá reflejado en la ventana de Router list, cambiando de color la ruta que antes estaba en azul a negra y también cambiará la sigla definiendo que estará activa.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Perdida de conexión con el isp principal](ImagenesPI/PIFase2/failoverprueba2.PNG "Perdida de conexión con el isp principal")
+
+![Reconexión con el isp secundario](ImagenesPI/PIFase2/failoverprueba3.PNG "Reconexión con el isp secundario")
 
 Por último volvemos a activar el ISP1 que antes se apagó, en cuanto se inicie deberá volver a pasar el la Route List como el principal, y en la ventana de traceroute, donde se perdió toda la conexión deberá de activarse nuevamente.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Reconexión con el isp principal](ImagenesPI/PIFase2/failoverprueba4.PNG "Reconexión con el isp principal")
 
 
 ## Comprobar VRRP
 
 Para hacer la comprobación del vrrp , entraremos en un equipo cliente con SO Ubuntu desktop, comprobaremos su ip y gateway, para confirmar que está configurado según el Vrrp asociado al Router.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Preparación de Prueba comprobando ip y gateway del equipo cliente](ImagenesPI/PIFase2/vrrpprueba1.PNG "Preparación de Prueba comprobando ip y gateway del equipo cliente")
 
 El siguiente paso será estar reproduciendo un video de youtube y estar haciendo ping al 8.8.8.8 continuamente desde el equipo cliente, también habrá  dos ventanas de Winbox donde veremos ambos router el maestro y el backup y dentro de cada una de estas ventanas veremos las ip e interfaces de ambos router, donde comprobaremos que el tráfico circula por el ether6-LAN del router maestro.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Prueba de conexión](ImagenesPI/PIFase2/vrrpprueba2.PNG "Prueba de conexión")
 
 Seguidamente para no perder la conexión con Winbox del router maestro en vez de apagarlo desconectamos el interfaz ether6-LAN que es el que está conectado al equipo cliente.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Desconectar interfaz ether6-LAN del router maestro](ImagenesPI/PIFase2/vrrpprueba3.PNG "Desconectar interfaz ether6-LAN del router maestro")
 
 Podemos comprobar como salta rápidamente el vrrp 1 del router backup, debido a que la respuesta es de unos 3 segundo, eso se puede confirmar viendo la ventana del equipo cliente que hace ping donde hay una parada de la secuencia del 41 al 45, apenas apreciable.
-
-![Fase1](/ImagenesPI/FASE1.PNG "")
-
 Acto seguido veremos como empieza a circular la conexión por el interfaz ether6-LAN del router backup.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Activacion del router de respaldo por vrrp1](ImagenesPI/PIFase2/vrrpprueba4.PNG "Activacion del router de respaldo por vrrp1")
 
 Ahora volvemos a Conectar el cable ether6-LAN del router maestro.
 
-![Fase1](/ImagenesPI/FASE1.PNG "")
+![Conectar interfaz ether6-LAN del router maestro](ImagenesPI/PIFase2/vrrpprueba5.PNG "Conectar interfaz ether6-LAN del router maestro")
 
 Y en breves momento el vrrp 1 del backup vuelve a cambiar de negro a rojo, y la conexión vuelve a circular por el ether6-LAN del router maestro.
+
+![Reconexión del vrrp1 del router maestro](ImagenesPI/PIFase2/vrrpprueba6.PNG "Reconexión del vrrp1 del router maestro")
+
+
 
 
 
