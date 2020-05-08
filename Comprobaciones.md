@@ -175,6 +175,31 @@ Por último volvemos a activar el ISP1 que antes se apagó, en cuanto se inicie 
 
 ## Comprobar VRRP
 
+Para hacer la comprobación del vrrp , entraremos en un equipo cliente con SO Ubuntu desktop, comprobaremos su ip y gateway, para confirmar que está configurado según el Vrrp asociado al Router.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+El siguiente paso será estar reproduciendo un video de youtube y estar haciendo ping al 8.8.8.8 continuamente desde el equipo cliente, también habrá  dos ventanas de Winbox donde veremos ambos router el maestro y el backup y dentro de cada una de estas ventanas veremos las ip e interfaces de ambos router, donde comprobaremos que el tráfico circula por el ether6-LAN del router maestro.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+Seguidamente para no perder la conexión con Winbox del router maestro en vez de apagarlo desconectamos el interfaz ether6-LAN que es el que está conectado al equipo cliente.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+Podemos comprobar como salta rápidamente el vrrp 1 del router backup, debido a que la respuesta es de unos 3 segundo, eso se puede confirmar viendo la ventana del equipo cliente que hace ping donde hay una parada de la secuencia del 41 al 45, apenas apreciable.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+Acto seguido veremos como empieza a circular la conexión por el interfaz ether6-LAN del router backup.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+Ahora volvemos a Conectar el cable ether6-LAN del router maestro.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+Y en breves momento el vrrp 1 del backup vuelve a cambiar de negro a rojo, y la conexión vuelve a circular por el ether6-LAN del router maestro.
 
 
 
