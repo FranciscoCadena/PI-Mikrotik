@@ -59,6 +59,7 @@ DNS
 ![DNS configurado](ImagenesPI/PIFase2/masterdns.PNG "DNS configurado")
 
 NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
+
 ![Nat de ambas Wan configurada](ImagenesPI/PIFase2/masternat.PNG "Nat de ambas Wan configurada")
 
 ### Backup
