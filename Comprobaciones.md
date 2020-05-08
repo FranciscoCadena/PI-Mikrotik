@@ -158,6 +158,23 @@ Y seguidamente haremos lo mismo pero con la ip de un cliente que pertenezca a la
 
 ![Ping a un equipo de la otra sede](/ImagenesPI/ipsecping4.PNG "Ping a un equipo de la otra sede")
 
+## Comprobar Failover
+
+Para realizar esta prueba entraremos por Winbox a uno de los router de la empresa, tendremos en pantalla, la terminal haciendo ping al 8.8.8.8 constantemente, la herramienta traceroute haciendo ping al 8.8.8.8 y la ventana de la lista de rutas.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+A continuación desconectamos el ISP1 que es el que definimos como principal, y observaremos como se pierde la conexión, hasta que pasado un tiempo se conectará automáticamente al ISP2 volviendo a tener conexión, no solo será visible porque vuelva a hacer ping al 8.8.8.8 desde la terminal, sino porque se verá reflejado en la ventana de Router list, cambiando de color la ruta que antes estaba en azul a negra y también cambiará la sigla definiendo que estará activa.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+Por último volvemos a activar el ISP1 que antes se apagó, en cuanto se inicie deberá volver a pasar el la Route List como el principal, y en la ventana de traceroute, donde se perdió toda la conexión deberá de activarse nuevamente.
+
+![Fase1](/ImagenesPI/FASE1.PNG "")
+
+
+## Comprobar VRRP
+
 
 
 
