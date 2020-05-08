@@ -60,17 +60,9 @@ NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
 
 ### ISP2
 
-Interfaces
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
-
 Ips
 ![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
 
-DNS
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
-
-NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
-![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
 
 ### Failover Rutas de Respaldo
 
@@ -110,10 +102,48 @@ Este protocolo lo usaremos en aquellas LAN que no sean demasiado grandes y cuyas
 
 Por ello el protocolo vrrp lo que hace es crear un router virtual, y la ip que definimos en ese router virtual debe ser el mismo en ambos router, y será el gateway que usaremos en nuestros equipos que usen ip estática, de esta manera cuando haya cualquier problema con uno de los router el protocolo vrrp lo detectara y saltara al router de respaldo, consiguiendo así que el equipo cliente no se quede sin internet.
 
+Lo primero que tendremos que hacer es ir a la pestaña de _VRRP_ dentro de la ventana de __interfaces list__, y darle al simbolo del (+) para crear uno.
+En la ventana que nos aparece en la pestaña de _General_ tan solo definimos el nombre que deseamos que tenga nuestro vrrp, acto seguido vamos a la pestaña _VRRP_, y dentro de este configuraremos lo siguiente:
+- __Interface__ ether6-LAN(donde definiremos en qué interfaz ira nuestro vrrp, en este caso será en LAN)
+- __VRID__ 10 (este será el identificador de nuestro vrrp, es importante que este número coincida con el vrrp que crearemos en el router backup sino no funcionara el vrrp)
+- Priority 100 (la prioridad define quien será el maestro y quien el backup, el que tenga un número mayor en este apartado será el master)
 
+El resto de parámetros lo podemos dejar por defecto.
 
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
 
+Como en este ejemplo de Red tenemos 2 redes estáticas, creamos otro vrrp, donde solo deberemos modificar el nombre, la interfaz que ahora será LAN2 y el VRID  a 20 por ejemplo, quedando como en la siguiente imagen.
 
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+
+Una vez creadas ambas vrrp podemos ver como quedan en el apartado de interfaces.
+
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+
+Las siglas de la izquierda de __RM__ hacen referencia a _R → running y M → master_.
+Esto aparecerá una vez que esté ambos router configurados.
+
+El siguiente paso será darle ip a ambos vrrp, como siempre para ello vamos al menú izquierdo IP → Address, símbolo del (+).
+En la ventana seleccionamos uno de los vrrp creados y le damos una ip dentro del rango de la red, con la precaución de que debe terminar en /32.
+
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+
+Hacemos el mismo procedimiento para el otro vrrp, definiendo una ip que corresponda a su red ya que cada vrrp que hemos creado es para una LAN diferente.
+
+#### Ahora pasaremos a configurar los VRRP en el router que hara de Backup
+
+Como hicimos con el router master, lo primero será los vrrp para cada LAN, donde lo único que cambiaremos será la interfaz y la prioridad, dejando el mismo VRID, quedando ambos router como se muestra en las siguientes imágenes.
+Una vez creado ambos vrrp, en la parte de interfaces podemos observar como ya están creadas y que aparece a la izquierda la sigla __B__ haciendo referencia  _B → backup_.
+
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+
+El siguiente paso será darle las ip a ambos vrrp. donde deberán coincidir las ip de esos con las que usamos en el router master, quedando de la siguiente manera.
+
+![Fase1](/ImagenesPI/Fase2/FASE1.PNG "")
+
+Una vez creada, aparecerán de color rojo eso es debido a que están en modo de espera, y cuando falle el maestro este saltara cambiando el color a negro debido a que se habrá activado.
 
 
 
