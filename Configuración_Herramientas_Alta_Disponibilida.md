@@ -69,7 +69,7 @@ Ips
 ![IP configuradas](ImagenesPI/PIFase2/slaveips.PNG "IP configuradas")
 
 
-### Failover Rutas de Respaldo
+## Failover Rutas de Respaldo
 
 Ahora pasaremos a configurar el Failover en ambos router de la empresa, la idea de esto es definir a los router que cuando se pierda la conexión con uno de los ISP tire por el otro definiendo cuál será el principal y cuál el secundario, por ello ambos router tendrán dos interfaces WAN uno por cada ISP.
 Para ello tan solo debemos ir al menú izquierdo, darle a IP → Routes, añadimos una nueva ruta dándole al símbolo (+).
@@ -100,7 +100,7 @@ Con esto conseguimos que cuando haya cualquier problema con el ISP1, nuestro rou
 
 Este mismo proceso habrá que hacerlo en el otro router de la empresa, en donde solo habrá que cambiar las ip de los gateways en la creación de ambas rutas.
 
-### VRRP
+## VRRP
 
 Este protocolo lo usaremos en aquellas LAN que no sean demasiado grandes y cuyas ip sean estáticas, esto es debido porque cuando una ip es dinámica y tiene 2 router dándole servicio de dhcp, en cuanto uno se caiga con volver a pedir ip por dhcp el mismo equipo cambiara la ip y el gateway, pero con  una ip estática no ocurre esto.
 
@@ -163,6 +163,28 @@ Una vez creada, aparecerán de color rojo eso es debido a que están en modo de 
 Una vez configurado ambos Router con sus respectivos vrrp, solo queda poner la ip fija a nuestros equipos clientes con el correspondiente gateway a cada uno según a la LAN a la que pertenezcan. 
 Con lo que a un equipo de la LAN le pondremos de gateway 192.168.10.10, y a los que pertenezcan a la LAN 2  le pondremos de gateway 192.168.20.20.
 
+## Ancho de Banda
+
+Realizaremos el ancho de banda en la LAN 2 por ejemplo, para ello desde Winbox nos dirigimos al menú izquierdo  y seleccionamos la opción de __Queues__, en la ventana que nos aparece marcamos la pestaña _Simple Queues_ y luego le damos al símbolo del (+).
+En esta nueva ventana donde dice __Name__ tan solo escribimos un nombre a la regla para definirla.
+En __Target__ definimos a quien se le asigna el ancho de banda pudiendo usar una _ip en concreto_, el _CIDR_ de la red o incluso el _interfaz_.
+En __Target Upload__ vamos a _Max Limit_ y definimos la velocidad de subida.
+En __Target Download__ vamos a _Max Limit_ y definimos la velocidad de bajada.
+El resto lo podemos dejar por defecto, aplicamos y le damos a OK.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Para poder hacerlo más visual aplicaremos otra regla en la cual definiremos a toda la red LAN 2. Con ello lo que conseguiremos es definir el límite de velocidad de la LAN2 y al vez poder definir el límite de velocidad de cada equipo dentro de la red.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Hay que tener en cuenta de que estas reglas se aplican igual que las de firewall, es decir empieza a aplicarse las reglas desde la primera a la última por tanto la regla más genérica debe estar abajo que en este caso es la regla que hace referencia a la red LAN2,  y la regla más específica debe estar más arriba que en este caso corresponde a la ip 192.168.20.4, quedando como se muestra en la imagen.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Si no seguimos este orden y dejamos la regla más general primero toda la red LAN2 tendrá el límite de velocidad indicado, sin aplicarse las otras reglas que definen la ip de cada equipo.
+ 
+__Nota:__ Los colores del icono cambian dependiendo del uso que le dé al ancho de banda asignado; entonces, si se usa de un 0% a 50% del ancho de banda, la regla estará de color verde, si se usa del 50% a 70%, se volverá de color amarillo, y si sobrepasa el 70% se volverá de color rojo.
 
 
 
