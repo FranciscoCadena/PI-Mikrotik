@@ -172,15 +172,15 @@ En __Target Upload__ vamos a _Max Limit_ y definimos la velocidad de subida.
 En __Target Download__ vamos a _Max Limit_ y definimos la velocidad de bajada.
 El resto lo podemos dejar por defecto, aplicamos y le damos a OK.
 
-![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+![Creando regla a una IP](ImagenesPI/PIFase2/mastervelocidad1.PNG "Creando regla a una IP")
 
 Para poder hacerlo más visual aplicaremos otra regla en la cual definiremos a toda la red LAN 2. Con ello lo que conseguiremos es definir el límite de velocidad de la LAN2 y al vez poder definir el límite de velocidad de cada equipo dentro de la red.
 
-![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+![Creando regla a la red LAN2](ImagenesPI/PIFase2/mastervelocidad2.PNG "Creando regla a la red LAN2")
 
 Hay que tener en cuenta de que estas reglas se aplican igual que las de firewall, es decir empieza a aplicarse las reglas desde la primera a la última por tanto la regla más genérica debe estar abajo que en este caso es la regla que hace referencia a la red LAN2,  y la regla más específica debe estar más arriba que en este caso corresponde a la ip 192.168.20.4, quedando como se muestra en la imagen.
 
-![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+![Reglas creadas y ordenadas](ImagenesPI/PIFase2/mastervelocidad3.PNG "Reglas creadas y ordenadas")
 
 Si no seguimos este orden y dejamos la regla más general primero toda la red LAN2 tendrá el límite de velocidad indicado, sin aplicarse las otras reglas que definen la ip de cada equipo.
  
