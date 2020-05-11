@@ -208,7 +208,7 @@ Para guiarnos nos fijamos en el siguiente diagrama en donde habrá 3 equipos en 
 
 Primero vamos al Router que terminamos de configurar al principio, nos vamos a interfaces desde el menu izquierdo, vamos a la _pestaña de Vlan_ y  le damos al símbolo más.
 
-![Crear Vlan](/ImagenesPI/vlna1.PNG "Crear Vlan")
+![Crear Vlan](/ImagenesPI/vlan1.PNG "Crear Vlan")
 
 En esta nueva ventana definimos el nombre de la vlan, el tipo que será una vlan, su identificador, y a que interfaz irá vinculada. Terminado le damos a Apply y luego a OK.
 
