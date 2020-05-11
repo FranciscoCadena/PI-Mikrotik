@@ -202,7 +202,16 @@ Y en breves momento el vrrp 1 del backup vuelve a cambiar de negro a rojo, y la 
 
 ![Reconexión del vrrp1 del router maestro](ImagenesPI/PIFase2/vrrpprueba6.PNG "Reconexión del vrrp1 del router maestro")
 
+## Comprobar Ancho de Banda
 
+Las pruebas se realizarán desde un Ubuntu desktop que se encuentre en la red LAN2, en la cual se mostrará en una imagen la ip del equipo que deberá corresponder con la de la red asignada, y el test de velocidad.
 
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Seguidamente se realizará otro test de velocidad al mismo equipo con las reglas del ancho de banda ya definidas en el router y en donde deberá corresponder la ip del equipo a una de las reglas que se definen en el router.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Como se observa en las imágenes anteriores, al principio tenia 1Mb de subida y bajada, y después con la regla que se definió en el router tiene una subida de  0.3Mb y una bajada de  0.8Mb.
 
 
