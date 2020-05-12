@@ -221,4 +221,4 @@ Lo que no se puede apreciar es la suma relativa del balanceo de carga en la inte
 - Como se está usando una virtualización con la OVA de CHR, está restringe la conexión a 1Mb
 - También como es una virtualización se requiere dos proveedores de internet dando acceso a internet, cuando en este ejemplo solo se cuenta con la red de casa.
 
-![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+![Comprobacion de balanceo de carga con PCC](ImagenesPI/PIFase2/pccprueba.PNG "Comprobacion de balanceo de carga con PCC")
