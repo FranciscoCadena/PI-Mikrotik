@@ -17,5 +17,6 @@
 - Comprobar el funcionamiento de Failover, haciendo que uno de los ISP se apague y ver si salta la ruta de respaldo para que mantenga la conectividad, luego volver a encender el ISP que antes hemos apagado para comprobar que cambia de nuevo la ruta de respaldo a como estaba al principio.
 - Comprobar el funcionamiento del vrrp, para ello se desconectara el router maestro, y se comprobará que en el equipo cliente sigue teniendo conexión a internet y que salta el vrrp que da al router backup, luego volvemos a encender el router maestro, y comprobamos que vuelve a cambiar la vrrp del backup al maestro.
 - Comprobar que la velocidad de subida y bajada cambia según la regla aplicada, para ellos se hará dos test a un mismo equipo, uno antes de aplicar la regla, y luego otro test después de aplicar las reglas de ancho de banda.
+- Comprobar el balanceo de carga para la DMZ, para ello usaremos una ubuntu desktop, abriremos dos pestañas de internet donde se estén viendo videos en ambos, se comprobará que la ip corresponde a un equipo de la DMZ, y por winbox comprobaremos si el tráfico fluye por ambos interfaces WAN , y la interfaz que da acceso a la DMZ deberá dar la suma relativa de ambos proveedores de internet.
 
 
