@@ -186,6 +186,92 @@ Si no seguimos este orden y dejamos la regla más general primero toda la red LA
  
 __Nota:__ Los colores del icono cambian dependiendo del uso que le dé al ancho de banda asignado; entonces, si se usa de un 0% a 50% del ancho de banda, la regla estará de color verde, si se usa del 50% a 70%, se volverá de color amarillo, y si sobrepasa el 70% se volverá de color rojo.
 
+## Balanceo de carga con PCC
 
+Para realizar el balanceo de carga seguiremos el diagrama de red del principio con la diferencia de que añadiremos una nueva red con la siguiente red 192.168.30.0/24, a la cual la llamaremos DMZ. El resto será igual.
+Comenzamos yendo a __IP → FIREWALL__ y luego a la pestaña de _Mangle_ seguidamente añadimos una nueva regla dandole al simbolo del (+), en la nueva ventana que nos aparece estando en la pestaña de _General_ tan solo definimos en el apartado de __Chain__  con _prerouting_ y en el apartado __Dst.Address__ añadimos la red de una de las WAN que tenemos. Si tenemos varias redes LAN podemos definirla en __In. Interface__, si solo tenemos una o queremos que se aplique a todas no es necesario definirla.
 
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
 
+Luego vamos a la Pestaña de _Action_ y en el apartado de __Action__ seleccionamos _Accept_, aplicamos y ok.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Esta regla la deberemos de repetir por cada interfaz que de acceso a internet, es decir si por ejemplo tenemos cuatro proveedores de internet habrá que crear cuatro reglas como estas en donde solo habrá que cambiar el apartado de __Dst.Address__ por el CIDR correspondiente a cada ISP. En nuestro caso serán solo dos reglas, puesto que tenemos dos interfaces Wan.
+
+Nuestro siguiente paso será crear reglas para marcar todas las peticiones de las conexiones que vengan desde internet.
+Para ello creamos una nueva regla, en la pestaña _General_ definimos en __Chain__ como _prerouting_, en __In Interface__ seleccionamos una de las interfaces que den acceso a Internet, y en el apatado de __Connection Mark__ lo dejamos en _no mark_.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Ahora pasamos a la pestaña de _Action_, aquí en el apartado de __Action__ seleccionamos _mark connection_, en el apartado de __New Connection Mark__ damos un nombre que queramos, que nos sirva para  definirlo, y dejamos marcada la casilla de __Passthrough__, esto nos permite que si no se cumple esta regla pase a la siguiente que tengamos creada.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Las siguientes  reglas corresponden a cada proveedor de internet y a una interfaz que vaya a una red local que nosotros definimos.
+Como siempre empezamos dandole al símbolo del (+) para crear una nueva regla, en la pestaña _General_ seleccionamos _prerouting_ en el apartado de __Chain__, en el apartado de __In Interface__ seleccionamos la red Lan que deseamos, en este caso será la interfaz que va a la DMZ.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Luego pasamos a la pestaña de _Advanced_ y en el apartado de __Per Connection Classifer__ seleccionamos _both addresses_ y nos saldrá a la derecha dos apartados para insertar números.
+ El primer número corresponde con la cantidad total de ISP que tengamos conectados a nuestro router, y el siguiente número corresponde al ISP para el que estamos creando la regla empezando siempre desde cero.
+Por ejemplo si tenemos cuatro ISP conectados al router habrá que crear cuatro reglas, una por cada ISP conectado a nuestro router y el orden numérico para cada regla sería el siguiente:
+- 4/0
+- 4/1
+- 4/2
+- 4/3
+Como se observa el primer número no cambia porque hace referencia al total, el que cambia es el segundo para saber a quien se le está aplicando la regla, como se empieza a contar desde el 0, si tenemos 4 ISP la cuenta será desde el 0 hasta el 3.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Ahora pasamos a la pestaña _Extra_ aquí buscamos la opción de __Dst.Address Type__, y en _Addres Type__ seleccionamos _local_,  y marcamos la casilla de _Invert_.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Por último vamos a la pestaña de _Action_, en esta seleccionamos _mark connection_ en el apartado de __Action__, en el apartado de __New Connection Mark__ seleccionamos uno de los nombres que definimos en las reglas anteriores para cada ISP, y dejamos marcada la opción de __Passtrough__. 
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Como siempre se crearán tantas reglas como wan tengamos, como en este caso tenemos dos, habrá que crear otra regla idéntica a la anterior cambiando solamente en la pestaña _Action_ en el apartado _New connection Mark_ al nombre que le hayamos dado para la regla del otro ISP que tenemos conectado, y en la pestaña de _Advanced_ en el apartado de __Per Connection Classifier__ al seleccionar  _both addresses_ debemos cambiar el segundo número por el que corresponda que en este caso será 1, haciendo referencia al segundo ISP.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Las siguientes reglas serán para marcar la ruta de todos los paquetes que pasan por las conexiones.
+En la pestaña _General_ seleccionamos el interfaz que va a nuestra red local en el apartado de __In Interface__, y en el apartado de __Connection Mark__ seleccionamos uno de los nombres que creamos al definir la regla de marcado de peticiones de conexión para cada ISP.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Luego pasamos a la pestaña de _Action_ en donde seleccionamos _mark routing_ en el apartado de __Action__, dejamos marcado la opción del __Passthrough__ y en el apartado de __New Routing Mark__ damos un nombre que haga referencia a uno de los ISP. 
+Aplicamos y ok.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Creamos otra regla idéntica a la anterior para el otro ISP cambiando solo el apartado de __Connection Mark__ dentro de la pestaña _General_ por el nombre de la regla que hace referencia al otro ISP, y en la pestaña de _Action_ daremos otro nombre para identificar al otro ISP en el apartado de __New Routing Mark__
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Ahora crearemos otras reglas como siempre una para cada ISP que tengamos conectado al router, para el _chain outpust_.
+Por lo tanto en la nueva regla, en la pestaña _General_ seleccionamos _output_ en el apartado de __Chain__, y en el apartado de __Connection Mark__ seleccionamos uno de los nombres que definimos en las reglas para marcado de peticiones por conexiones para el ISP, en la siguiente regla que creemos se deberá cambiar solo este apartado seleccionando el nombre de la otra regla del otro ISP.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Pasamos a la pestaña de _Action_, en donde seleccionamos _mark routing_ en el apartado de __Action__, dejamos marcado __Passthroug__ y en el apartado de __New Routing Mark__ seleccionamos uno de los nombres que creamos cuando definimos las reglas de rutas de los paquetes. Cuando creemos las otras reglas este apartado será otro de los que cambie definiendo los otros nombres que definimos al crear las reglas de marcado de paquetes. 
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Una vez creada todas las reglas para los dos ISP que tenemos en este ejemplo debería quedar como en la siguiente imagen.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+El siguiente paso será agregar las rutas a la tabla de ruteo, para ello vamos a IP → Routes, y le damos al (+). Crearemos una ruta por cada ISP que tengamos conectado al router.
+En esta ventana definimos como direcciones de destino todas, así que en el apartado de __Dst. Address__ escribimos 0.0.0.0/0.
+En __Gateway__ escribimos la ip de nuestro ISP, en __Check Gateway__ lo dejamos en ping, dejamos todo lo demas por defecto y lo que debemos modificar es el apartado de __Routing Mark__ donde seleccionaremos uno de los nombre que definimos en las reglas que creamos para el marcado de ruta de los paquetes, lo interesante será que el nombre corresponda con la ip del ISP que estamos definiendo en la ruta.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
+
+Con esto conseguimos que todo el tráfico marcado para isp1 salga por el gateway que hemos definido.
+La siguiente ruta que creemos para el otro ISP será idéntica a la anterior cambiando solo la ip del __Gateway__ por el otro ISP  y el apartado de __Routing Mark__ donde seleccionaremos el otro nombre de la otra regla creada de marcado de rutas.
+
+Quedando las rutas como se muestra en la imagen.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
