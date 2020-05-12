@@ -214,4 +214,11 @@ Seguidamente se realizará otro test de velocidad al mismo equipo con las reglas
 
 Como se observa en las imágenes anteriores, al principio tenia 1Mb de subida y bajada, y después con la regla que se definió en el router tiene una subida de  0.3Mb y una bajada de  0.8Mb.
 
+## Comprobar balanceo de carga por PCC
 
+Para esta comprobación se a partido de una ubuntu desktop, perteneciente a la red dmz, en la imagen se muestra que la ip del equipo corresponde a dicha red, también se verá en la imagen que hay dos pestañas de internet donde se reproducen videos por youtube y desde Winbox estando conectado al router principal que le da red a la dmz, debe haber fluido de paquetes por ambas interfaces WAN.
+Lo que no se puede apreciar es la suma relativa del balanceo de carga en la interfaz que da red a la dmz, esto es debido a 2 factores:
+- Como se está usando una virtualización con la OVA de CHR, está restringe la conexión a 1Mb
+- También como es una virtualización se requiere dos proveedores de internet dando acceso a internet, cuando en este ejemplo solo se cuenta con la red de casa.
+
+![Fase2](ImagenesPI/PIFase2/Fase2.PNG "")
