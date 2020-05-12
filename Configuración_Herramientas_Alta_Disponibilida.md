@@ -1,4 +1,4 @@
-# En este apartado se explicara como configurar algunas herrameintas que aporten Alta Disponibilidad a nuestra Red.
+# En este apartado se explicara como configurar algunas herramientas que aporten Alta Disponibilidad a nuestra Red.
 
 Para ello nos guiaremos de la siguiente topografia.
 
