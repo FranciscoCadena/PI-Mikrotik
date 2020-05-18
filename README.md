@@ -8,7 +8,7 @@ En el proyecto se dará a conocer el sistema operativo que usa Mikrotik para con
 Todo este proceso se realizará de manera práctica donde desarrollaremos una topografía de red que podría usar una pequeña empresa de manera virtual, en la cual enseñaremos a configurar métodos básicos para la creación de una red y profundizando más en temas de Seguridad y Alta disponibilidad.
 
 __La estructura del documento es la siguiente__
-- Recursos (donde se comenta las herramientas usadas para poder desarrollar el proyecto)
+- [Recursos](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Recursos.md) (donde se comenta las herramientas usadas para poder desarrollar el proyecto)
 - Planificación de la Red de una empresa (donde se irá mostrando las diferentes fases de topografías de red, que se irán realizando posteriormente)
 - Fase 1: Configuración básica de la Red (donde se explicara los pasos de configuración básica para montar una red )
 - Fase 1 con gns3(donde se verá la configuración realizada con gns3 de la fase 1)
