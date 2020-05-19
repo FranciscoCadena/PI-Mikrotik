@@ -13,7 +13,7 @@ __La estructura del documento es la siguiente__
 - Fase 1: [Configuración básica de la Red](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_b%C3%A1sica_de_la_Red.md) (donde se explicara los pasos de configuración básica para montar una red )
 - [Fase 1 con gns3](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Fase1_GNS3.md) (donde se verá la configuración realizada con gns3 de la fase 1)
 - Fase 2: [Configuración de Herramientas que aportan Alta Disponibilidad](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_Herramientas_Alta_Disponibilida.md) (donde se explicará la configuración de algunas herramientas para darle una mejor disponibilidad a nuestra red)
-- Fase 2 con gns3 (donde se verá la configuración realizada con gns3 de la fase 2)
+- [Fase 2 con gns3](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Fase2_GNS3.md) (donde se verá la configuración realizada con gns3 de la fase 2)
 - Configuración de Herramientas para dar Seguridad
 - Uso de Suricata como IDS junto a Mikrotik
 - [Lista de pruebas](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Lista_de_Pruebas.md) (listado de pruebas que se realizarán para comprobar que todo funciona correctamente)
