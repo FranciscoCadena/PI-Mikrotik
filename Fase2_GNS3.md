@@ -2,7 +2,7 @@
 
 En este apartado se verá la configuración de todos los router usando gns3,  según la siguiente imagen, que corresponde a la Fase 2 del proyecto.
 
-![Topografia de la Fase 2 Virtualizado con GNS3](ImagenesGNS3/GNSFase2/gns3fase2.PNG "Topografia de la Fase 2 Virtualizado con GNS3")
+![Topografia de la Fase 2 Virtualizado con GNS3](imagenesGNS3/GNSFase2/gns3fase2.PNG "Topografia de la Fase 2 Virtualizado con GNS3")
 
 Como se puede observar en la imagen anterior, la topografía de red ha sido simplificada con respecto a lo visto del diagrama de la fase dos del apartado [Planificación de la Red Empresarial](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Planificaci%C3%B3n_de_la_Red_de_una_empresa.md).
 
