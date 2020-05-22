@@ -116,24 +116,20 @@ Para ello tan solo tenemos que ir a la pestaña de _Address Lists_ dentro dentro
 En la ventana que nos aparece le damos un nombre a la lista de direcciones, agregamos la ip que vamos a permitir acceder al router y tambien si queremos podemos definir o no el tiempo que estará dentro de esta lista. 
 Con esto podemos agregar todas las ip que queramos en una address list en concreto o crear una address list por ip, según más nos convenga.
 
-![Creación manual de address list](imagenesPI/PIFase3/addresslista.PNG "Creación manual de address list")
+![Creación manual de address list](ImagenesPI/PIFase3/addresslista.PNG "Creación manual de address list")
 
 Una vez que tengamos definidas nuestras address list tan solo debemos crear una regla de firewall en la que permitamos el acceso a estas listas, definiendolo en la pestaña de _advanced_ y seleccionar las _addres list_ que deseamos de las creadas antes en el apartado de __Src. Address List__. 
 
-![Crear regla de Firewall agregando nuestra Address List creada](imagenesPI/PIFase3/exclusiones.PNG "Crear regla de Firewall agregando nuestra Address List creada")
+![Crear regla de Firewall agregando nuestra Address List creada](ImagenesPI/PIFase3/exclusiones.PNG "Crear regla de Firewall agregando nuestra Address List creada")
 
-![Regla creada](imagenesPI/PIFase3/portknockingreglas2.PNG "Regla creada")
+![Regla creada](ImagenesPI/PIFase3/portknockingreglas2.PNG "Regla creada")
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
-
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
-
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
