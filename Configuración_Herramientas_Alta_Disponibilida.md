@@ -1,5 +1,12 @@
 # En este apartado se explicara como configurar algunas herramientas que aporten Alta Disponibilidad a nuestra Red.
 
+En donde se verán lo siguiente:
+- Configuración básica de todos los router
+- Montar un failover con rutas de respaldo
+- Montar un VRRP
+- Montar un Ancho de Banda en una determinada LAN y equipo
+- Montar un Balanceo de carga por PCC con los dos proveedores de Internet
+ 
 Para ello nos guiaremos de la siguiente topografia.
 
 ![Topografia sencilla para HA](ImagenesPI/PIFase2/Fase2-2.PNG "Topografia sencilla para HA")
