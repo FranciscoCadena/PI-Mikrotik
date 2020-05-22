@@ -16,7 +16,7 @@ Le damos al botón que dice __List__ y en la nueva ventana de _Interface Lists_ 
 
 Ahora regresaremos a la ventana principal de _Interface List_ y le damos al (+), en esta nueva ventana lo que haremos será en el apartado _List_ elegir __WAN__ que fue el nombre que definimos antes, y en el apartado interface seleccionamos una de las diferentes interfaces wan que tengamos, en este caso como tengo tres debo agregar las tres interfaces a la lista wan.
 
-![Agregar interfaces a la lista WAN](imagenesPI/PIFase3/agregarinterfaceslista.PNG "Agregar interfaces a la lista WAN")
+![Agregar interfaces a la lista WAN](ImagenesPI/PIFase3/agregarinterfaceslista.PNG "Agregar interfaces a la lista WAN")
 
 Al final nos debe quedar la lista como en la imagen siguiente.
 
