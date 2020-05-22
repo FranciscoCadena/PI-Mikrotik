@@ -1,5 +1,7 @@
 # Comprobaciones
 
+# Fase 1
+
 ## Comprobacion desde Cliente de Red
 
 Para ello tan solo montamos un equipo en virtualbox, en este caso una ubuntu desktop, y lo fundamental es que en la parte de Red, esté en red interna y el nombre corresponda con la LAN a la cual hemos montado el servicio de dhcp. 
@@ -158,6 +160,8 @@ Y seguidamente haremos lo mismo pero con la ip de un cliente que pertenezca a la
 
 ![Ping a un equipo de la otra sede](/ImagenesPI/ipsecping4.PNG "Ping a un equipo de la otra sede")
 
+# Fase 2
+
 ## Comprobar Failover
 
 Para realizar esta prueba entraremos por Winbox a uno de los router de la empresa, tendremos en pantalla, la terminal haciendo ping al 8.8.8.8 constantemente, la herramienta traceroute haciendo ping al 8.8.8.8 y la ventana de la lista de rutas.
@@ -222,3 +226,48 @@ Lo que no se puede apreciar es la suma relativa del balanceo de carga en la inte
 - También como es una virtualización se requiere dos proveedores de internet dando acceso a internet, cuando en este ejemplo solo se cuenta con la red de casa.
 
 ![Comprobacion de balanceo de carga con PCC](ImagenesPI/PIFase2/pccprueba.PNG "Comprobacion de balanceo de carga con PCC")
+
+# Fase 3
+
+## Comprobar Port Knocking
+
+Para realizar la comprobación del funcionamiento del port knocking primero mostraremos en una imagen las reglas creadas, para comprobar la cantidad de toques a realizar y por qué puertos debemos entrar. También se verán las interfaces e ip, en este caso nos conectaremos por la ip 192.168.0.23/24.
+
+![Reglas firewall, interface he ip del router](ImagenesPI/PIFase3/portknockingprueba1.PNG "Reglas firewall, interface he ip del router")
+
+Luego estaremos en la pestaña de _address list_ estando conectado al router desde Winbox, he intentaremos por ssh y por winbox al router, dándonos error.  
+ 
+![Error de conexión al router](ImagenesPI/PIFase3/portknockingprueba2.PNG "Error de conexión al router")
+
+En la siguiente imágenes veremos como vamos paso por paso conectándonos por ssh a los puertos definidos en las reglas, y la ip de nuestra máquina anfitriona irá apareciendo en la addresslist que corresponde a cada regla definida.
+
+Primer toque, puerto 2000
+
+![Llamando al puerto 2000](ImagenesPI/PIFase3/portknockingprueba3.PNG "Llamando al puerto 2000")
+
+Segundo toque, puerto 4000
+
+![Llamando al puerto 4000](ImagenesPI/PIFase3/portknockingprueba4.PNG "Llamando al puerto 4000")
+
+Tercer toque, puerto 8000
+
+![Llamando al puerto 8000](ImagenesPI/PIFase3/portknockingprueba5.PNG "Llamando al puerto 8000")
+
+Una vez que esté en la última address list podremos entrar por ssh sin tener que definir ningún puerto. 
+También se puede ver el tiempo que estará la ip de nuestra máquina anfitriona en cada address list, cuando expire el tiempo de la última address list, la que da acceso seguro para entrar al router, nos echara del router, teniendo que repetir la secuencia.
+
+Conexión por ssh sin necesidad del puerto porque ya está en la address list que tiene permiso de conexión.
+
+![Entrando al router sin necesidad de puertos por estar en la lista de direcciones con permisos](ImagenesPI/PIFase3/portknockingprueba6.PNG "Entrando al router sin necesidad de puertos por estar en la lista de direcciones con permisos")
+
+Dentro de Mikrotik desde SSH, para confirmarlo se puede observar el nombre del router, las interfaces e ip tanto en el lado del winbox a la izquierda como en el lado de la conexión por ssh a la derecha de la imagen.
+
+![Conexión establecida por ssh, y comprobación de que estamos en el router, mostrando sus ip e interfaces](ImagenesPI/PIFase3/portknockingprueba7.PNG "Conexión establecida por ssh, y comprobación de que estamos en el router, mostrando sus ip e interfaces")
+
+__Nota__ el cambio de color del powershell es debido a que una vez dentro de Mikrotik por ssh no se veía bien las letras, de hay que haya pasado a otro color.
+
+
+
+
+
+
