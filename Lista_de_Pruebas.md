@@ -19,4 +19,6 @@
 - Comprobar que la velocidad de subida y bajada cambia según la regla aplicada, para ellos se hará dos test a un mismo equipo, uno antes de aplicar la regla, y luego otro test después de aplicar las reglas de ancho de banda.
 - Comprobar el balanceo de carga para la DMZ, para ello usaremos una ubuntu desktop, abriremos dos pestañas de internet donde se estén viendo videos en ambos, se comprobará que la ip corresponde a un equipo de la DMZ, y por winbox comprobaremos si el tráfico fluye por ambos interfaces WAN , y la interfaz que da acceso a la DMZ deberá dar la suma relativa de ambos proveedores de internet.
 
+## Fase 3
 
+- Comprobar el funcionamiento de Port Knocking, para ello estaremos conestados al router por winbox e intentaremos entrar por ssh desde la maquina anfitriona, luego iremos entrando segun los puertos asignados para ver como se va agregando la ip de la maquina enfitriona a la Address List permitidas asta poder entrar en el router.
