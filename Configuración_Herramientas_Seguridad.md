@@ -8,6 +8,8 @@ Partiremos de un router multiwan cuyas ip sean estáticas, y una red lan con ser
 
 ![Interfaces, direccionamiento de las mismas y las rutas](ImagenesPI/PIFase3/ipsconfiguradas.PNG "Interfaces, direccionamiento de las mismas y las rutas")
 
+## Crear Lista de Interfaces
+
 Lo primero que podemos hacer para facilitar el trabajo a la hora de crear las reglas de firewall es definir todas las redes WAN en una lista.
 Para ello estando en la ventana de Interfaces vamos a la pestaña de _Interface List_.
 Le damos al botón que dice __List__ y en la nueva ventana de _Interface Lists_ le damos al símbolo del (+), en la nueva ventana llamada _New Interface List_ vamos al aparatado de __Name__ donde definiremos el nombre que queramos en este caso _WAN_, aplicamos y ok. Con esto ya nos aparecerá el nombre definido en la lista de interfaces.
@@ -21,6 +23,8 @@ Ahora regresaremos a la ventana principal de _Interface List_ y le damos al (+),
 Al final nos debe quedar la lista como en la imagen siguiente.
 
 ![Lista wan creada](ImagenesPI/PIFase3/listwan.PNG "Lista wan creada")
+
+## Port Knocking
 
 Ahora pasamos a crear las reglas del port knocking, para ello vamos a __IP → Firewall__ y luego agregamos una regla dándole al (+).
 En este ejemplo haremos que los golpes de puertos necesarios para poder entrar al router ya sea por (WinBox, SSH, Telenet, etc.) sean tres, tal y como se ve en la primera imagen de la topografía de red.
@@ -105,11 +109,20 @@ Cumpliendo con lo definido en el diagrama de red.
 
 ![Reglas de Port Knocking creadas](ImagenesPI/PIFase3/portknockingreglas.PNG "Reglas de Port Knocking creadas")
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+## Crear Address List
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+A aparte del Port Knocking, podemos crear nosotros las address lists manualmente definiendo qué ip consideramos seguras para poder entrar en el router. 
+Para ello tan solo tenemos que ir a la pestaña de _Address Lists_ dentro dentro de la ventana de __Firewall__ y una vez aquí darle al símbolo del (+).
+En la ventana que nos aparece le damos un nombre a la lista de direcciones, agregamos la ip que vamos a permitir acceder al router y tambien si queremos podemos definir o no el tiempo que estará dentro de esta lista. 
+Con esto podemos agregar todas las ip que queramos en una address list en concreto o crear una address list por ip, según más nos convenga.
 
-![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
+![Creación manual de address list](imagenesPI/PIFase3/addresslista.PNG "Creación manual de address list")
+
+Una vez que tengamos definidas nuestras address list tan solo debemos crear una regla de firewall en la que permitamos el acceso a estas listas, definiendolo en la pestaña de _advanced_ y seleccionar las _addres list_ que deseamos de las creadas antes en el apartado de __Src. Address List__. 
+
+![Crear regla de Firewall agregando nuestra Address List creada](imagenesPI/PIFase3/exclusiones.PNG "Crear regla de Firewall agregando nuestra Address List creada")
+
+![Regla creada](imagenesPI/PIFase3/portknockingreglas2.PNG "Regla creada")
 
 ![Fase2](imagenesPI/PIFase3/Fase2.PNG "")
 
