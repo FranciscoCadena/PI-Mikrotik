@@ -22,3 +22,7 @@
 ## Fase 3
 
 - Comprobar el funcionamiento de Port Knocking, para ello estaremos conestados al router por winbox e intentaremos entrar por ssh desde la maquina anfitriona, luego iremos entrando segun los puertos asignados para ver como se va agregando la ip de la maquina enfitriona a la Address List permitidas asta poder entrar en el router.
+- Comprobar el funcionamiento del correo de mikrotik por gmail, realizando un envío del mismo y comprobar que nos ha llegado el correo.
+- Comprobar que nos llegan los errores y problemas relacionados con dhcp por correo.
+- Comprobar que el programa para que lleguen correos automaticamente segun el tiempo especificado funciona correctamente.
+
