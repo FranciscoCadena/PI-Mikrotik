@@ -124,7 +124,123 @@ Una vez que tengamos definidas nuestras address list tan solo debemos crear una 
 
 ![Regla creada](ImagenesPI/PIFase3/portknockingreglas2.PNG "Regla creada")
 
+## Configurar Gmail en Mikrotik
+
+Lo primero es saber la ip de nuestro servicio de correo de gmail, y el puerto, para eso podemos ir al siguiente enlace [SMTP gmail](https://support.google.com/a/answer/176600?hl=es).
+Y nos fijamos en el siguiente apartado que se muestra en la imagen.
+
 ![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Lo más interesante de aquí son los puertos __(465 y 587)__ y la dirección del servidor smtp __smtp.gmail.com__.
+Ahora pasamos a nuestro router mikotik, abrimos una terminal y hacemos ping a esa dirección de smtp, para saber la ip del mismo
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Apuntamos la ip que nos aparece porque nos servirá más adelante.
+Con esto ya tenemos el puerto y la ip.
+Ahora para dar más seguridad iremos a la siguiente página [Contraseña de aplicaciones](https://support.google.com/accounts/answer/185833?hl=es-419) y seguiremos los pasos para crear contraseñas de aplicaciones.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Una vez dentro del apartado de contraseña de aplicación, vamos al apartado que dice _Seleccionar Aplicación_, marcamos otro, y escribimos por ejemplo _Router Mikortik_ o lo que cada uno vea mejor, y luego le damos a __Generar__.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Apuntamos la contraseña que nos dan de 16 dígitos después de darle al botón de generar.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Ahora tenemos todo lo necesario. Así que pasamos a nuestro router Mikrotik.
+Una vez en el router vamos al menú izquierdo donde dice __Tools → Email__
+y en la ventana que nos aparece escribimos lo siguiente en cada apartado.
+- __Server:__ ip de nuestro servicio de smtp
+- __Port:__ el puerto que vamos a usar
+- __Start Tls:__ hace referencia al transporte criptográfico de seguridad
+- __From:__ nuestro correo electrónico
+- __User:__ el usuario al cual va dirigido, funciona mejor si dejamos nuestro correo al igual que en _from_
+- __Password:__ la contraseña que nos dio google en el apartado de contraseña de aplicaciones. Aunque también se puede usar la propia contraseña de nuestro correo electronico, pero de esta manera no es tan segura ni fiable.
+Aplicamos y ok.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Un dato a tener en cuenta para que funcione correctamene el envio de correos es tener activo nuestro servicio SNTP (Server Network Time Protocol) activado, para ello vamos a __System → SNTP client__.
+En la ventana que nos aparece marcamos la casilla de _Enabled_, y en _Primary NTP Server_ escribimos __time.google.com__, luego le damos al botón de Apply y automáticamente nos reconocerá la ip de este servicio (siempre que tengamos bien configurado nuestro DNS), rellenando automáticamente lo necesario, así que le damos a OK.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+## Configurar que nos lleguen errores y dhcp por correo
+
+Una vez configurado nuestro servicio de correo en Mikrotik vamos a definir que queremos que nos envíe por email, para ellos vamos a __System → Logging__
+Una vez aquí vamos primero a la pestaña de _Actions_, y le damos al simbolo del (+).
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+En la ventanita que nos aparece, definimos el nombre de la acción en _Name_ por ejemplo __email__, definimos de que tipo será en _Type_ el cual será __email__, activamos la casilla _Start TLS_ y en el apartado _Email_ definimos el correo al cual será enviado, aplicamos y ok.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Ya nos deberá aparecer nuestra acción creada.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Acto seguido vamos a la pestaña de _Rules_ y le damos al símbolo del (+)
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+En la ventana que nos aparece en donde dice _Action_ seleccionamos la acción que previamente creamos como __email__, y en _Topics_ nos saldrá un desplegable con una gran cantidad de opciones donde podemos elegir la que deseemos, en este caso seleccionaremos __error__, luego le damos a aplicar y ok.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Con esta regla cada vez que se produzca un error en el router, nos será notificado al correo que definimos en la _Action_, de esta manera podemos crear todas las reglas que queramos definiendo qué aspectos queremos que se nos comuniquen por correo. 
+En este ejemplo aparte de los errores se creó otra regla para el dhcp como se muestra a continuación.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+## Configurar que nos lleguen archivox Backup por correo
+
+También podemos configurar el router Mikrotik para que nos envíe automáticamente cada cierto tiempo un archivo de respaldo de la configuración del router.
+Para ello usaremos los siguientes scripts.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Cada script corresponde a uno de los dos tipos de respaldo que puede crear Mikrotik.
+ 
+- El __Binario__ es un respaldo total de la configuración del router, el cual guarda tanto los usuario como las contraseñas del mismo, está pensado para usarse en el mismo router cuando haya algún tipo de error, el tipo de texto esta en binario con lo cual si intentamos abrirlo está todo cifrado, siendo ilegible y solo reconocible por dispositivos mikrotik.
+- El __Export__ puede ser un respaldo total o parcial de la configuración del router, el cual es un script de texto plano que no guarda ni los usuarios ni las contraseñas.
+
+Pues una vez explicado eso, abrimos una terminal desde el router y copiamos uno de los dos script, lo pegamos en la terminal y le damos a _Intro_ para ejecutarlo, luego realizamos el mismo procedimiento con el otros script.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Una vez ejecutado ambos script en la terminal vamos al menú izquierdo y luego a __System → Script__, en la ventana de _Script List_ nos deberá de aparecer dos archivos los cuales corresponden a los dos script ejecutados antes.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Ahora deberemos de hacer algunas modificaciones a los dos script, hacemos doble clic por ejemplo en el _respaldobinario_ y buscamos la siguiente línea (/tool e-mail send to="youremail@yourdomain.com") en el cuadro de texto de abajo 
+de la ventana, en esa línea debemos modificar lo que está entre comillas y agregar el correo al cual queremos que llegue el backup. 
+También podemos fijarnos en la siguiente linea (subject=([/system identity get name]), esta línea hace referencia al nombre que le hayamos definido al router en __System Identity__, por lo tanto es bueno definir un nombre para cada router, no solo para identificarlo, sino para cuando nos llegue este correo sepamos a qué router hace referencia.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Una vez cambiado el correo en ambos script pasamos a configurar el envío programado de los mismos, para ellos vamos al menú izquierdo, __System → Scheduler__ y luego al símbolo del (+).
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+En la nueva ventana que nos aparece definiremos cuando se inicia y cada cuanto tiempo se ejecuta el script.
+Por tanto en cada apartado configuraremos lo siguiente:
+- __Name:__ Damos el nombre que queramos para definirlo
+- __Start Date:__ Es la fecha en la cual empezará a ejecutarse esta tarea
+- __Start Time:__ Es la hora de inicio en la cual emepazará a ejecutarse la tarea
+- __Interval:__ Es el intervalo de tiempo, para que se ejecute nuevamente la tarea, es este ejemplo se a definido que sea una vez al dia es decir cada 24 horas
+- __Owner:__ Hace referencia al propietario de la creación de la tarea, este aparece automáticamente al darle al botón _Apply_
+- Las __Policies__ las podemos dejar por defecto todas marcadas
+En el cuadro de texto de abajo escribimos el nombre del uno de los script que previamente creamos, para definir qué será eso lo que deberá ejecutar en el tiempo definido
+Los demas campos se rellenan solos al darle al botón de _Apply_ le damos al OK para terminar.
+Seguidamente creamos otra regla con el mismo tiemppo o distinto segun prefiramos para el otro script de respaldo el de __respaldoexport__.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Al final nos quedarán ambas reglas creadas como en la imagen siguiente.
 
 ![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
@@ -132,4 +248,5 @@ Una vez que tengamos definidas nuestras address list tan solo debemos crear una 
 
 ![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 ![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
