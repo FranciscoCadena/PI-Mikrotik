@@ -270,44 +270,44 @@ __Nota__ el cambio de color del powershell es debido a que una vez dentro de Mik
 
 Para probar que funciona correctamente el envío de correo vamos a __Tools → Email__ y en la ventana que aparece le damos a _Send Email_, nos aparecerá una nueva ventana, rellenamos los campos en donde los primeros hacen referencia a nuestra cuenta con mikrotik, y luego definimos a qué correo se lo vamos a enviar y quien se lo envía, tal como se muestra en la siguiente imagen.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Envió de correo manualmente desde Mikrotik](ImagenesPI/PIFase3/gmailmikrotik2.PNG "Envió de correo manualmente desde Mikrotik")
 
 Después de darle a enviar revisamos nuestro correo para ver si nos ha llegado el mensaje y comprobar que funciona correctamente.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Correo recibido](ImagenesPI/PIFase3/gmailmikrotik3.PNG "Correo recibido")
 
 ## Comprobar el envío de logs asignados
 
 Como prueba para ver si funciona el aviso de errores y dhcp creadas en el router vamos a tener abierto los logs, las reglas creadas y vamos a desconectar uno de los interfaces wan que están como dhcp cliente.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Prueba de envío de errores por correo](ImagenesPI/PIFase3/gmailerror7.PNG "Prueba de envío de errores por correo")
 
 Como vemos en el logs se a enviado un correo para notificarnos de un problema de dhcp.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Desconexión del interfaz 3, y comprobación del envío de correo desde el log](ImagenesPI/PIFase3/gmailerror8.PNG "Desconexión del interfaz 3, y comprobación del envío de correo desde el log")
 
 Si ahora vamos a nuestro correo podemos ver como nos han llegado varios correos avisandonos de lo ocurrido en el router tanto con el servicio de dhcp como con la interfaz, dándonos diversos detalles cada correo.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Comprobación de la llegada de los correos ](ImagenesPI/PIFase3/gmailerror9.PNG "Comprobación de la llegada de los correos ")
 
 ## Comprobar la automatización de envios de Backups
 
 Para probar de que tanto los script creados como las tareas programadas funcionan correctamente podemos modificar la hora de uno de los archivos para que correspondan con la hora que tenemos en ese momento.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Modificar horario de la tarea para que concuerde con la hora actual](ImagenesPI/PIFase3/respaldo8.PNG "Modificar horario de la tarea para que concuerde con la hora actual")
 
 O bien desde la ventana de los Script podemos seleccionar uno de ellos y luego darle al botón de __Run Script__.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Activar el Botón Run Scrip](ImagenesPI/PIFase3/respaldo10.PNG "Activar el Botón Run Script")
 
 El _Run Count_ corresponde a las veces que se a enviado por correo el script, o las veces que este se a ejecutado.
 Hay que tener en cuenta que en el periodo de tiempo que definimos en las tareas es posible que de error o que no llegue algun correo si ambos _script_ deben ser enviados al mismo tiempo, por lo que recomiendo darle un margen entre un correo y otro.
  
 A continuación comprobamos los correos que nos han llegado.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Correos recibidos del router con las tareas programadas](ImagenesPI/PIFase3/respaldo11.PNG "Correos recibidos del router con las tareas programadas")
 
 Y el archivo que nos ha llegado de este
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Archivo de Bachup dentro del correo que ha llegado desde el router](ImagenesPI/PIFase3/respaldo9.PNG "Archivo de Bachup dentro del correo que ha llegado desde el router")
 
