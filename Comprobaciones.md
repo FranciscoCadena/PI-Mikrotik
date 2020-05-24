@@ -266,8 +266,48 @@ Dentro de Mikrotik desde SSH, para confirmarlo se puede observar el nombre del r
 
 __Nota__ el cambio de color del powershell es debido a que una vez dentro de Mikrotik por ssh no se veía bien las letras, de hay que haya pasado a otro color.
 
+## Comprobar el envío de correo por gmail
 
+Para probar que funciona correctamente el envío de correo vamos a __Tools → Email__ y en la ventana que aparece le damos a _Send Email_, nos aparecerá una nueva ventana, rellenamos los campos en donde los primeros hacen referencia a nuestra cuenta con mikrotik, y luego definimos a qué correo se lo vamos a enviar y quien se lo envía, tal como se muestra en la siguiente imagen.
 
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
+Después de darle a enviar revisamos nuestro correo para ver si nos ha llegado el mensaje y comprobar que funciona correctamente.
 
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+## Comprobar el envío de logs asignados
+
+Como prueba para ver si funciona el aviso de errores y dhcp creadas en el router vamos a tener abierto los logs, las reglas creadas y vamos a desconectar uno de los interfaces wan que están como dhcp cliente.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Como vemos en el logs se a enviado un correo para notificarnos de un problema de dhcp.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Si ahora vamos a nuestro correo podemos ver como nos han llegado varios correos avisandonos de lo ocurrido en el router tanto con el servicio de dhcp como con la interfaz, dándonos diversos detalles cada correo.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+## Comprobar la automatización de envios de Backups
+
+Para probar de que tanto los script creados como las tareas programadas funcionan correctamente podemos modificar la hora de uno de los archivos para que correspondan con la hora que tenemos en ese momento.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+O bien desde la ventana de los Script podemos seleccionar uno de ellos y luego darle al botón de __Run Script__.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+El _Run Count_ corresponde a las veces que se a enviado por correo el script, o las veces que este se a ejecutado.
+Hay que tener en cuenta que en el periodo de tiempo que definimos en las tareas es posible que de error o que no llegue algun correo si ambos _script_ deben ser enviados al mismo tiempo, por lo que recomiendo darle un margen entre un correo y otro.
+ 
+A continuación comprobamos los correos que nos han llegado.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Y el archivo que nos ha llegado de este
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
