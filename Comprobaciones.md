@@ -321,10 +321,16 @@ Vamos a probar el funcionamiento de suricata, para ello primero veremos los dife
 
 Bien una vez explicado un poco los diferentes archivos log, para hacer una pequeña prueba crearemos nuestra propia regla, para ello podemos hacerlo de varias formas la mas logica es crear un archivo de texto nuevo en la ruta por defecto que usa actualmente suricata la cual es _/var/lib/suricata/rules_, o también podemos crear un fichero de texto en la ruta /etc/suricata/rules la cual se crea automáticamente al instalar el _suricata-update_ el problema de esto es que deberemos especificar la ruta de este en el archivo de configuración de suricata en el apartado de __default-rule-path__, por ello es más recomendable crearlo en la ruta por defecto de _/var/lib/suricata/rules_.
 
+![Creando el archivo custom.rules](ImagenesPI/Suricata/crearcustomrules.PNG "Creando el archivo custom.rules")
+
 Una vez creado el archivo de texto el cual podemos definir como _custom.rules_, dentro de este agregamos la siguiente línea __“alert icmp any any -> any any (msg: "ICMP detected"; sid: 1000001;)”__ salimos y guardamos, la regla anterior lo que hará será crear una alerta (visible en los logs) cada vez que detecte un paquete ICMP.
+
+![Insertando la regla en custom.rules](ImagenesPI/Suricata/reglamanual.PNG "Insertando la regla en custom.rules")
 
 Una vez creada la alerta la definiremos en el archivo de configuración __suricata.yaml__, buscamos _rule-files_, y añadimos nuestra regla la cual definimos como _custom.rules_ debajo de _suricata.rules_.
 Guardamos el archivo y reiniciamos suricata para que cargue las reglas nuevas.
+
+![Agregando la regla creada manualmente al archivo suricata.yaml](ImagenesPI/Suricata/agregarcustomrules.PNG "Agregando la regla creada manualmente al archivo suricata.yaml")
 
 Ahora arrancamos suricata con el siguiente comando
 ~~~
@@ -342,6 +348,9 @@ Si no tenemos la herramienta ethtool, la podemos instalar con.
 ~~~
 sudo apt-get install ethtool
 ~~~
+
+![Instalación de la herramienta ethtool](ImagenesPI/Suricata/instalarethtool.PNG "Instalación de la herramienta ethtool")
+
 Si al ejecutar el comando nos aparece una línea comentando _Cannot change large-receive-offload_ significa que nuestra interfaz no es compatible con esta función y por tanto la  ignorara. 
 Sin embargo, podemos verificar esto ejecutando el siguiente comando.
 ~~~
@@ -352,14 +361,24 @@ El cual nos deberá responder con.
 large-receive-offload: off [fixed]
 ~~~
 
+![Ejecución de los comandos ethtool](ImagenesPI/Suricata/ethtool.PNG "Ejecución de los comandos ethtool")
+
 Una vez realizado y confirmado lo anterior ejecutamos el comando
 ~~~
 suricata -c /etc/suricata/suricata.yaml -i enp0s3
 ~~~
 
+![Arrancando suricata en modo PCAP](ImagenesPI/Suricata/suricatapcap.PNG "Arrancando suricata en modo PCAP")
+
 Y abrimos dos terminales nuevas, en una de ellas ejecutaremos el comando __tail -f /var/log/suricata/fast.log__ y en la otra terminal ejecutamos el comando __tail -f /var/log/suricata/eve.json__.
 
 Teniendo todo listo abrimos una nueva terminal y hacemos ping al 8.8.8.8 por ejemplo o también podemos hacer ping desde un equipo diferente al equipo que tenga instalado suricata, si todo ha ido bien nos debería de saltar la información de los icmp capturados.
 
+Ping al 8.8.8.8 desde la misma maquina.
 
+![Prueba ping 8.8.8.8 desde mismo equipo](ImagenesPI/Suricata/pruebasuricata1.PNG "Prueba ping 8.8.8.8 desde mismo equipo")
+
+Ping desde un windows 10 al equipo que tiene instalado suricata con ip 192.168.0.23.
+
+![Prueba ping desde diferente equipo a Suricata](ImagenesPI/Suricata/pruebasuricata2.PNG "Prueba ping desde diferente equipo a Suricata")
 
