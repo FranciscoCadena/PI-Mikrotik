@@ -93,6 +93,6 @@ Podemos ejecutar el siguiente comando para tener un ejemplo de cada uno de ellos
 ~~~
 suricata-update --dump-sample-configs
 ~~~
-Aparte de tener estos archivos debemos especificarlos en el archivo de configuración de suricata el __suricata.yaml__, para poder ver un ejemplo mas claro de esto podemos visitar la siguiente pagina https://suricata-update.readthedocs.io/en/latest/update.html#example-configuration-files.
+Aparte de tener estos archivos debemos especificarlos en el archivo de configuración de suricata el __suricata.yaml__, para poder ver un ejemplo mas claro de esto podemos visitar la siguiente pagina [suricata-update](https://suricata-update.readthedocs.io/en/latest/update.html#example-configuration-files).
 De todas formas el futuro del uso de suricata es realizando todo desde el archivo _suricata.rules_.
  
