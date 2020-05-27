@@ -311,3 +311,55 @@ Y el archivo que nos ha llegado de este
 
 ![Archivo de Bachup dentro del correo que ha llegado desde el router](ImagenesPI/PIFase3/respaldo9.PNG "Archivo de Bachup dentro del correo que ha llegado desde el router")
 
+## Comprobar funcionamiento de suricata
+
+Vamos a probar el funcionamiento de suricata, para ello primero veremos los diferentes log de suricata y que nos aporta cada uno de ellos.
+- __suricata.log:__ Recoge los eventos del mismo Suricata: inicializaciones, recargas, errores, etc.
+- __stats.log:__ Recoge estadísticas regulares acerca del tráfico que se ha ido analizando hasta el momento.
+- __fast.log:__ Recoge los eventos disparados por las reglas. Tiene como objetivo dar una impresión rápida y directa de los eventos.
+- __eve.json:__ Recoge, igual que el anterior, los eventos disparados por las reglas, pero lo hace en formato JSON, lo que permite que posteriormente pueda ser interpretado de forma mucho más fácil por programas externos.
+
+Bien una vez explicado un poco los diferentes archivos log, para hacer una pequeña prueba crearemos nuestra propia regla, para ello podemos hacerlo de varias formas la mas logica es crear un archivo de texto nuevo en la ruta por defecto que usa actualmente suricata la cual es _/var/lib/suricata_, o también podemos crear un fichero de texto en la ruta /etc/suricata/rules la cual se crea automáticamente al instalar el _suricata-update_ el problema de esto es que deberemos especificar la ruta de este en el archivo de configuración de suricata en el apartado de __default-rule-path__, por ello es más recomendable crearlo en la ruta por defecto de _/var/lib/suricata_.
+
+Una vez creado el archivo de texto el cual podemos definir como _custom.rules_, dentro de este agregamos la siguiente línea __“alert icmp any any -> any any (msg: "ICMP detected"; sid: 1000001;)”__ salimos y guardamos, la regla anterior lo que hará será crear una alerta (visible en los logs) cada vez que detecte un paquete ICMP.
+
+Una vez creada la alerta la definiremos en el archivo de configuración __suricata.yaml__, buscamos _rule-files_, y añadimos nuestra regla la cual definimos como _custom.rules_ debajo de _suricata.rules_.
+Guardamos el archivo y reiniciamos suricata para que cargue las reglas nuevas.
+
+Ahora arrancamos suricata con el siguiente comando
+~~~
+suricata -c /etc/suricata/suricata.yaml -i enp0s3
+~~~
+
+Con la opción _-c_ definimos la ruta del archivo de configuración, y con _-i_ definimos que corra en modo PCAP, con lo que le definimos el nombre de la interfaz que en caso es enp0s3
+
+__Nota__. Es conveniente antes de ejecutar el comando anterior desactivar las funciones de descarga de paquetes en la interfaz de red en la que escucha Suricata con el siguiente comando.
+~~~
+ethtool -K enp0s3 gro off lro off
+~~~
+
+Si no tenemos la herramienta ethtool, la podemos instalar con.
+~~~
+sudo apt-get install ethtool
+~~~
+Si al ejecutar el comando nos aparece una línea comentando _Cannot change large-receive-offload_ significa que nuestra interfaz no es compatible con esta función y por tanto la  ignorara. 
+Sin embargo, podemos verificar esto ejecutando el siguiente comando.
+~~~
+ethtool -k enp0s3 | grep large
+~~~
+El cual nos deberá responder con.
+~~~
+large-receive-offload: off [fixed]
+~~~
+
+Una vez realizado y confirmado lo anterior ejecutamos el comando
+~~~
+suricata -c /etc/suricata/suricata.yaml -i enp0s3
+~~~
+
+Y abrimos dos terminales nuevas, en una de ellas ejecutaremos el comando __tail -f /var/log/suricata/fast.log__ y en la otra terminal ejecutamos el comando __tail -f /var/log/suricata/eve.json__.
+
+Teniendo todo listo abrimos una nueva terminal y hacemos ping al 8.8.8.8 por ejemplo o también podemos hacer ping desde un equipo diferente al equipo que tenga instalado suricata, si todo ha ido bien nos debería de saltar la información de los icmp capturados.
+
+
+
