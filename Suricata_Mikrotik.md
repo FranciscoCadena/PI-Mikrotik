@@ -55,3 +55,44 @@ sudo tail /var/log/suricata/suricata.log
 La linea mas importante de todo lo que nos muestra es la siguiente.
 <Notice> - all 4 packet processing threads, 4 management threads initialized, engine started.
 La cantidad de __threads(hilos)__ dependera del sistema y su configuración.  
+ 
+### OPCIONAL
+Una vez que comprobamos que suricata está instalado y corriendo, vamos a actualizar las fuentes, para ello ejecutamos.
+~~~
+sudo suricata-update update-sources
+~~~
+Luego vemos una lista de todas las fuentes disponibles con.
+~~~
+sudo suricata-update list-sources
+~~~
+Una vez que veamos el que nos interesa tan solo debemos activarlo, en este ejemplo se activa el _OISF_, usando el __name__ completo que vimos en la lista anterior. 
+~~~
+sudo suricata-update enable-source oisf/trafficid
+~~~
+Y luego actualizamos nuestras reglas.
+~~~
+sudo suricata-update
+~~~
+Ahora debemos reiniciar suricata con.
+~~~
+systemctl restart suricata
+~~~ 
+Comprobamos las listas activas de la fuente con.
+~~~
+suricata-update ist-enabled-sources
+~~~ 
+Como se dijo antes todas las reglas van a un archivo llamado _suricata.rules_ que se encuentra en la ruta _/var/lib/suricata_, para comprobar que suricata está leyendo correctamente de esta dirección vamos al archivo de configuración el cual se encuentra en _/etc/suricata/suricata.yaml_ y buscamos __rule-files__ donde deberá estar el archivo _suricata.rules_ y en __default-rule-path__ debera estar la ruta _/var/lib7suricata/rules_.
+ 
+Para poder definir qué reglas queremos tener activas y cuales desactivadas lo normal es modificar el archivo __suricata.rules__,  para poder entrar al directorio donde se encuentra _/var/lib/suricata_, debemos ser root.
+Otra forma que no viene por defecto al instalar el suricata-update es teniendo varios archivos en la ruta _/etc/suricata_ para definir lo que queremos hacer con cada regla, esos archivos son los siguiente.
+- __/etc/suricata/enable.conf__, activar reglas
+- __/etc/suricata/disable.conf__, desactivar reglas
+- __/etc/suricata/drop.conf__, eliminar reglas
+- __/etc/suricata/modify.conf__, modificar reglas
+Podemos ejecutar el siguiente comando para tener un ejemplo de cada uno de ellos con. 
+~~~
+suricata-update --dump-sample-configs
+~~~
+Aparte de tener estos archivos debemos especificarlos en el archivo de configuración de suricata el __suricata.yaml__, para poder ver un ejemplo mas claro de esto podemos visitar la siguiente pagina https://suricata-update.readthedocs.io/en/latest/update.html#example-configuration-files.
+De todas formas el futuro del uso de suricata es realizando todo desde el archivo _suricata.rules_.
+ 
