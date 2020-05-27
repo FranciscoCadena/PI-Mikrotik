@@ -20,7 +20,7 @@ Una vez instalado suricata podemos confirmarlo usando el siguiente comando para 
 ~~~
 sudo systemctl status suricata
 ~~~
-Y tambien podemos usar el siguiente comando que nos dara informacion de todo lo instalado, tanto herramientas, como librerías.
+Y tambien podemos usar el siguiente comando que nos dara informacion de todo lo instalado, tanto herramientas, como librerías, directorios de instalación, etc.
 ~~~
 sudo suricata --build-info
 ~~~ 
