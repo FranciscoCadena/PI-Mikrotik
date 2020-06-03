@@ -385,25 +385,63 @@ Ping desde un windows 10 al equipo que tiene instalado suricata con ip 192.168.0
 ## Comprobar funcionamiento de Suricata junto a Mikrotik
 
 Para realizar la prueba partiremos del diagrama de la Fase 2 con los equipos Suricatas vinculados cada uno al router master y otro al router backup.
- 
+
+![Diagrama fase2 con Suricatas conectados a los Routers](ImagenesPI/Suricata/fase3-suricata.PNG "Diagrama fase2 con Suricatas conectados a los Routers")
+
 Una vez configurado Mikrotik, volvemos a nuestro Suricata, lo primero será crear una carpeta, por ejemplo dentro de la carpeta mikrotik creada donde nos descargamos la herramienta trafr, a la cual llamaremos _registros_.
-Dentro de esta carpeta ejecutamos el siguiente comando.
+
+![Creando carpeta registro y cambiando a root](ImagenesPI/Suricata/suricataprueba1.PNG "Creando carpeta registro y cambiando a root")
+
+Dentro de esta carpeta ejecutamos el siguiente comando estando como _root_ ya que las reglas de suricata están en un directorio donde solo tiene acceso el root.
 __/usr/local/bin/trafr -s | suricata -c /etc/suricata/suricata.yaml -v -r /dev/stdin__
 Con ello arrancamos la herramienta trafr que se encuentra actualmente en /usr/local/bin, y lo que recoge se lo envía a suricata el cual estará corriendo en modo pcap, enviando todo al directorio definido con la opción -r y procesandolos en orden.
 El motivo de ejecutar el comando en la carpeta creada es porque al usar la opción -r en modo pcap (offline), suricata crea nuevos archivos .log en la ruta donde se ejecuta ese comando, por lo tanto en vez de visualizar los archivos de suricata que por defecto están en la ruta _/var/log/suricata_ visualizamos los nuevos creados.
- 
-Para poder ver el tráfico que llega podemos usar 
-tail -f /var/log/suricata/fast.log
+
+![Nuevos Logs creados al ejecutar Suricata en la carpeta registros](ImagenesPI/Suricata/nuevoslogs.PNG "Nuevos Logs creados al ejecutar Suricata en la carpeta registros")
+
+Abrimos dos nuevas terminales, y nos dirigimos a la ruta _/mikrotik/registros_, para poder ver el tráfico que llega podemos usar 
+~~~
+tail -f fast.log
+~~~
 O si queremos más información podemos usar
-tail -f /var/log/suricata/eve.json
- 
- 
-Encendemos un equipo de cada red local que tenga acceso a internet, en este ejemplo se enciende el pc de la red _lan2 con ip 192.168.20.3_ y un equipo de la _dmz con ip 192.168.30.4_.
-Hacemos ping con uno de ellos al 8.8.8.8 y con el otro haremos ping al 1.1.1.1.
-Y comprobamos desde Suricata si recoje los icmp que se envían, usando la alerta __“alert icmp any any -> any any (msg: "ICMP detected"; sid: 1000001;)”__ y viéndolo desde el fast.log con __tail -f /var/log/suricata/fast.log__
-__Nota__ Como las reglas de suricata están en un directorio donde solo tiene acceso el root, es recomendable ejecutar suricata siendo root para que pueda cargar las reglas.
+~~~
+tail -f eve.json | grep "ICMP detected"
+~~~
 
+Teniendo nuestro equipo Suricata preparado para escuchar los paquetes que le llegan encendemos desde GNS3 un equipo de cada red local que tenga acceso a internet, en este ejemplo se enciende el pc de la red _lan2 con ip 192.168.20.3_ y un equipo de la _dmz con ip 192.168.30.4_.
 
+![Preparando Suricata para recibir paquetes de Mikrotik](ImagenesPI/Suricata/suricataprueba2.PNG "Preparando Suricata para recibir paquetes de Mikrotik")
+
+Comprobamos desde Suricata si recoje los icmp que se envían, usando la alerta __“alert icmp any any -> any any (msg: "ICMP detected"; sid: 1000001;)”__ y viéndolo desde el _fast.log y el eve.json_.
+
+Primero realizamos los ping desde el equipo cuya ip es la _192.168.20.3_.
+ 
+Hacemos ping al _1.1.1.1_.
+
+![ping al 1.1.1.1](ImagenesPI/Suricata/suricataprueba3.PNG "ping al 1.1.1.1") 
+
+Hacemos ping a la página de _www.marca.com_.
+
+![ping a marca](ImagenesPI/Suricata/suricataprueba4.PNG "ping a marca") 
+
+Hacemos ping al otro equipo encendido cuya ip es _192.168.30.4_.
+
+![ping al otro equipo de gns3](ImagenesPI/Suricata/suricataprueba5.PNG "ping al otro equipo de gns3") 
+
+Ahora pasamos ha hacer ping desde el otro equipo cuya ip es _192.168.30.4_.
+Dejamos primero algo de separación en los dos archivos logs, para diferenciar las nuevas capturas de tráfico.
+ 
+Hacemos ping a la página de _www.google.com_.
+
+![ping a google](ImagenesPI/Suricata/suricataprueba6.PNG "ping a google") 
+
+Hacemos ping al _9.9.9.9_
+
+![ping al 9.9.9.9](ImagenesPI/Suricata/suricataprueba7.PNG "ping al 9.9.9.9") 
+
+Hacemos ping al anterior equipo cuya ip es _192.168.20.3_.
+
+![ping al otro equipo de gns3](ImagenesPI/Suricata/suricataprueba8.PNG "ping al otro equipo de gns3")
 
 
 
