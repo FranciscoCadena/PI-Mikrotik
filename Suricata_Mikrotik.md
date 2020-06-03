@@ -167,7 +167,7 @@ Por ello lo primero será instalar la siguiente librería con
 sudo apt-get install libc6-i386
 ~~~
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Instalando librería](ImagenesPI/Suricata/instalarlibreria.PNG "Instalando librería")
 
 Creamos una carpeta llamada _mikrotik_ y luego descargamos Trafr  del siguiente enlace con wget http://www.mikrotik.com/download/trafr.tgz
 
