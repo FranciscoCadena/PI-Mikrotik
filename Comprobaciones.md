@@ -382,3 +382,41 @@ Ping desde un windows 10 al equipo que tiene instalado suricata con ip 192.168.0
 
 ![Prueba ping desde diferente equipo a Suricata](ImagenesPI/Suricata/pruebasuricata2.PNG "Prueba ping desde diferente equipo a Suricata")
 
+## Comprobar funcionamiento de Suricata junto a Mikrotik
+
+Para realizar la prueba partiremos del diagrama de la Fase 2 con los equipos Suricatas vinculados cada uno al router master y otro al router backup.
+ 
+Una vez configurado Mikrotik, volvemos a nuestro Suricata, lo primero será crear una carpeta, por ejemplo dentro de la carpeta mikrotik creada donde nos descargamos la herramienta trafr, a la cual llamaremos _registros_.
+Dentro de esta carpeta ejecutamos el siguiente comando.
+__/usr/local/bin/trafr -s | suricata -c /etc/suricata/suricata.yaml -v -r /dev/stdin__
+Con ello arrancamos la herramienta trafr que se encuentra actualmente en /usr/local/bin, y lo que recoge se lo envía a suricata el cual estará corriendo en modo pcap, enviando todo al directorio definido con la opción -r y procesandolos en orden.
+El motivo de ejecutar el comando en la carpeta creada es porque al usar la opción -r en modo pcap (offline), suricata crea nuevos archivos .log en la ruta donde se ejecuta ese comando, por lo tanto en vez de visualizar los archivos de suricata que por defecto están en la ruta _/var/log/suricata_ visualizamos los nuevos creados.
+ 
+Para poder ver el tráfico que llega podemos usar 
+tail -f /var/log/suricata/fast.log
+O si queremos más información podemos usar
+tail -f /var/log/suricata/eve.json
+ 
+ 
+Encendemos un equipo de cada red local que tenga acceso a internet, en este ejemplo se enciende el pc de la red _lan2 con ip 192.168.20.3_ y un equipo de la _dmz con ip 192.168.30.4_.
+Hacemos ping con uno de ellos al 8.8.8.8 y con el otro haremos ping al 1.1.1.1.
+Y comprobamos desde Suricata si recoje los icmp que se envían, usando la alerta __“alert icmp any any -> any any (msg: "ICMP detected"; sid: 1000001;)”__ y viéndolo desde el fast.log con __tail -f /var/log/suricata/fast.log__
+__Nota__ Como las reglas de suricata están en un directorio donde solo tiene acceso el root, es recomendable ejecutar suricata siendo root para que pueda cargar las reglas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
