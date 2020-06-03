@@ -266,9 +266,4 @@ Al final nos quedarán ambas reglas creadas como en la imagen siguiente.
 
 ![Tareas programadas creadas](ImagenesPI/PIFase3/respaldo7.PNG "Tareas programadas creadas")
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
-
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
