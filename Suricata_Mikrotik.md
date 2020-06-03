@@ -158,3 +158,63 @@ suricata-update --dump-sample-configs
 Aparte de tener estos archivos debemos especificarlos en el archivo de configuración de suricata el __suricata.yaml__, para poder ver un ejemplo mas claro de esto podemos visitar la siguiente pagina [suricata-update](https://suricata-update.readthedocs.io/en/latest/update.html#example-configuration-files).
 De todas formas el futuro del uso de suricata es realizando todo desde el archivo _suricata.rules_.
  
+## Preparando Suricata
+
+Una vez que ya tenemos instalado Suricata y probado, nuestro siguiente paso será hacer que trabaje junto a Mikrotik, para ello primero haremos unos pasos previos.
+En el equipo donde tengamos instalado Suricata nos descargamos la herramienta __Trafr__  la cual es una aplicación escrita por Mikrotik para _convertir el tráfico TZSP a PCAP_. La aplicación es de 32 bits, por lo que para iniciarla se necesitará habilitar el soporte para aplicaciones de 32 bits en Ubuntu a 64 bits.
+Por ello lo primero será instalar la siguiente librería con
+~~~
+sudo apt-get install libc6-i386
+~~~
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+Creamos una carpeta llamada _mikrotik_ y luego descargamos Trafr  del siguiente enlace con wget http://www.mikrotik.com/download/trafr.tgz
+
+![Descargando la herramienta Trafr](ImagenesPI/Suricata/descargartrafr.PNG "Descargando la herramienta Trafr")
+
+Lo descomprimimos con _tar -zvxf trafr.tgz_.
+
+![Descomprimir Trafr](ImagenesPI/Suricata/descomprimirtrafrPNG.PNG "Descomprimir Trafr")
+
+Probamos a ver si captura los paquetes ejecutando __./trafr -s__ si nos van apareciendo líneas encriptadas cada poco tiempo es que está capturando los paquetes y funciona correctamente. 
+
+![Opciones de uso de Trafr](ImagenesPI/Suricata/probartrafr.PNG "Opciones de uso de Trafr")
+
+Ahora que sabemos que funciona movemos trafr a la siguiente ruta _/usr/local/bin_
+ 
+![Mover la herrameinta Trafr a la ruta definida](ImagenesPI/Suricata/movertrafr.PNG "Mover la herrameinta Trafr a la ruta definida")
+
+## Preparando Mikrotik
+
+Ahora que tenemos preparado nuestro IDS, configuraremos Mikrotik para que le envíe todo el tráfico que atraviesa el router a nuestro equipo que tiene Suricata instalado.
+Para ello lo primero será darle una ip a uno de los puertos donde irá conectado, en este ejemplo conectamos el equipo suricata al _ether5_ así que para diferenciarlo primero le daremos un nombre.
+
+![Definir el nombre de ether5 para diferenciarlo](ImagenesPI/Suricata/nombrarsuricata.PNG "Definir el nombre de ether5 para diferenciarlo")
+
+Luego le damos un direccionamiento, no crearemos ningún  servicio de dhcp porque nos interesa que la ip de Suricata sea fija.
+Ahora tenemos varias formas de redirigir el tráfico desde el router a nuestro Suricata.
+
+![Dando ip al ether5](ImagenesPI/Suricata/ipsuricata.PNG "Dando ip al ether5")
+
+La primera es con la herramienta de _Packet Sniffer_ para ello vamos al menú izquierdo, __Tool → Packet Sniffer__, una vez aquí vamos a la pestaña de _Streaming_, marcamos las casilla de _Filter Stream_ y _Streaming Enabled_ y en el apartado de _Server_ escribimos la ip de nuestro Suricata que será el que le daremos nosotros como ip fija.
+Una vez configurado solo debemos darle al botón _Strart_.
+
+![Configurando la herramienta Packet Sniffer](ImagenesPI/Suricata/packetsniffer.PNG "Configurando la herramienta Packet Sniffer")
+
+El segundo método es creando una _regla Mangle o de marcado_, con lo que iremos a __Ip → Firewall__ y luego a la pestaña de _Mangle_.
+Creamos una nueva regla donde en la pestaña _General_ el apartado de _Chain_ lo dejamos en __forward__.
+Luego vamos a la pestaña de _Action_, en el apartado de _Action_ seleccionamos la opción de __sniff TZSP__, en _Sniff Target_ escribimos la ip de nuestro equipo Suricata, y en _Sniff Target Port_ definimos el puerto por el que irá a nuestro equipo Suricata, el cual será el _UDP 37008_ que es reconocido también por Wireshark para el encapsulamiento de paquetes por  _TZSP(TaZmen Sniffer Protocol)_.
+Este puerto deberá estar abierto también en nuestro equipo Suricata.
+
+![Creando regla para enviar el trafico a un sistema compatible con TZSP como Wireshark](ImagenesPI/Suricata/manglesuricata.PNG "Creando regla para enviar el trafico a un sistema compatible con TZSP como Wireshark")
+
+La ventaja de usar la regla Mangle es que podemos definir, qué interfaz, puerto o direccionamiento queremos capturar y enviar a analizar a nuestro equipo Suricata, mientras que la herramienta Packet Sniffer envía todo el tráfico, por consiguiente el equipo donde esté instalado Suricata requerirá de tener bastante memoria RAM y al menos 4 CPU para que trabajen todos los multihilos de Suricata.
+
+El tercer método se realiza con un __Switch__ realizando un _Port Mirror_, por ello aquí no se verá debido a que nuestra virtualización se está realizando sobre RouterOS.
+
+
+
+
+
+
