@@ -25,5 +25,6 @@
 - Comprobar el funcionamiento del correo de mikrotik por gmail, realizando un envío del mismo y comprobar que nos ha llegado el correo.
 - Comprobar que nos llegan los errores y problemas relacionados con dhcp por correo.
 - Comprobar que el programa para que lleguen correos automaticamente segun el tiempo especificado funciona correctamente.
-- Comprobar que suricata funciona, creando una regla manualmente, que recoja todos los icmp, y ver si lo capta los archivos log.
+- Comprobar que Suricata funciona, creando una regla manualmente, que recoja todos los icmp, y ver si lo capta los archivos log.
+- Comprobar que Suricata recibe los paquetes enviados por Mikrotik con la regla mangle, usando en mikrotik una regla que de alertas con todos los icmp.
 
