@@ -21,6 +21,7 @@ __En esta parte implementaremos algunos tecnologias para que nuestra red tanga m
 - Se implementará un Failover de líneas de respaldo para ambos router con los dos ISP, para cuando uno de ellos falle, automáticamente tire por el otro.
 - Se implementará un VRRP entre los dos router de la empresa para las redes estáticas de la DMZ y la LAN2 con ello ayudamos a que cuando un router se dañe sigamos teniendo conexión gracias a que tirara por el otro router, es un proceso muy parecido al failover.
 - Se implementara un ancho de banda en la red LAN 2 puesto que tienen salida a internet, para ver como se configura y como funciona.
+- Se implementara un balanceo de Carga para la DMZ.
 
 Todo este apartado estara en el documento de configuración de Herramientas que aportan Alta Disponibilidad.
 
