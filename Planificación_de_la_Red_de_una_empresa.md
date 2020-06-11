@@ -15,7 +15,7 @@ __En la cual se configurara los siguientes aspectos__
 Todo este apartado estara en el documento de configuracion de una red empresarial.
 
 ## La segunda fase tendrá algunos cambios en la topografía de red respecto a la anterior como se ve en la siguiente imagen.
-![Fase 2 de Red](/ImagenesPI/PIFase2/Fase2.PNG "Topografia de Red de la Fase1")
+![Fase 2 de Red](/ImagenesPI/PIFase2/Fase2.PNG "Topografia de Red de la Fase2")
 
 __En esta parte implementaremos algunos tecnologias para que nuestra red tanga mayor disponibilidad__
 - Se implementará un Failover de líneas de respaldo para ambos router con los dos ISP, para cuando uno de ellos falle, automáticamente tire por el otro.
@@ -25,7 +25,14 @@ __En esta parte implementaremos algunos tecnologias para que nuestra red tanga m
 
 Todo este apartado estara en el documento de configuración de Herramientas que aportan Alta Disponibilidad.
 
+## La tercera fase principalmente consistirá en montar un IDS
+![Fase 3 de Red](/ImagenesPI/PIFase3/FASE3.PNG "Topografia de Red de la Fase3")
 
+__En esta fase se implementara lo siguiente__
+- Se implementa el Port knocking en ambos routers, para darle una capa de seguridad frente a quienes quieran conectar remotamente al router, usando un código de puertos.
+- Se configuraran ambos router para que nos envíen correo cuando se detecte errores o cualquier anomalía que nosotros queramos que se nos sea avisado, también se configurara el correo para que en una determinada hora de cada día nos mande un backup de la configuración de los router.
+- Se configurara Mikrotik para que le envié todos los paquetes que atraviesen el router a un equipo con Suricata instalado como IDS.
+- Se monta un sistema Kali, para simular que a entrado a nuestro router y realiza un escaneo de red con nmap, para comprobar si Suricata lo detecta.
 
 
 
