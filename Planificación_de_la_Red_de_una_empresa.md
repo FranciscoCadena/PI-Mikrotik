@@ -34,5 +34,5 @@ __En esta fase se implementara lo siguiente__
 - Se configurara Mikrotik para que le envié todos los paquetes que atraviesen el router a un equipo con Suricata instalado como IDS.
 - Se monta un sistema Kali, para simular que a entrado a nuestro router y realiza un escaneo de red con nmap, para comprobar si Suricata lo detecta.
 
-
+Todo esto estara en los archivos de Suricata-Mikrotik y en el de configuración de Herramientas de Seguridad.
 
