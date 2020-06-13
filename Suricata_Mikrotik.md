@@ -229,17 +229,17 @@ Y luego con el equipo kali linux ejecutar nmap a la red, usando la opción -sS d
 
 Haremos un escaneo primero al router cuya ip es 192.168.0.31.
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Escaneo de puertos al router](ImagenesPI/Suricata/Kalirouter.PNG "Escaneo de puertos al router")
 
 Una vez visto los puertos que tenemos abiertos en nuestro router podemos dirigirnos desde nuestro router mikrotik a __IP → Services__ o también a __IP → firewall en la pestaña de service port__, en ambos encontraremos información de puertos abiertos para servicios, donde podemos deshabilitar los que no usemos o crear reglas para dropear lo que llegue por ellos, varias de las medidas que podemos usar para securizar nuestro router la podemos sacar desde la página oficial de mikrotik por este [enlace](https://wiki.mikrotik.com/wiki/Firewall) 
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Puertos activos en el router](ImagenesPI/Suricata/Puertos.PNG "Puertos activos en el router")
 
 Luego realizamos un escaneo a uno de los equipo de la red LAN2, por ejemplo a la ip 192.168.20.3.
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Escaneo al equipo de la lan2](ImagenesPI/Suricata/Kalilan2.PNG "Escaneo al equipo de la lan2")
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Resultados del escaneo con Suricata](ImagenesPI/Suricata/Suricatalan2.PNG "Resultados del escaneo con Suricata")
 
 Podemos comprobar como con suricata nos da muchas alertas, esto es en parte debido a que este equipo como se puede ver en la captura de kali linux tiene muchos puertos abiertos. 
 Y el archivo de eve.json que es el de abajo a la izquierda da tanta información que cuesta entenderlo. 
@@ -255,7 +255,7 @@ Como ejemplos con capturas para ver como se vería, tenemos este con el comando:
 tail -f eve.json | jq ‘.’
 ~~~
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Visualización de eve.json con jq](ImagenesPI/Suricata/suricatajq.PNG "Visualización de eve.json con jq")
 
 y este otro para filtrar por tipo de evento el cual será alertas, con el comando: 
 
@@ -263,15 +263,15 @@ y este otro para filtrar por tipo de evento el cual será alertas, con el comand
 tail -f eve.json | jq -c 'select(.event_type=="alert")’
 ~~~
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Visualización de eve.json con jq, solo alertas](ImagenesPI/Suricata/suricatajq2.PNG "Visualización de eve.json con jq, solo alertas")
 
 Por último hacemos un escaneo a la red 192.168.0.0/24.
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Escaneo de ip y puertos sobre la red](ImagenesPI/Suricata/Kalired.PNG "Escaneo de ip y puertos sobre la red")
 
 Como vemos en la imagen de suricata nos muestra todas las redes y puertos abiertos en cada una de ellas.
 
-![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+![Resultados del escaneo con Suricata](ImagenesPI/Suricata/suricatared.PNG "Resultados del escaneo con Suricata")
 
 Y con suricata la información que nos da es abrumadora, puesto que se va recogiendo todos los puertos e ip a la cual le está realizando he escaneo kali. 
 
