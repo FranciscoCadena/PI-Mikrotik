@@ -275,6 +275,9 @@ Como vemos en la imagen de suricata nos muestra todas las redes y puertos abiert
 
 Y con suricata la información que nos da es abrumadora, puesto que se va recogiendo todos los puertos e ip a la cual le está realizando he escaneo kali. 
 
+Como se a podido observar el archivo _eve.json_ da mucha información la cual puede costar ver a no ser que se filtre apropiadamente, y también hemos comprobado la cantidad de alertas que nos aparecen con tan solo un escaneo de puertos.
+
+Por ello hay tantas herramientas de tercero que utilizan este archivo eve.json, como puede ser _Kibana, Elasticsearch, EveBox_ entre otros, de ahí que exista un Sistema operativo el cual ya lo trae todo incorporado llamado __SELKS__, este SO es muy interesante para realizar un monitoreo de la red, el cual gracias a todas las herramientas que incluye, puedes ver diagramas, gráficas, información muy detallada de las alertas, de una forma más visual y sencilla.
 
 
 
