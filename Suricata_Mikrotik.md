@@ -213,6 +213,77 @@ La ventaja de usar la regla Mangle es que podemos definir, qué interfaz, puerto
 
 El tercer método se realiza con un __Switch__ realizando un _Port Mirror_, por ello aquí no se verá debido a que nuestra virtualización se está realizando sobre RouterOS.
 
+## Pruebas Nmap en la red con Kali linux
+
+En este apartado vamos a mostrar ejemplos de cómo suricata detecta un escaneo de puertos realizado por nmap.
+Para ello como se puede observar en el documento de [Planificación de la Red de una empresa](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Planificaci%C3%B3n_de_la_Red_de_una_empresa.md), en la fase 3 hay conectado un equipo kali linux al router master.
+
+Esto es para hacer pruebas de vulnerabilidades a la red. Porque en la realidad no se montaría un equipo atacante en tu propia red.
+
+La idea es simular que alguien de fuera a podido conectarse o entrar a nuestro router, y su siguiente paso será hacer un escaneo de red y puertos para ver todos los puertos abiertos y que redes privadas existen.
+
+Con esto pretendemos ver cómo detecta suricata ese escaneo y comprobar la cantidad de alertas que mostraría, esto será interesante porque si por ejemplo tenemos montado suricata para que nos avise de cualquier alerta ya sea por telegram, correo u otro medio es posible que nos sature este por la cantidad de avisos.
+
+Para realizar esto es tan sencillo como tener corriendo suricata para que recoja los paquetes que le envíe mikrotik, con los archivos fast.log y eve.json corriendo.
+Y luego con el equipo kali linux ejecutar nmap a la red, usando la opción -sS de esta forma se está realizando un escaneo TCP SYN y se intercambian los paquetes SYN, la conexión no queda establecida porque no se manda el ACK del SYNC que manda el servidor destino sino que se envía un RESET.
+
+Haremos un escaneo primero al router cuya ip es 192.168.0.31.
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+Una vez visto los puertos que tenemos abiertos en nuestro router podemos dirigirnos desde nuestro router mikrotik a __IP → Services__ o también a __IP → firewall en la pestaña de service port__, en ambos encontraremos información de puertos abiertos para servicios, donde podemos deshabilitar los que no usemos o crear reglas para dropear lo que llegue por ellos, varias de las medidas que podemos usar para securizar nuestro router la podemos sacar desde la página oficial de mikrotik por este [enlace](https://wiki.mikrotik.com/wiki/Firewall) 
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+Luego realizamos un escaneo a uno de los equipo de la red LAN2, por ejemplo a la ip 192.168.20.3.
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+Podemos comprobar como con suricata nos da muchas alertas, esto es en parte debido a que este equipo como se puede ver en la captura de kali linux tiene muchos puertos abiertos. 
+Y el archivo de eve.json que es el de abajo a la izquierda da tanta información que cuesta entenderlo. 
+Si suricata nos tuviera que avisar de todas esas alertas tendremos muchos mensajes.
+
+Para poder trabajar de forma más amigable con el archivo eve.json está la herramienta __jq__ la cual se instaló en la parte que se explicaba como instalar Suricata, esta herramienta ayuda a analizar y filtrar los resultados del archivo .json.
+
+Podemos ver algunos ejemplos en este enlace de [Suricata](https://suricata.readthedocs.io/en/suricata-4.1.4/output/eve/eve-json-examplesjq.html) o este otro de la página de [Stamus-network](https://www.stamus-networks.com/2015/05/18/looking-at-suricata-json-events-on-command-line/).
+
+Como ejemplos con capturas para ver como se vería, tenemos este con el comando:
+
+~~~
+tail -f eve.json | jq ‘.’
+~~~
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+y este otro para filtrar por tipo de evento el cual será alertas, con el comando: 
+
+~~~
+tail -f eve.json | jq -c 'select(.event_type=="alert")’
+~~~
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+Por último hacemos un escaneo a la red 192.168.0.0/24.
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+Como vemos en la imagen de suricata nos muestra todas las redes y puertos abiertos en cada una de ellas.
+
+![Fase2](ImagenesPI/Suricata/Fase2.PNG "")
+
+Y con suricata la información que nos da es abrumadora, puesto que se va recogiendo todos los puertos e ip a la cual le está realizando he escaneo kali. 
+
+
+
+
+
+
+
+
+
+
 
 
 
