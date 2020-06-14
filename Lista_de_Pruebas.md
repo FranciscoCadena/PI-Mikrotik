@@ -1,5 +1,7 @@
 # Listado de Pruebas
 
+Esto es un listado de pruebas a realizar para comprobar de que las configuraciones realizadas trabajan correctamente, estas comprobaciones se pueden ver en el documento de [Comprobaciones](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Comprobaciones.md)
+
 ## Fase 1
 
 - Comprobar que la interfaz WAN del router que irá como cliente de dhcp, reciba ip y tenga conectividad.
