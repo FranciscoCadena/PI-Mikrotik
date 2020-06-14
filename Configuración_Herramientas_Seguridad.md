@@ -266,4 +266,42 @@ Al final nos quedarán ambas reglas creadas como en la imagen siguiente.
 
 ![Tareas programadas creadas](ImagenesPI/PIFase3/respaldo7.PNG "Tareas programadas creadas")
 
+## Layer 7
+
+Vamos a configurar nuestro router mikrotik con layer 7 para filtrar ciertos paquetes y de esta manera bloquear el acceso a ciertas páginas web.
+
+Nuestro primer paso será ir a __IP → Firewall__ y luego a la pestaña de _Layer 7 Protocols_, una vez aquí le damos al símbolo (+) y en la ventana que nos aparece definimos el nombre que nosotros queramos en el aparatado _Name_ y en el apartado _Regexp_ será donde insertemos una expresión regular.
+En este caso se insertó la siguiente expresion regular:
+
+~~~
+^.+(youporn.com|pornhub.com|xvideos.com|xvideos|pornstars|youtube.com|youtu.be|googlevideo.com|facebook).*$
+~~~
+
+La idea será bloquear las paginas que vienen definidas en la expresión regular.
+Aplicamos y Ok.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Nuestro siguiente paso será estando en la ventana de _Firewall_ ir a la pestaña de _Mangle_. 
+Una vez aquí crearemos dos reglas.
+La primera regla será para marcar las conexiones que van por DNS y que  cumplan el protocolo de L7 antes definido.
+Para ello realizaremos lo siguiente, en la ventana que nos aparece al crear una nueva regla estando en la pestaña _General_  seleccionamos __prerouting__ en el apartado _chain_, en el apartado de _Protocol_ seleccionamos __UDP__,
+en el apartado de _Dst.Port_ escribimos __53__ y en el apartado de _Connection Mark_ seleccionamos __no-mark__.
+Ahora pasamos a la pestaña de Advanced, aquie solo debemos ir al aparatado de _Layer 7 Protocol_ y selecionar el protocolo que definimos anteriormente en Layer7, si tenemos varios pues seleccionamos el que nos interese, ya que podemos crear todos los protocolos de layer7 que queramos según nuestras necesidades.
+Luego pasamos a la pestaña de _Action_, en ella seleccionamos __mark connection__ en el apartado de _Action_, en _New Connection Mark_  definimos un nombre que nosotros queramos y el _Passthough_ lo dejamos marcado para que pase a la siguiente regla. Aplicamos y OK.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Ahora crearemos la otra regla para marcar los paquetes que provengan de las conexiones marcadas de la anterior regla.
+Estando en la pestaña _General_ tan solo seleccionamos __prerouting__ en el apartado de _chain_ y en _Connection Mark_ seleccionamos el nombre que definimos en la anterior regla para las conexiones marcadas.
+Luego pasamos a la pestaña _Action_, en esta seleccionamos __mark packet__ en el apartado de _Action_, definimos un nombre que nosotros queramos en el apartado de _New Packet Mark_ y marcamos el _Passthrough_.Aplicamos y ok.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+Ahora pasamos a crear las reglas de Firewall, entonces en la ventana de Firewall vamos a la pestaña de _Filter Rules_  y creamos dos reglas cuya _Action_ será __drop__, y en la pestaña _General_ en el apartado de _Packet Market_ seleccionamos el nombre que definimos en la segunda regla de mangle que usamos para definir los paquetes marcados.
+La única diferencia de estas dos reglas será en el apartado _Chain_ donde uno hará referencia a la cadena __forward__ para prohibir las peticiones que coincidan con la definición de L7 señalada , y la otra regla hace referencia a la cadena  __Input__ porque en casos normales el router hace  las veces de DNS para la red.
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+
+![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
 
