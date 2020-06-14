@@ -280,7 +280,7 @@ En este caso se insertó la siguiente expresion regular:
 La idea será bloquear las paginas que vienen definidas en la expresión regular.
 Aplicamos y Ok.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Definiendo los Protocolos L7](ImagenesPI/PIFase3/L7.PNG "Definiendo los Protocolos L7")
 
 Nuestro siguiente paso será estando en la ventana de _Firewall_ ir a la pestaña de _Mangle_. 
 Una vez aquí crearemos dos reglas.
@@ -290,18 +290,24 @@ en el apartado de _Dst.Port_ escribimos __53__ y en el apartado de _Connection M
 Ahora pasamos a la pestaña de Advanced, aquie solo debemos ir al aparatado de _Layer 7 Protocol_ y selecionar el protocolo que definimos anteriormente en Layer7, si tenemos varios pues seleccionamos el que nos interese, ya que podemos crear todos los protocolos de layer7 que queramos según nuestras necesidades.
 Luego pasamos a la pestaña de _Action_, en ella seleccionamos __mark connection__ en el apartado de _Action_, en _New Connection Mark_  definimos un nombre que nosotros queramos y el _Passthough_ lo dejamos marcado para que pase a la siguiente regla. Aplicamos y OK.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Configurar regla mangle pestaña general ](ImagenesPI/PIFase3/L7manglegeneral.PNG "Configurar regla mangle pestaña general")
+
+![Configurar regla mangle pestaña advanced](ImagenesPI/PIFase3/L7mangleadvanced.PNG "Configurar regla mangle pestaña advanced")
+
+![Configurar regla mangle pestaña action](ImagenesPI/PIFase3/L7mangleaction.PNG "Configurar regla mangle pestaña action")
 
 Ahora crearemos la otra regla para marcar los paquetes que provengan de las conexiones marcadas de la anterior regla.
 Estando en la pestaña _General_ tan solo seleccionamos __prerouting__ en el apartado de _chain_ y en _Connection Mark_ seleccionamos el nombre que definimos en la anterior regla para las conexiones marcadas.
 Luego pasamos a la pestaña _Action_, en esta seleccionamos __mark packet__ en el apartado de _Action_, definimos un nombre que nosotros queramos en el apartado de _New Packet Mark_ y marcamos el _Passthrough_.Aplicamos y ok.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Configurar segunda regla mangle pestaña general](ImagenesPI/PIFase3/L7manglegeneral2.PNG "Configurar segunda regla mangle pestaña general")
+
+![Configurar segunda regla mangle pestaña action](ImagenesPI/PIFase3/L7mangleaction2.PNG "Configurar segunda regla mangle pestaña action")
 
 Ahora pasamos a crear las reglas de Firewall, entonces en la ventana de Firewall vamos a la pestaña de _Filter Rules_  y creamos dos reglas cuya _Action_ será __drop__, y en la pestaña _General_ en el apartado de _Packet Market_ seleccionamos el nombre que definimos en la segunda regla de mangle que usamos para definir los paquetes marcados.
 La única diferencia de estas dos reglas será en el apartado _Chain_ donde uno hará referencia a la cadena __forward__ para prohibir las peticiones que coincidan con la definición de L7 señalada , y la otra regla hace referencia a la cadena  __Input__ porque en casos normales el router hace  las veces de DNS para la red.
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Configurar regla firewall pestaña general ](ImagenesPI/PIFase3/L7firewallgeneral.PNG "Configurar regla firewall pestaña general")
 
-![Fase2](ImagenesPI/PIFase3/Fase2.PNG "")
+![Configurar regla firewall pestaña action](ImagenesPI/PIFase3/L7firewallaction.PNG "Configurar regla firewall pestaña action")
 
