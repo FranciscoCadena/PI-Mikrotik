@@ -27,4 +27,5 @@
 - Comprobar que el programa para que lleguen correos automaticamente segun el tiempo especificado funciona correctamente.
 - Comprobar que Suricata funciona, creando una regla manualmente, que recoja todos los icmp, y ver si lo capta los archivos log.
 - Comprobar que Suricata recibe los paquetes enviados por Mikrotik con la regla mangle, usando en mikrotik una regla que de alertas con todos los icmp.
+- Comprobar el funcionamiento de Layer 7, para ello se verá si se bloquea las páginas que se definieron en el protocolo de layer 7 dentro de Firewall, pero seguimos teniendo acceso a internet a páginas que no definimos que se bloquearan.
 
