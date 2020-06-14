@@ -1,5 +1,12 @@
 # Seguridad
 
+En este apartado se explicara la configuración de:
+- Port Knocking
+- Envio de correo 
+- Envio de backup por correo
+- Envio de archivos log por cooreo
+- Layer 7
+
 Según el diagrama siguiente vamos a explicar como configurar el __Port Knocking__.
 
 ![Topografía de red con gns3 para Port Knocking](ImagenesPI/PIFase3/topografia1.PNG "Topografía de red con gns3 para Port Knocking")
