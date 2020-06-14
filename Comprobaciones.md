@@ -443,8 +443,22 @@ Hacemos ping al anterior equipo cuya ip es _192.168.20.3_.
 
 ![ping al otro equipo de gns3](ImagenesPI/Suricata/suricataprueba8.PNG "ping al otro equipo de gns3")
 
+## Comprobar funcionamiento de Layer 7
 
+Para comprobar el funcionamiento de layer 7 se harán capturas de imágenes donde en el lado izquierdo tendremos el router con la pestaña de mangle el cual se podrá ver como aumenta el contador de paquetes en las 2 reglas mangles que se crearon para tal fin.
+Y en el lado derecho se tendrá un equipo Ubuntu navegando por internet, en cual intentara entrar en la página youporn y facebook las cuales están bloqueadas y no tendrá acceso, pero si podrá entrar en otra que no esté definida en layer 7 como por ejemplo la página de marca.
 
+Intentando entrar en youporn.
+
+![Bloqueo a youporn](ImagenesPI/PIFase3/L7filter.PNG "Bloqueo a youporn")
+
+Intentando entrar en facebook, aumento de contadores de las reglas mangle, las cuales están subrayadas para diferenciarlas de las demás.
+
+![Bloqueo a facebook](ImagenesPI/PIFase3/L7filter2.PNG "Bloqueo a facebook")
+
+Intento de entrar en marca.
+
+![Permitido marca](ImagenesPI/PIFase3/L7filter3.PNG "Permitido marca")
 
 
 
