@@ -5,7 +5,7 @@ Este proyecto se basa en Mikrotik, una empresa Europea que trabaja en temas de t
 
 En el proyecto se dará a conocer el sistema operativo que usa Mikrotik para configurar sus router llamado RouterOS y una herramienta que se usa habitualmente para configurar el router de manera gráfica llamado Winbox. 
 
-Todo este proceso se realizará de manera práctica donde desarrollaremos una topografía de red que podría usar una pequeña empresa de manera virtual, en la cual enseñaremos a configurar métodos básicos para la creación de una red y profundizando más en temas de Seguridad y Alta disponibilidad.
+Todo este proceso se realizará de manera práctica donde desarrollaremos una topografía de red que podría usar una empresa de manera virtual, en la cual enseñaremos a configurar métodos básicos para la creación de una red y profundizando más en temas de Seguridad y Alta disponibilidad.
 
 __La estructura del documento es la siguiente__
 - [Recursos](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Recursos.md) (donde se comenta las herramientas usadas para poder desarrollar el proyecto)
