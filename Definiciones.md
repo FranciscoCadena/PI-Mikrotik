@@ -60,4 +60,23 @@ Algunos programas que usan pcap:
 - Nmap
 - tcpdump
 
+## Metodo PCC Matcher para el balanceo de carga
+
+Permitirá dividir el tráfico en flujos iguales con la capacidad de mantener paquetes con un conjunto específico de opciones en un flujo particular (puede especificar este conjunto de opciones desde src-address, src-port, dst-address, dst-port)
+
+PCC toma los campos seleccionados del encabezado IP y, con la ayuda de un algoritmo hash, convierte los campos seleccionados en un valor de 32 bits. Este valor se divide por un Denominador especificado y el resto se compara con un Remanente especificado , si es igual, se capturará el paquete. 
+
+## VRRP
+
+Virtual Router Redundancy Protocol (VRRP) es un protocolo de comunicaciones no propietario definido en el RFC 3768 diseñado para aumentar la disponibilidad de la puerta de enlace por defecto dando servicio a máquinas en la misma subred. El aumento de fiabilidad se consigue mediante el anuncio de un router virtual como una puerta de enlace por defecto en lugar de un router físico. Dos o más routers físicos se configuran representando al router virtual, con sólo uno de ellos realizando realmente el enrutamiento. Si el router físico actual que está realizando el enrutamiento falla, el otro router físico negocia para sustituirlo. Se denomina router maestro al router físico que realiza realmente el enrutamiento y routers de respaldo a los que están en espera de que el maestro falle.
+
+## Protocol Layer 7
+
+El protocolo layer7 es un método de búsqueda de patrones en flujos ICMP / TCP / UDP.
+Funciona por medio de patrones pre-establecidos en la capa de Aplicación del modelo OSI.
+
+L7 matcher recopila los primeros 10 paquetes de una conexión o los primeros 2 KB de una conexión y busca el patrón en los datos recopilados. Si el patrón no se encuentra en los datos recopilados, el comparador deja de inspeccionar más. La memoria asignada se libera y el protocolo se considera desconocido . Debe tener en cuenta que muchas conexiones aumentarán significativamente el uso de memoria y CPU.
+
+El requisito adicional es que el emparejador de capa 7 debe ver ambas direcciones de tráfico (entrante y saliente). Para cumplir este requisito, las reglas deben establecerse en cadena hacia adelante . Si la regla se encuentra en entrada / prerouting cadena entonces la misma regla debe ser también situado en la salida / POSTROUTING cadena, de lo contrario los datos recogidos no puede ser completo que resulta en un patrón incorrectamente emparejado.
+
 
