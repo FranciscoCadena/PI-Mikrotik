@@ -32,7 +32,8 @@ __En esta fase se implementara lo siguiente__
 - Se implementa el Port knocking en ambos routers, para darle una capa de seguridad frente a quienes quieran conectar remotamente al router, usando un código de puertos.
 - Se configuraran ambos router para que nos envíen correo cuando se detecte errores o cualquier anomalía que nosotros queramos que se nos sea avisado, también se configurara el correo para que en una determinada hora de cada día nos mande un backup de la configuración de los router.
 - Se configurara Mikrotik para que le envié todos los paquetes que atraviesen el router a un equipo con Suricata instalado como IDS.
-- Se monta un sistema Kali, para simular que a entrado a nuestro router y realiza un escaneo de red con nmap, para comprobar si Suricata lo detecta.
+- Se monta un sistema Kali, para simular que alguien a entrado a nuestro router y realiza un escaneo de red con nmap, para comprobar si Suricata lo detecta.
+- Se configura el protocolo de Layer 7 para filtrar varias paginas y no tener acceso a estas.
 
 Todo esto estara en los archivos de [Suricata-Mikrotik](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Suricata_Mikrotik.md) y en el de [configuración de Herramientas de Seguridad](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_Herramientas_Seguridad.md).
 
