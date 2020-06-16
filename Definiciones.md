@@ -79,4 +79,12 @@ L7 matcher recopila los primeros 10 paquetes de una conexión o los primeros 2 K
 
 El requisito adicional es que el emparejador de capa 7 debe ver ambas direcciones de tráfico (entrante y saliente). Para cumplir este requisito, las reglas deben establecerse en cadena hacia adelante . Si la regla se encuentra en entrada / prerouting cadena entonces la misma regla debe ser también situado en la salida / POSTROUTING cadena, de lo contrario los datos recogidos no puede ser completo que resulta en un patrón incorrectamente emparejado.
 
+## ISP 
 
+El proveedor de servicios de Internet, (ISP, por las siglas en inglés de Internet service provider) es la empresa que brinda conexión a Internet a sus clientes. Un ISP conecta a sus usuarios a Internet a través de diferentes tecnologías como ADSL, cablemódem, GSM, dial-up, etc.
+
+## CGNAT (Carrier-Grade NAT o NAT444)
+
+La idea es utilizar el espacio de direcciones compartido 100.64.0.0/10 dentro de la red del operador y realizar NAT en el enrutador de borde del operador para indicar IP pública o rango de IP pública. Lo que ocurre es que en lugar de hacer una vez NAT, hacen NAT dos veces.
+
+![Diagrama de ejemplo de cgnat](imagenesGNS3/GNSFase3/CGNAT.PNG "Diagrama de ejemplo de cgnat")
