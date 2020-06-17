@@ -23,7 +23,7 @@ __En esta parte implementaremos algunos tecnologias para que nuestra red tanga m
 - Se implementara un ancho de banda en la red LAN 2 puesto que tienen salida a internet, para ver como se configura y como funciona.
 - Se implementara un balanceo de Carga para la DMZ.
 
-Todo este apartado estara en el documento de [configuración de Herramientas que aportan Alta Disponibilidad](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_Herramientas_Alta_Disponibilida.md).
+Todo este apartado estara en el documento de [configuración de Herramientas que aportan Alta Disponibilidad](./Configuración_Herramientas_Alta_Disponibilida.md).
 
 ## La tercera fase principalmente consistirá en montar un IDS
 ![Fase 3 de Red](./ImagenesPI/PIFase3/FASE3.PNG "Topografia de Red de la Fase3")
@@ -35,5 +35,7 @@ __En esta fase se implementara lo siguiente__
 - Se monta un sistema Kali, para simular que alguien a entrado a nuestro router y realiza un escaneo de red con nmap, para comprobar si Suricata lo detecta.
 - Se configura el protocolo de Layer 7 para filtrar varias paginas y no tener acceso a estas.
 
-Todo esto estara en los archivos de [Suricata-Mikrotik](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Suricata_Mikrotik.md) y en el de [configuración de Herramientas de Seguridad](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_Herramientas_Seguridad.md).
+Todo esto estara en los archivos de [Suricata-Mikrotik](./Suricata_Mikrotik.md) y en el de [configuración de Herramientas de Seguridad](./Configuración_Herramientas_Seguridad.md).
+
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
 
