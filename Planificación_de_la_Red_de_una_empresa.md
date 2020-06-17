@@ -17,6 +17,8 @@ __En la cual se configurara los siguientes aspectos__
 
 Todo este apartado estara en el documento de [configuracion de una red empresarial](./Configuración_básica_de_la_Red.md).
 
+Configuración de Fase 1 con GNS3: [enlace](./Fase1_GNS3.md),
+
 ## La segunda fase tendrá algunos cambios en la topografía de red respecto a la anterior como se ve en la siguiente imagen.
 ![Fase 2 de Red](./ImagenesPI/PIFase2/Fase2.PNG "Topografia de Red de la Fase2")
 
@@ -27,6 +29,8 @@ __En esta parte implementaremos algunos tecnologias para que nuestra red tanga m
 - Se implementara un balanceo de Carga para la DMZ.
 
 Todo este apartado estara en el documento de [configuración de Herramientas que aportan Alta Disponibilidad](./Configuración_Herramientas_Alta_Disponibilida.md).
+
+Configuración de Fase 2 con GNS3: [enlace](./Fase2_GNS3.md).
 
 ## La tercera fase principalmente consistirá en montar un IDS
 ![Fase 3 de Red](./ImagenesPI/PIFase3/FASE3.PNG "Topografia de Red de la Fase3")
@@ -39,6 +43,8 @@ __En esta fase se implementara lo siguiente__
 - Se configura el protocolo de Layer 7 para filtrar varias paginas y no tener acceso a estas.
 
 Todo esto estara en los archivos de [Suricata-Mikrotik](./Suricata_Mikrotik.md) y en el de [configuración de Herramientas de Seguridad](./Configuración_Herramientas_Seguridad.md).
+
+Configuración de Fase 3 con GNS3: [enlace](./Fase3_GNS3.md).
 
 [Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
 
