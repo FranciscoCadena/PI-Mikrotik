@@ -1,0 +1,20 @@
+theme: jekyll-theme-time-machine
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - Fase1_GNS3.md
+  - Fase2_GNS3.md
+  - Fase3_GNS3.md
+  - Lista_de_Pruebas.md
+  - README.md
+  - Recursos.md
+  - Suricata_Mikrotik.md
+  - Comprobaciones.md
+  - Definiciones.md
+  - Planificación_de_la_Red_de_una_empresa.md
+  - Configuración_Herramientas_Alta_Disponibilida.md
+  - Configuración_básica_de_la_Red.md
+  - Configuración_Herramientas_Seguridad.md
