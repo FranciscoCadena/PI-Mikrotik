@@ -17,7 +17,7 @@ __En la cual se configurara los siguientes aspectos__
 
 Todo este apartado estara en el documento de [configuracion de una red empresarial](./Configuración_básica_de_la_Red.md).
 
-Configuración de Fase 1 con GNS3: [enlace](./Fase1_GNS3.md),
+Configuración de Fase 1 con GNS3: [enlace](./Fase1_GNS3.md).
 
 ## La segunda fase tendrá algunos cambios en la topografía de red respecto a la anterior como se ve en la siguiente imagen.
 ![Fase 2 de Red](./ImagenesPI/PIFase2/Fase2.PNG "Topografia de Red de la Fase2")
