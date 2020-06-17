@@ -211,6 +211,7 @@ También podemos configurar el router Mikrotik para que nos envíe automáticame
 Para ello usaremos los siguientes scripts.
 
 Backup Binario
+
 ~~~
 /system script add name=respaldo_binario source={/system backup save name=([/system identity get name] . "-" . \
 [:pick [/system clock get date] 7 11] . [:pick [/system clock get date] 0 3] . [:pick [/system clock get date] 4 6]); \
@@ -222,7 +223,10 @@ Backup Binario
 :log info ("System Backup emailed at " . [/sys cl get time] . " " . [/sys cl get date])}
 ~~~
 
+
+
 Backup Export
+
 ~~~
 /system script add name=respaldo_export source={/export file=([/system identity get name] . "-" . \
 [:pick [/system clock get date] 7 11] . [:pick [/system clock get date] 0 3] . [:pick [/system clock get date] 4 6]); \
