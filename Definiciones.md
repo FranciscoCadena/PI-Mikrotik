@@ -1,3 +1,5 @@
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
+
 # Definiciones
 
 ## Drop vs Reject
@@ -96,3 +98,6 @@ La pasarela (en inglés gateway ) o puerta de enlace es el dispositivo que actú
 Su propósito es traducir la información del protocolo utilizado en una red inicial, al protocolo usado en la red de destino.
 
 La pasarela es normalmente un equipo informático configurado para dotar a las máquinas de una red de área local (Local Area Network, LAN) conectadas a él de un acceso hacia una red exterior, generalmente realizando para ello operaciones de traducción de direcciones de red (Network Address Translation, NAT). Esta capacidad de traducción de direcciones permite aplicar una técnica llamada enmascaramiento de IP , usada muy a menudo para dar acceso a Internet a los equipos de una LAN compartiendo una única conexión a Internet, y por tanto, una única dirección IP externa.
+
+
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
