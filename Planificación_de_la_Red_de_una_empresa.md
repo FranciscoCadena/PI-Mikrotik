@@ -1,6 +1,6 @@
 # La planificación se realizara en diferentes fases
 ## La primera fase sera montar una topografia de red como en la siguiente imagen.
-![Fase 1 de Red](https://franciscocadena.github.io/PI-Mikrotik/ImagenesPI/FASE1.PNG "Topografia de Red de la Fase1")
+![Fase 1 de Red](./ImagenesPI/FASE1.PNG "Topografia de Red de la Fase1")
 
 __En la cual se configurara los siguientes aspectos__
 - DHCP tanto cliente como servidor
@@ -15,7 +15,7 @@ __En la cual se configurara los siguientes aspectos__
 Todo este apartado estara en el documento de [configuracion de una red empresarial](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_b%C3%A1sica_de_la_Red.md).
 
 ## La segunda fase tendrá algunos cambios en la topografía de red respecto a la anterior como se ve en la siguiente imagen.
-![Fase 2 de Red](https://franciscocadena.github.io/PI-Mikrotik/ImagenesPI/PIFase2/Fase2.PNG "Topografia de Red de la Fase2")
+![Fase 2 de Red](./ImagenesPI/PIFase2/Fase2.PNG "Topografia de Red de la Fase2")
 
 __En esta parte implementaremos algunos tecnologias para que nuestra red tanga mayor disponibilidad__
 - Se implementará un Failover de líneas de respaldo para ambos router con los dos ISP, para cuando uno de ellos falle, automáticamente tire por el otro.
