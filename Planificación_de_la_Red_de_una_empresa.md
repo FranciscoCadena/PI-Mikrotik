@@ -12,7 +12,7 @@ __En la cual se configurara los siguientes aspectos__
 - Creación de vpn entre dos router de diferentes redes con IPsec.
 - Crear reglas básicas de NAT en el firewall, como enmascaramiento.
 
-Todo este apartado estara en el documento de [configuracion de una red empresarial](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_b%C3%A1sica_de_la_Red.md).
+Todo este apartado estara en el documento de [configuracion de una red empresarial](./Configuración_básica_de_la_Red.md).
 
 ## La segunda fase tendrá algunos cambios en la topografía de red respecto a la anterior como se ve en la siguiente imagen.
 ![Fase 2 de Red](./ImagenesPI/PIFase2/Fase2.PNG "Topografia de Red de la Fase2")
