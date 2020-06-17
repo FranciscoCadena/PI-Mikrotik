@@ -130,7 +130,7 @@ Para ello desde el menú izquierdo debemos ir a __IP → Firewall__, una vez aqu
 
 En la nueva ventana estando en la pestaña de __general__, debemos asegurarnos que donde dice _chain_ este __srcnat__ que es lo mismo que source nat, y en out interface debe ser la __WAN__.  
 
-![srcnat](/ImagenesPI/srcnat.PNG "srcnat")
+![srcnat](/ImagenesPI/scrnat.PNG "srcnat")
 
 Seguidamente vamos a la pestaña de Action, y donde dice Action debemos seleccionar masquerade.
 
