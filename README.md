@@ -20,7 +20,7 @@ __La estructura del documento es la siguiente__
 - Fase 3: [Uso de Suricata como IDS junto a Mikrotik](./Suricata_Mikrotik.md) (donde se vera la Instalación de Suricata y los metodos de configuración para que Mikrotik le envie los paquetes a Suricata y trabaje como IDS)
 - [Fase 3 con gns3](./Fase3_GNS3.md) (en donde se verá la imagen de la topografía final virtualizada con gns3 y los script de la configuración de cada router).
 - [Lista de pruebas](./Lista_de_Pruebas.md) (listado de pruebas que se realizarán para comprobar que todo funciona correctamente) 
-- [Comprobaciones](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Comprobaciones.md) (comprobaciones, basándonos en la lista de pruebas para confirmar el funcionamiento de nuestra configuración)
+- [Comprobaciones](./Comprobaciones.md) (comprobaciones, basándonos en la lista de pruebas para confirmar el funcionamiento de nuestra configuración)
 - [Definiciones](./Definiciones.md) (en donde se explicara algunas de las herrameintas usadas, protocolos, y otros conceptos).
 
 
