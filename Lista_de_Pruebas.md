@@ -1,6 +1,8 @@
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
+
 # Listado de Pruebas
 
-Esto es un listado de pruebas a realizar para comprobar de que las configuraciones realizadas trabajan correctamente, estas comprobaciones se pueden ver en el documento de [Comprobaciones](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Comprobaciones.md)
+Esto es un listado de pruebas a realizar para comprobar de que las configuraciones realizadas trabajan correctamente, estas comprobaciones se pueden ver en el documento de [Comprobaciones](./Comprobaciones.md)
 
 ## Fase 1
 
@@ -30,4 +32,6 @@ Esto es un listado de pruebas a realizar para comprobar de que las configuracion
 - Comprobar que Suricata funciona, creando una regla manualmente, que recoja todos los icmp, y ver si lo capta los archivos log.
 - Comprobar que Suricata recibe los paquetes enviados por Mikrotik con la regla mangle, usando en mikrotik una regla que de alertas con todos los icmp.
 - Comprobar el funcionamiento de Layer 7, para ello se verá si se bloquea las páginas que se definieron en el protocolo de layer 7 dentro de Firewall, pero seguimos teniendo acceso a internet a páginas que no definimos que se bloquearan.
+
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
 
