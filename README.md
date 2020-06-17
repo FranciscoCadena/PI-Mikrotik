@@ -1,5 +1,7 @@
 # PI-Mikrotik
+
 Proyecto Integrado ASIR Mikrotik
+
 ## Introducción
 Este proyecto se basa en Mikrotik, una empresa Europea que trabaja en temas de telecomunicaciones y redes, también aporta soluciones a la hora de crear una red ofreciendo sus propios productos con diversidad de router y switches tanto de gama baja como de gama alta, pudiendo adaptarse a las medidas económicas de cada empresa, y si eso no es suficiente también tiene un sistema operativo propio para que pueda implementarse en un pc.
 
