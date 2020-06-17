@@ -26,7 +26,7 @@ __En esta parte implementaremos algunos tecnologias para que nuestra red tanga m
 Todo este apartado estara en el documento de [configuración de Herramientas que aportan Alta Disponibilidad](https://github.com/FranciscoCadena/PI-Mikrotik/blob/master/Configuraci%C3%B3n_Herramientas_Alta_Disponibilida.md).
 
 ## La tercera fase principalmente consistirá en montar un IDS
-![Fase 3 de Red](/ImagenesPI/PIFase3/FASE3.PNG "Topografia de Red de la Fase3")
+![Fase 3 de Red](./ImagenesPI/PIFase3/FASE3.PNG "Topografia de Red de la Fase3")
 
 __En esta fase se implementara lo siguiente__
 - Se implementa el Port knocking en ambos routers, para darle una capa de seguridad frente a quienes quieran conectar remotamente al router, usando un código de puertos.
