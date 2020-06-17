@@ -1,8 +1,10 @@
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
+
 # Fase 3 con GNS3
 
 En este apartado se muestra con la siguiente imagen como se a virtualizado la Fase 3 con GNS3 que se encuentra en el documento de planificación de red empresarial.
 
-![Virtualización en GNS3 de la Fase 3](imagenesGNS3//GNSFase3/gns3fase3.PNG "Virtualización en GNS3 de la Fase 3")
+![Virtualización en GNS3 de la Fase 3](./imagenesGNS3//GNSFase3/gns3fase3.PNG "Virtualización en GNS3 de la Fase 3")
 
 Esta vez en vez de mostrar las imágenes de la configuración final de cada router por winbox, se pasará los script de la configuración, para realizarla desde la terminal.
 
@@ -726,3 +728,4 @@ set name=Switch-LAN1
 set enabled=yes
 ~~~
 
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
