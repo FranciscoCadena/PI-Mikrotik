@@ -1,4 +1,7 @@
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
+
 # La planificación se realizara en diferentes fases
+
 ## La primera fase sera montar una topografia de red como en la siguiente imagen.
 ![Fase 1 de Red](./ImagenesPI/FASE1.PNG "Topografia de Red de la Fase1")
 
