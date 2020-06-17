@@ -97,10 +97,14 @@ sudo tail /var/log/suricata/suricata.log
 ![Información de suricata.log](./ImagenesPI/Suricata/suricatalog.PNG "Información de suricata.log")
 
 La linea mas importante de todo lo que nos muestra es la siguiente.
+
+~~~
 <Notice> - all 4 packet processing threads, 4 management threads initialized, engine started.
 La cantidad de __threads(hilos)__ dependera del sistema y su configuración.  
- 
+~~~
+
 ### OPCIONAL
+
 Una vez que comprobamos que suricata está instalado y corriendo, vamos a actualizar las fuentes, para ello ejecutamos.
 ~~~
 sudo suricata-update update-sources
