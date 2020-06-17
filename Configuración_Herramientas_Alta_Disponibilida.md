@@ -1,3 +1,5 @@
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
+
 # En este apartado se explicara como configurar algunas herramientas que aporten Alta Disponibilidad a nuestra Red.
 
 En donde se verán lo siguiente:
@@ -9,7 +11,7 @@ En donde se verán lo siguiente:
  
 Para ello nos guiaremos de la siguiente topografia.
 
-![Topografia sencilla para HA](ImagenesPI/PIFase2/Fase2-2.PNG "Topografia sencilla para HA")
+![Topografia sencilla para HA](./ImagenesPI/PIFase2/Fase2-2.PNG "Topografia sencilla para HA")
 
 Los router __ISP__ no serían necesario tocarlos puesto que la ip nos la debería dar nuestro proveedor de internet, pero como esto es una virtualización explicaremos brevemente qué tipo de configuración básica le daremos.
  
@@ -17,19 +19,19 @@ Solo definiremos que tendrá tres interfaces uno que dé a internet, la cual ten
 
 Comencemos definiendo las interfaces del ISP, y a donde irá cada una.
  
-![Interfaces del ISP](ImagenesPI/PIFase2/isp2interface.PNG "Interfaces del ISP")
+![Interfaces del ISP](./ImagenesPI/PIFase2/isp2interface.PNG "Interfaces del ISP")
  
 Seguiremos dándole ip dinámica a la interfaz WAN, para ello como siempre iremos a __ip →  dhcp__ cliente y definimos la regla para la WAN.
 
-![Dhcp cliente de ISP](ImagenesPI/PIFase2/isp2dhcpcliente.PNG "Dhcp cliente de ISP")
+![Dhcp cliente de ISP](./ImagenesPI/PIFase2/isp2dhcpcliente.PNG "Dhcp cliente de ISP")
 
 Ahora daremos direccionamiento a las otras dos interfaces que irán a los dos router que se encuentran en la empresa, estas ip serán estáticas con lo que no crearemos un servicio de dhcp, y seran /30.
  
-![IP configuradas de ISP](ImagenesPI/PIFase2/isp2ips.PNG "IP configuradas de ISP")
+![IP configuradas de ISP](./ImagenesPI/PIFase2/isp2ips.PNG "IP configuradas de ISP")
 
 Definimos los servidores DNS y marcamos la casilla de __Allow Remote Request__.
 
-![DNS del ISP](ImagenesPI/PIFase2/isp2dns.PNG "DNS del ISP")
+![DNS del ISP](./ImagenesPI/PIFase2/isp2dns.PNG "DNS del ISP")
 
 Por último creamos el enmascaramiento en NAT.
 
@@ -45,7 +47,7 @@ Todos estos pasos los realizaremos en ambos router ISP, teniendo precaución de 
  
 Una buena práctica a la hora de trabajar con varios router y poder diferenciarlos es darles un nombre o identificador, para ello vamos al menú izquierdo donde dice __System → Identity__, en esta ventana podemos darle un nombre al router para poder definirlo.
 
-![Nombrar al Router](ImagenesPI/PIFase2/identity.PNG "Nombrar al Router")
+![Nombrar al Router](./ImagenesPI/PIFase2/identity.PNG "Nombrar al Router")
 
 Como siempre lo primero que haremos sera la configuracion basica del router, definiendo las interfaces, el direccionamiento de cada interfaz, el dns, y el servicio dhcp, pero en este caso no será necesario.
 
@@ -55,25 +57,25 @@ Por ello solo dejaremos las imágenes de cómo quedaría la configuración de am
 
 Interfaces
 
-![Interfaces configuradas](ImagenesPI/PIFase2/masterinterface.PNG "Interfaces configuradas")
+![Interfaces configuradas](./ImagenesPI/PIFase2/masterinterface.PNG "Interfaces configuradas")
 
 Ips
 
-![IP configuradas](ImagenesPI/PIFase2/masterips.PNG "IP configuradas")
+![IP configuradas](./ImagenesPI/PIFase2/masterips.PNG "IP configuradas")
 
 DNS
 
-![DNS configurado](ImagenesPI/PIFase2/masterdns.PNG "DNS configurado")
+![DNS configurado](./ImagenesPI/PIFase2/masterdns.PNG "DNS configurado")
 
 NAT, como tenemos dos WAN debermos crear dos reglas de NAT una por cada WAN
 
-![Nat de ambas Wan configurada](ImagenesPI/PIFase2/masternat.PNG "Nat de ambas Wan configurada")
+![Nat de ambas Wan configurada](./ImagenesPI/PIFase2/masternat.PNG "Nat de ambas Wan configurada")
 
 ### Backup
 
 Ips
 
-![IP configuradas](ImagenesPI/PIFase2/slaveips.PNG "IP configuradas")
+![IP configuradas](./ImagenesPI/PIFase2/slaveips.PNG "IP configuradas")
 
 
 ## Failover Rutas de Respaldo
@@ -86,7 +88,7 @@ En esta ventana definimos:
 - __Check Gateway__ ping (con esto validará haciendo ping al gateway de que este funciona y hay conexión a el)
 - __Distance__ 1 (con el 1 definimos que será la principal)
 
-![Configurar ruta principal](ImagenesPI/PIFase2/master-route1.PNG "Configurar ruta principal")
+![Configurar ruta principal](./ImagenesPI/PIFase2/master-route1.PNG "Configurar ruta principal")
 
 El resto podemos dejarlo por defecto.
  
@@ -96,7 +98,7 @@ Una vez creada esta regla, pasamos a crear la siguiente, con los siguientes par�
 - __Check Gateway__ ping (con esto validará haciendo ping al gateway de que este funciona y hay conexión a el)
 - __Distance__ 2 (con el 2 definimos que será la secundaria o backup)
 
-![Configurar ruta de respaldo](ImagenesPI/PIFase2/master-route2.PNG "Configurar ruta de respaldo")
+![Configurar ruta de respaldo](./ImagenesPI/PIFase2/master-route2.PNG "Configurar ruta de respaldo")
  
 Como vemos la única diferencia con respecto a la anterior ha sido que hemos definido el otro gateway que corresponderá al otro ISP, será el secundario o ruta de respaldo, definido en Distance como 2.
 
@@ -121,19 +123,19 @@ En la ventana que nos aparece en la pestaña de _General_ tan solo definimos el 
 
 El resto de parámetros lo podemos dejar por defecto.
 
-![Vrrp1 pestaña Vrrp del router maestro](ImagenesPI/PIFase2/mastervrrp1.PNG "Vrrp1 pestaña Vrrp del router maestro")
+![Vrrp1 pestaña Vrrp del router maestro](./ImagenesPI/PIFase2/mastervrrp1.PNG "Vrrp1 pestaña Vrrp del router maestro")
 
-![Vrrp1 pestaña General del router maestro](ImagenesPI/PIFase2/mastervrrp1_1.PNG "Vrrp1 pestaña General del router maestro")
+![Vrrp1 pestaña General del router maestro](./ImagenesPI/PIFase2/mastervrrp1_1.PNG "Vrrp1 pestaña General del router maestro")
 
 Como en este ejemplo de Red tenemos 2 redes estáticas, creamos otro vrrp, donde solo deberemos modificar el nombre, la interfaz que ahora será LAN2 y el VRID  a 20 por ejemplo, quedando como en la siguiente imagen.
 
-![Vrrp2 pestaña Vrrp del router maestro](ImagenesPI/PIFase2/mastervrrp2.PNG "Vrrp2 pestaña Vrrp del router maestro")
+![Vrrp2 pestaña Vrrp del router maestro](./ImagenesPI/PIFase2/mastervrrp2.PNG "Vrrp2 pestaña Vrrp del router maestro")
 
-![Vrrp2 pestaña General del router maestro](ImagenesPI/PIFase2/mastervrrp2_1.PNG "Vrrp2 pestaña General del router maestro")
+![Vrrp2 pestaña General del router maestro](./ImagenesPI/PIFase2/mastervrrp2_1.PNG "Vrrp2 pestaña General del router maestro")
 
 Una vez creadas ambas vrrp podemos ver como quedan en el apartado de interfaces.
 
-![Interfaces con los vrrp configurados](ImagenesPI/PIFase2/mastervrrpinterfaces.PNG "Interfaces con los vrrp configurados")
+![Interfaces con los vrrp configurados](./ImagenesPI/PIFase2/mastervrrpinterfaces.PNG "Interfaces con los vrrp configurados")
 
 Las siglas de la izquierda de __RM__ hacen referencia a _R → running y M → master_.
 Esto aparecerá una vez que esté ambos router configurados.
@@ -141,7 +143,7 @@ Esto aparecerá una vez que esté ambos router configurados.
 El siguiente paso será darle ip a ambos vrrp, como siempre para ello vamos al menú izquierdo IP → Address, símbolo del (+).
 En la ventana seleccionamos uno de los vrrp creados y le damos una ip dentro del rango de la red, con la precaución de que debe terminar en /32.
 
-![IP configuradas en los dos vrrp](ImagenesPI/PIFase2/mastervrrpips.PNG "IP configuradas en los dos vrrp")
+![IP configuradas en los dos vrrp](./ImagenesPI/PIFase2/mastervrrpips.PNG "IP configuradas en los dos vrrp")
 
 Hacemos el mismo procedimiento para el otro vrrp, definiendo una ip que corresponda a su red ya que cada vrrp que hemos creado es para una LAN diferente.
 
@@ -149,21 +151,21 @@ Hacemos el mismo procedimiento para el otro vrrp, definiendo una ip que correspo
 
 Como hicimos con el router master, lo primero será crear los vrrp para cada LAN, donde lo único que cambiaremos será la interfaz y la prioridad, dejando el mismo VRID, quedando ambos router como se muestra en las siguientes imágenes.
 
-![Vrrp1 pestaña Vrrp del router backup](ImagenesPI/PIFase2/slavevrrp1.PNG "Vrrp1 pestaña Vrrp del router backup")
+![Vrrp1 pestaña Vrrp del router backup](./ImagenesPI/PIFase2/slavevrrp1.PNG "Vrrp1 pestaña Vrrp del router backup")
 
-![Vrrp1 pestaña General del router backup](ImagenesPI/PIFase2/slavevrrp1_1.PNG "Vrrp1 pestaña General del router backup")
+![Vrrp1 pestaña General del router backup](./ImagenesPI/PIFase2/slavevrrp1_1.PNG "Vrrp1 pestaña General del router backup")
 
-![Vrrp2 pestaña Vrrp del router backup](ImagenesPI/PIFase2/slavevrrp2.PNG "Vrrp2 pestaña Vrrp del router backup")
+![Vrrp2 pestaña Vrrp del router backup](./ImagenesPI/PIFase2/slavevrrp2.PNG "Vrrp2 pestaña Vrrp del router backup")
 
-![Vrrp2 pestaña General del router backup](ImagenesPI/PIFase2/slavevrrp2_2.PNG "Vrrp2 pestaña General del router backup")
+![Vrrp2 pestaña General del router backup](./ImagenesPI/PIFase2/slavevrrp2_2.PNG "Vrrp2 pestaña General del router backup")
 
 Una vez creado ambos vrrp, en la parte de interfaces podemos observar como ya están creadas y que aparece a la izquierda la sigla __B__ haciendo referencia  _B → backup_.
 
-![Interfaces con los vrrp configurados](ImagenesPI/PIFase2/slavevrrpinterface.PNG "Interfaces con los vrrp configurados")
+![Interfaces con los vrrp configurados](./ImagenesPI/PIFase2/slavevrrpinterface.PNG "Interfaces con los vrrp configurados")
 
 El siguiente paso será darle las ip a ambos vrrp. donde deberán coincidir las ip de esos con las que usamos en el router master, quedando de la siguiente manera.
 
-![IP configuradas en los dos vrrp](ImagenesPI/PIFase2/slavevrrpips.PNG "IP configuradas en los dos vrrp")
+![IP configuradas en los dos vrrp](./ImagenesPI/PIFase2/slavevrrpips.PNG "IP configuradas en los dos vrrp")
 
 Una vez creada, aparecerán de color rojo eso es debido a que están en modo de espera, y cuando falle el maestro este saltara cambiando el color a negro debido a que se habrá activado.
 
@@ -179,15 +181,15 @@ En __Target Upload__ vamos a _Max Limit_ y definimos la velocidad de subida.
 En __Target Download__ vamos a _Max Limit_ y definimos la velocidad de bajada.
 El resto lo podemos dejar por defecto, aplicamos y le damos a OK.
 
-![Creando regla a una IP](ImagenesPI/PIFase2/mastervelocidad1.PNG "Creando regla a una IP")
+![Creando regla a una IP](./ImagenesPI/PIFase2/mastervelocidad1.PNG "Creando regla a una IP")
 
 Para poder hacerlo más visual aplicaremos otra regla en la cual definiremos a toda la red LAN 2. Con ello lo que conseguiremos es definir el límite de velocidad de la LAN2 y al vez poder definir el límite de velocidad de cada equipo dentro de la red.
 
-![Creando regla a la red LAN2](ImagenesPI/PIFase2/mastervelocidad2.PNG "Creando regla a la red LAN2")
+![Creando regla a la red LAN2](./ImagenesPI/PIFase2/mastervelocidad2.PNG "Creando regla a la red LAN2")
 
 Hay que tener en cuenta de que estas reglas se aplican igual que las de firewall, es decir empieza a aplicarse las reglas desde la primera a la última por tanto la regla más genérica debe estar abajo que en este caso es la regla que hace referencia a la red LAN2,  y la regla más específica debe estar más arriba que en este caso corresponde a la ip 192.168.20.4, quedando como se muestra en la imagen.
 
-![Reglas creadas y ordenadas](ImagenesPI/PIFase2/mastervelocidad3.PNG "Reglas creadas y ordenadas")
+![Reglas creadas y ordenadas](./ImagenesPI/PIFase2/mastervelocidad3.PNG "Reglas creadas y ordenadas")
 
 Si no seguimos este orden y dejamos la regla más general primero toda la red LAN2 tendrá el límite de velocidad indicado, sin aplicarse las otras reglas que definen la ip de cada equipo.
  
@@ -198,27 +200,27 @@ __Nota:__ Los colores del icono cambian dependiendo del uso que le dé al ancho 
 Para realizar el balanceo de carga seguiremos el diagrama de red del principio con la diferencia de que añadiremos una nueva red con la siguiente red 192.168.30.0/24, a la cual la llamaremos DMZ. El resto será igual.
 Comenzamos yendo a __IP → FIREWALL__ y luego a la pestaña de _Mangle_ seguidamente añadimos una nueva regla dandole al simbolo del (+), en la nueva ventana que nos aparece estando en la pestaña de _General_ tan solo definimos en el apartado de __Chain__  con _prerouting_ y en el apartado __Dst.Address__ añadimos la red de una de las WAN que tenemos. Si tenemos varias redes LAN podemos definirla en __In. Interface__, si solo tenemos una o queremos que se aplique a todas no es necesario definirla.
 
-![Regla de Mangle pestaña General](ImagenesPI/PIFase2/mastermangle1.PNG "Regla de Mangle pestaña General")
+![Regla de Mangle pestaña General](./ImagenesPI/PIFase2/mastermangle1.PNG "Regla de Mangle pestaña General")
 
 Luego vamos a la Pestaña de _Action_ y en el apartado de __Action__ seleccionamos _Accept_, aplicamos y ok.
 
-![Regla de Mangle pestaña Action](ImagenesPI/PIFase2/mastermangle2.PNG "Regla de Mangle pestaña Action")
+![Regla de Mangle pestaña Action](./ImagenesPI/PIFase2/mastermangle2.PNG "Regla de Mangle pestaña Action")
 
 Esta regla la deberemos de repetir por cada interfaz que de acceso a internet, es decir si por ejemplo tenemos cuatro proveedores de internet habrá que crear cuatro reglas como estas, en donde solo habrá que cambiar el apartado de __Dst.Address__ por el CIDR correspondiente a cada ISP. En nuestro caso serán solo dos reglas, puesto que tenemos dos interfaces Wan.
 
 Nuestro siguiente paso será crear reglas para marcar todas las peticiones de las conexiones que vengan desde internet.
 Para ello creamos una nueva regla, en la pestaña _General_ definimos en __Chain__ como _prerouting_, en __In Interface__ seleccionamos una de las interfaces que den acceso a Internet, y en el apatado de __Connection Mark__ lo dejamos en _no mark_.
 
-![Regla de mangle para marcado de peticiones, pestaña General](ImagenesPI/PIFase2/mastermangle3.PNG "Regla de mangle para marcado de peticiones, pestaña General")
+![Regla de mangle para marcado de peticiones, pestaña General](./ImagenesPI/PIFase2/mastermangle3.PNG "Regla de mangle para marcado de peticiones, pestaña General")
 
 Ahora pasamos a la pestaña de _Action_, aquí en el apartado de __Action__ seleccionamos _mark connection_, en el apartado de __New Connection Mark__ damos un nombre que queramos, que nos sirva para  definirlo, y dejamos marcada la casilla de __Passthrough__, esto nos permite que si no se cumple esta regla pase a la siguiente que tengamos creada.
 
-![Regla de mangle para marcado de peticiones, pestaña Action](ImagenesPI/PIFase2/mastermangle4.PNG "Regla de mangle para marcado de peticiones, pestaña Action")
+![Regla de mangle para marcado de peticiones, pestaña Action](./ImagenesPI/PIFase2/mastermangle4.PNG "Regla de mangle para marcado de peticiones, pestaña Action")
 
 Las siguientes  reglas corresponden a cada proveedor de internet y a una interfaz que vaya a una red local que nosotros definimos.
 Como siempre empezamos dandole al símbolo del (+) para crear una nueva regla, en la pestaña _General_ seleccionamos _prerouting_ en el apartado de __Chain__, en el apartado de __In Interface__ seleccionamos la red Lan que deseamos, en este caso será la interfaz que va a la DMZ.
 
-![Regla Mangle LAN pestaña General](ImagenesPI/PIFase2/mastermangle5.PNG "Regla Mangle LAN pestaña General")
+![Regla Mangle LAN pestaña General](./ImagenesPI/PIFase2/mastermangle5.PNG "Regla Mangle LAN pestaña General")
 
 Luego pasamos a la pestaña de _Advanced_ y en el apartado de __Per Connection Classifer__ seleccionamos _both addresses_ y nos saldrá a la derecha dos apartados para insertar números.
 El primer número corresponde a la cantidad total de ISP que tengamos conectados en nuestro router, y el siguiente número corresponde al ISP para el que estamos creando la regla empezando siempre desde cero.
@@ -229,54 +231,56 @@ Por ejemplo si tenemos cuatro ISP conectados al router habrá que crear cuatro r
 - 4/3
 Como se observa el primer número no cambia porque hace referencia al total, el que cambia es el segundo para saber a quien se le está aplicando la regla, como se empieza a contar desde el 0, si tenemos 4 ISP la cuenta será desde el 0 hasta el 3.
 
-![Regla Mangle LAN pestaña Advanced](ImagenesPI/PIFase2/mastermangle6.PNG "Regla Mangle LAN pestaña Advanced")
+![Regla Mangle LAN pestaña Advanced](./ImagenesPI/PIFase2/mastermangle6.PNG "Regla Mangle LAN pestaña Advanced")
 
 Ahora pasamos a la pestaña _Extra_ aquí buscamos la opción de __Dst.Address Type__, y en _Addres Type__ seleccionamos _local_,  y marcamos la casilla de _Invert_.
 
-![Regla Mangle LAN pestaña Extra](ImagenesPI/PIFase2/mastermangle7.PNG "Regla Mangle LAN pestaña Extra")
+![Regla Mangle LAN pestaña Extra](./ImagenesPI/PIFase2/mastermangle7.PNG "Regla Mangle LAN pestaña Extra")
 
 Por último vamos a la pestaña de _Action_, en esta seleccionamos _mark connection_ en el apartado de __Action__, en el apartado de __New Connection Mark__ seleccionamos uno de los nombres que definimos en las reglas anteriores para cada ISP, y dejamos marcada la opción de __Passtrough__. 
 
-![Regla Mangle LAN pestaña Action](ImagenesPI/PIFase2/mastermangle8.PNG "Regla Mangle LAN pestaña Action")
+![Regla Mangle LAN pestaña Action](./ImagenesPI/PIFase2/mastermangle8.PNG "Regla Mangle LAN pestaña Action")
 
 Como siempre se crearán tantas reglas como wan tengamos, como en este caso tenemos dos, habrá que crear otra regla idéntica a la anterior cambiando solamente en la pestaña _Action_ en el apartado __New connection Mark__ al nombre que le hayamos dado para la regla del otro ISP que tenemos conectado, y en la pestaña de _Advanced_ en el apartado de __Per Connection Classifier__ al seleccionar  _both addresses_ debemos cambiar el segundo número por el que corresponda que en este caso será 1, haciendo referencia al segundo ISP.
 
-![Regla Mangle LAN pestaña Extra para ISP2](ImagenesPI/PIFase2/mastermangle9.PNG "Regla Mangle LAN pestaña Extra para ISP2")
+![Regla Mangle LAN pestaña Extra para ISP2](./ImagenesPI/PIFase2/mastermangle9.PNG "Regla Mangle LAN pestaña Extra para ISP2")
 
 Las siguientes reglas serán para marcar la ruta de todos los paquetes que pasan por las conexiones.
 En la pestaña _General_ seleccionamos el interfaz que va a nuestra red local en el apartado de __In Interface__, y en el apartado de __Connection Mark__ seleccionamos uno de los nombres que creamos al definir la regla de marcado de peticiones de conexión para cada ISP.
 
-![Regla Mangle para marcar paquetes pestaña General](ImagenesPI/PIFase2/mastermangle10.PNG "Regla Mangle para marcar paquetes pestaña General")
+![Regla Mangle para marcar paquetes pestaña General](./ImagenesPI/PIFase2/mastermangle10.PNG "Regla Mangle para marcar paquetes pestaña General")
 
 Luego pasamos a la pestaña de _Action_ en donde seleccionamos _mark routing_ en el apartado de __Action__, dejamos marcado la opción del __Passthrough__ y en el apartado de __New Routing Mark__ damos un nombre que haga referencia a uno de los ISP. 
 Aplicamos y ok.
 
-![Regla Mangle para marcar paquetes pestaña Action](ImagenesPI/PIFase2/mastermangle11.PNG "Regla Mangle para marcar paquetes pestaña Action")
+![Regla Mangle para marcar paquetes pestaña Action](./ImagenesPI/PIFase2/mastermangle11.PNG "Regla Mangle para marcar paquetes pestaña Action")
 
 Creamos otra regla idéntica a la anterior para el otro ISP cambiando solo el apartado de __Connection Mark__ dentro de la pestaña _General_ por el nombre de la regla que hace referencia al otro ISP, y en la pestaña de _Action_ daremos otro nombre para identificar al otro ISP en el apartado de __New Routing Mark__
 
 Ahora crearemos otras reglas como siempre una para cada ISP que tengamos conectado al router, para el _chain outpust_.
 Por lo tanto en la nueva regla, en la pestaña _General_ seleccionamos _output_ en el apartado de __Chain__, y en el apartado de __Connection Mark__ seleccionamos uno de los nombres que definimos en las reglas para marcado de peticiones por conexiones para el ISP, en la siguiente regla que creemos se deberá cambiar solo este apartado seleccionando el nombre de la otra regla del otro ISP.
 
-![Regla Mangle Output pestaña General](ImagenesPI/PIFase2/mastermangle12.PNG "Regla Mangle Output pestaña General")
+![Regla Mangle Output pestaña General](./ImagenesPI/PIFase2/mastermangle12.PNG "Regla Mangle Output pestaña General")
 
 Pasamos a la pestaña de _Action_, en donde seleccionamos _mark routing_ en el apartado de __Action__, dejamos marcado __Passthroug__ y en el apartado de __New Routing Mark__ seleccionamos uno de los nombres que creamos cuando definimos las reglas de rutas de los paquetes. Cuando creemos las otras reglas este apartado será otro de los que cambie definiendo los otros nombres que definimos al crear las reglas de marcado de paquetes. 
 
-![Regla Mangle Output pestaña Action](ImagenesPI/PIFase2/mastermangle13.PNG "Regla Mangle Output pestaña Action")
+![Regla Mangle Output pestaña Action](./ImagenesPI/PIFase2/mastermangle13.PNG "Regla Mangle Output pestaña Action")
 
 Una vez creada todas las reglas para los dos ISP que tenemos en este ejemplo debería quedar como en la siguiente imagen.
 
-![Todas las Reglas Mangle configuradas](ImagenesPI/PIFase2/mastermangle14.PNG "Todas las Reglas Mangle configuradas")
+![Todas las Reglas Mangle configuradas](./ImagenesPI/PIFase2/mastermangle14.PNG "Todas las Reglas Mangle configuradas")
 
 El siguiente paso será agregar las rutas a la tabla de ruteo, para ello vamos a __IP → Routes__, y le damos al (+). Crearemos una ruta por cada ISP que tengamos conectado al router.
 En esta ventana definimos como direcciones de destino todas, así que en el apartado de __Dst. Address__ escribimos 0.0.0.0/0.
 En __Gateway__ escribimos la ip de nuestro ISP, en __Check Gateway__ lo dejamos en ping, dejamos todo lo demas por defecto y lo que debemos modificar es el apartado de __Routing Mark__ donde seleccionaremos uno de los nombre que definimos en las reglas que creamos para el marcado de ruta de los paquetes, lo interesante será que el nombre corresponda con la ip del ISP que estamos definiendo en la ruta.
 
-![Creando ruta para PCC en ISP1](ImagenesPI/PIFase2/masterpccroute.PNG "Creando ruta para PCC en ISP1")
+![Creando ruta para PCC en ISP1](./ImagenesPI/PIFase2/masterpccroute.PNG "Creando ruta para PCC en ISP1")
 
 Con esto conseguimos que todo el tráfico marcado para isp1 salga por el gateway que hemos definido.
 La siguiente ruta que creemos para el otro ISP será idéntica a la anterior cambiando solo la ip del __Gateway__ por el otro ISP  y el apartado de __Routing Mark__ donde seleccionaremos el otro nombre de la otra regla creada de marcado de rutas.
 
 Quedando las rutas como se muestra en la imagen.
 
-![Rutas de PCC creadas](ImagenesPI/PIFase2/masterpccroute2.PNG "Rutas de PCC creadas")
+![Rutas de PCC creadas](./ImagenesPI/PIFase2/masterpccroute2.PNG "Rutas de PCC creadas")
+
+[Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
