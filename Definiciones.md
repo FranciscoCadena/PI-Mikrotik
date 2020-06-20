@@ -101,6 +101,12 @@ La pasarela es normalmente un equipo informático configurado para dotar a las m
 
 ## RoMON (Router Manager Overlay Network)
 
-Protocolo propietario de Mikrotik, no activo por defecto, el cual permite enlazar y acceder a dispositivos routerOS que se encuentren tanto en capa 2 (bridge) como en capa 3 (ruteada) con versión 6.28 o superior en una red a través de winbox v3.x. Solo se necesita activar este protocolo en los routerOs que se deseen acceder
+Protocolo propietario de Mikrotik, no activo por defecto, el cual permite enlazar y acceder a dispositivos routerOS que se encuentren tanto en capa 2 (nivel de enlace de datos) como en capa 3 (nivel de red) con versión 6.28 o superior en una red a través de winbox v3.x. Solo se necesita activar este protocolo en los routerOs que se deseen acceder
+
+## Balanceo de Carga
+
+Divide el tráfico entre interfaces de red de capa 4 (nivel de transporte).
+Es sumamente útil donde existen enlaces de comunicación redundantes, ya que todos los enlaces se pueden utilizar al mismo tiempo.
+Al utilizar múltiples enlaces de forma simultanea. se incrementa la disponibilidadd del ancho de banda. De esta fomra se evita la congestión o saturación de la red en un solo enlace.
 
 [Inicio](https://franciscocadena.github.io/PI-Mikrotik/)
