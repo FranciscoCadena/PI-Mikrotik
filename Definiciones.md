@@ -81,6 +81,8 @@ L7 matcher recopila los primeros 10 paquetes de una conexión o los primeros 2 K
 
 El requisito adicional es que el emparejador de capa 7 debe ver ambas direcciones de tráfico (entrante y saliente). Para cumplir este requisito, las reglas deben establecerse en cadena hacia adelante . Si la regla se encuentra en entrada / prerouting cadena entonces la misma regla debe ser también situado en la salida / POSTROUTING cadena, de lo contrario los datos recogidos no puede ser completo que resulta en un patrón incorrectamente emparejado.
 
+Para conocer el verdadero proposito con el que fue diseñado este protoloco, el cual no fue bloquear paginas web ni ningun tipo de censura, recomiendo ir a la pagian oficial yendo a este [enlace](http://l7-filter.sourceforge.net/) 
+
 ## ISP 
 
 El proveedor de servicios de Internet, (ISP, por las siglas en inglés de Internet service provider) es la empresa que brinda conexión a Internet a sus clientes. Un ISP conecta a sus usuarios a Internet a través de diferentes tecnologías como ADSL, cablemódem, GSM, dial-up, etc.
