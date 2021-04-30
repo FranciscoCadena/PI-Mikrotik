@@ -50,11 +50,11 @@ Reglas de Firewall.
 
 ![Firewall Rules](./imagenesGNS3/firewallreglas.PNG "Firewall Rules")
 
-Politicas del tunel por IPsec.
+Políticas del tunel por IPsec.
 
 ![IPsec Policies](./imagenesGNS3/IPsecpolitica.PNG "IPsec Policies")
 
-Vecinos que estan activos por el tunel creado.
+Vecinos que están activos por el túnel creado.
 
 ![Ipsec Active Peers](./imagenesGNS3/ipsecvecinoactivo.PNG "Ipsec Active Peers")
 
